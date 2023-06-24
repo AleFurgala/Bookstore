@@ -37,7 +37,7 @@ public class Main {
                             Book.showAllBooks();
                             break;
                         case 2:
-                            System.out.println("2.Wyszukaj ksiażkę");
+                            Book.showAllBooksByTitle();
                             break;
                         case 3:
                             System.out.println("3.Dodaj książkę");
