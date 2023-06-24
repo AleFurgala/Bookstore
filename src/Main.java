@@ -43,7 +43,7 @@ public class Main {
                             Book.addBook();
                             break;
                         case 4:
-                            System.out.println("4.Usuń książkę");
+                            Book.deleteBook();
                             break;
                         case 5:
                             System.out.println("5.Edytuj książkę");

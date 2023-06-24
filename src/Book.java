@@ -82,4 +82,24 @@ public class Book{
         }
     }
 
+    public static void deleteBook() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
+            Statement stmt = con.createStatement();
+            System.out.println("Wprowadź numer id książki którą chcesz usunąć: ");
+            Scanner scanner = new Scanner(System.in);
+            int idKsiazki = scanner.nextInt();
+
+
+            String query= "DELETE FROM ksiazki WHERE id = '" + idKsiazki +"'";
+
+            stmt.executeUpdate(query);
+
+
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
