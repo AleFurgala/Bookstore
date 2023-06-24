@@ -26,7 +26,7 @@ public class Main {
                     System.out.println("2.Wyszukaj ksiażkę");
                     System.out.println("3.Dodaj książkę");
                     System.out.println("4.Usuń książkę");
-                    System.out.println("5.Edytuj książkę");
+                    System.out.println("5.Edytuj książke");
                     System.out.println("6.Powrót do glównego menu");
                     System.out.println("********************************************************");
 
@@ -37,7 +37,7 @@ public class Main {
                             Book.showAllBooks();
                             break;
                         case 2:
-                            Book.showAllBooksByTitle();
+                            Book.showBooksByTitleOrAuthor();
                             break;
                         case 3:
                             Book.addBook();
@@ -46,7 +46,7 @@ public class Main {
                             Book.deleteBook();
                             break;
                         case 5:
-                            System.out.println("5.Edytuj książkę");
+
                             break;
                         case 6:
                             System.out.println("6.Powrót do glównego menu");

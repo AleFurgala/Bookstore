@@ -4,7 +4,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class Book{
+public class Book {
+    private static String titleOrAuthor;
+
+    public static String getTitleOrAuthor() {
+        return titleOrAuthor;
+    }
+
+    public static void setTitleOrAuthor(String titleOrAuthor) {
+        Book.titleOrAuthor = titleOrAuthor;
+    }
 
     public static void showAllBooks() {
         try {
@@ -26,17 +35,19 @@ public class Book{
             System.out.println(e);
         }
     }
-    public static void showAllBooksByTitle() {
+
+    public static void showBooksByTitleOrAuthor() {
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
             Statement stmt = con.createStatement();
 
-            System.out.println("Wprowadź tytuł książki: ");
+            System.out.println("Podaj tytuł albo autora: ");
             Scanner scanner = new Scanner(System.in);
-            String tytulKsiazki = scanner.nextLine();
+            setTitleOrAuthor(scanner.nextLine());
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM `ksiazki` WHERE `tytul` ='" + tytulKsiazki + "'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ksiazki WHERE tytul LIKE '%" + getTitleOrAuthor() + "%' OR autor LIKE '%" + getTitleOrAuthor() + "%' ");
             System.out.println("id  | Autor ksiązki | Tytuł książki | cena ");
             System.out.println();
             while (rs.next())
@@ -92,9 +103,33 @@ public class Book{
             int idKsiazki = scanner.nextInt();
 
 
-            String query= "DELETE FROM ksiazki WHERE id = '" + idKsiazki +"'";
+            String query = "DELETE FROM ksiazki WHERE id = '" + idKsiazki + "'";
 
             stmt.executeUpdate(query);
+
+
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void updateBook() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
+            Statement stmt = con.createStatement();
+            System.out.println("Wprowadź szukaną fraze: ");
+            Scanner scanner = new Scanner(System.in);
+            String fraza = scanner.nextLine();
+
+            //ResultSet rs = stmt.executeQuery("SELECT * FROM `ksiazki` WHERE `tytul` LIKE `%Pan%`");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ksiazki WHERE tytul LIKE '%" + fraza + "%' OR autor LIKE '%" + fraza + "%' ");
+            System.out.println("id  | Autor ksiązki | Tytuł książki | cena ");
+            System.out.println();
+            while (rs.next())
+                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
+                        "  " + rs.getString(4));
 
 
             con.close();
