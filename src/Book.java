@@ -5,7 +5,36 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class Book {
+    private static String title;
+    private static String author;
+    private static int price;
+
     private static String titleOrAuthor;
+
+    public static String getTitle() {
+        return title;
+    }
+
+    public static void setTitle(String title) {
+        Book.title = title;
+    }
+
+    public static String getAuthor() {
+        return author;
+    }
+
+    public static void setAuthor(String author) {
+        Book.author = author;
+    }
+
+    public static int getPrice() {
+        return price;
+    }
+
+    public static void setPrice(int price) {
+        Book.price = price;
+    }
+
 
     public static String getTitleOrAuthor() {
         return titleOrAuthor;
@@ -14,6 +43,7 @@ public class Book {
     public static void setTitleOrAuthor(String titleOrAuthor) {
         Book.titleOrAuthor = titleOrAuthor;
     }
+
 
     public static void showAllBooks() {
         try {
@@ -69,21 +99,19 @@ public class Book {
 
             Scanner scanner = new Scanner(System.in);
 
-            // System.out.println("Wprowadź numer: ");
-            //int dodajNumer = scanner.nextInt();
 
             Scanner scanner1 = new Scanner(System.in);
 
             System.out.println("Wprowadź tytuł: ");
 
-            String dodajTytul = scanner1.nextLine();
+            setTitle(scanner1.nextLine());
             System.out.println("Wprowadź autora: ");
-            String dodajAutora = scanner1.nextLine();
+            setAuthor(scanner1.nextLine());
             System.out.println("Wprowadź cenę: ");
-            int dodajCena = scanner.nextInt();
+            setPrice(scanner.nextInt());
 
 
-            String query = "INSERT INTO ksiazki(tytul, autor, cena) VALUES('" + dodajTytul + "' , '" + dodajAutora + "' , " + dodajCena + ")";
+            String query = "INSERT INTO ksiazki(tytul, autor, cena) VALUES('" + getTitle() + "' , '" + getAuthor() + "' , " + getPrice() + ")";
 
             stmt.executeUpdate(query);
 
