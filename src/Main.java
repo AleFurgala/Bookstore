@@ -47,7 +47,8 @@ public class Main {
                             Book.deleteBook();
                             break;
                         case 5:
-
+                            Book.showAllBooks();
+                            Book.updateBook();
                             break;
                         case 6:
                             System.out.println("6.Powrót do glównego menu");

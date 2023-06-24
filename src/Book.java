@@ -155,18 +155,21 @@ public class Book {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
             Statement stmt = con.createStatement();
-            System.out.println("Wprowadź szukaną fraze: ");
             Scanner scanner = new Scanner(System.in);
-            String fraza = scanner.nextLine();
+            Scanner scanner1 = new Scanner(System.in);
 
-            //ResultSet rs = stmt.executeQuery("SELECT * FROM `ksiazki` WHERE `tytul` LIKE `%Pan%`");
-            ResultSet rs = stmt.executeQuery("SELECT * FROM ksiazki WHERE tytul LIKE '%" + fraza + "%' OR autor LIKE '%" + fraza + "%' ");
-            System.out.println("id  | Autor ksiązki | Tytuł książki | cena ");
-            System.out.println();
-            while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
-                        "  " + rs.getString(4));
+            System.out.println("Wprowadź id książki, którą chcesz edytować");
+            setId(scanner.nextInt());
 
+            System.out.println("Wprowadź tytuł: ");
+            setTitle(scanner1.nextLine());
+            System.out.println("Wprowadź autora: ");
+            setAuthor(scanner1.nextLine());
+            System.out.println("Wprowadź cenę: ");
+            setPrice(scanner.nextInt());
+
+            String query = "UPDATE ksiazki SET tytul = '" + getTitle() + "', autor = '" + getAuthor() + "', cena =  '" + getPrice() +"' WHERE id = '" + getId() + "'";
+            stmt.executeUpdate(query);
 
             con.close();
         } catch (Exception e) {
