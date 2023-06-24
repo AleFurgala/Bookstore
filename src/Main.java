@@ -1,3 +1,7 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class Main {
@@ -24,12 +28,13 @@ public class Main {
                     System.out.println("4.Usuń książkę");
                     System.out.println("5.Edytuj książkę");
                     System.out.println("6.Powrót do glównego menu");
+                    System.out.println("********************************************************");
 
 
                     int menu2 = scanner.nextInt();
                     switch (menu2) {
                         case 1:
-                            System.out.println("1.Wyświetl wszystkie książki");
+                            Book.showAllBooks();
                             break;
                         case 2:
                             System.out.println("2.Wyszukaj ksiażkę");
@@ -62,7 +67,7 @@ public class Main {
                     int menu3 = scanner.nextInt();
                     switch (menu3) {
                         case 1:
-                            System.out.println("1.Wyświetl wszystkie klienci");
+                            System.out.println("Wyświetl wszystkich klientów");
                             break;
                         case 2:
                             System.out.println("2.Wyszukaj klienci");
@@ -125,4 +130,5 @@ public class Main {
         }while (menu!=0);
 
     }
+
 }
