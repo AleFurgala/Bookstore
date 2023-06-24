@@ -43,6 +43,7 @@ public class Main {
                             Book.addBook();
                             break;
                         case 4:
+                            Book.showAllBooks();
                             Book.deleteBook();
                             break;
                         case 5:

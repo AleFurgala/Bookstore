@@ -5,6 +5,8 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class Book {
+
+    private static int id;
     private static String title;
     private static String author;
     private static int price;
@@ -42,6 +44,14 @@ public class Book {
 
     public static void setTitleOrAuthor(String titleOrAuthor) {
         Book.titleOrAuthor = titleOrAuthor;
+    }
+
+    public static int getId() {
+        return id;
+    }
+
+    public static void setId(int id) {
+        Book.id = id;
     }
 
 
@@ -126,15 +136,13 @@ public class Book {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
             Statement stmt = con.createStatement();
+
             System.out.println("Wprowadź numer id książki którą chcesz usunąć: ");
             Scanner scanner = new Scanner(System.in);
-            int idKsiazki = scanner.nextInt();
+            setId(scanner.nextInt());
 
-
-            String query = "DELETE FROM ksiazki WHERE id = '" + idKsiazki + "'";
-
+            String query = "DELETE FROM ksiazki WHERE id = '" + getId() + "'";
             stmt.executeUpdate(query);
-
 
             con.close();
         } catch (Exception e) {
