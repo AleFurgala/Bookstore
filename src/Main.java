@@ -40,7 +40,7 @@ public class Main {
                             Book.showAllBooksByTitle();
                             break;
                         case 3:
-                            System.out.println("3.Dodaj książkę");
+                            Book.addBook();
                             break;
                         case 4:
                             System.out.println("4.Usuń książkę");

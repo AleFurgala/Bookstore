@@ -50,5 +50,36 @@ public class Book{
         }
     }
 
+    public static void addBook() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
+            Statement stmt = con.createStatement();
+
+            Scanner scanner = new Scanner(System.in);
+
+            // System.out.println("Wprowadź numer: ");
+            //int dodajNumer = scanner.nextInt();
+
+            Scanner scanner1 = new Scanner(System.in);
+
+            System.out.println("Wprowadź tytuł: ");
+
+            String dodajTytul = scanner1.nextLine();
+            System.out.println("Wprowadź autora: ");
+            String dodajAutora = scanner1.nextLine();
+            System.out.println("Wprowadź cenę: ");
+            int dodajCena = scanner.nextInt();
+
+
+            String query = "INSERT INTO ksiazki(tytul, autor, cena) VALUES('" + dodajTytul + "' , '" + dodajAutora + "' , " + dodajCena + ")";
+
+            stmt.executeUpdate(query);
+
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
 }
