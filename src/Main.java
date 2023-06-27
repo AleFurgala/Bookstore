@@ -101,13 +101,16 @@ public class Main {
                     int menu4 = scanner.nextInt();
                     switch (menu4) {
                         case 1:
-                            System.out.println("1.Wyświetl wszystkie zamówienia");
+                          Order.showAllOrder();
                             break;
                         case 2:
                             System.out.println("2.Wyszukaj zamówienia");
                             break;
                         case 3:
-                            System.out.println("3.Dodaj zamówienia");
+                            Client.showAllClients();
+                            Book.showAllBooks();
+                            Order.addBook();
+
                             break;
                         case 4:
                             System.out.println("4.Usuń zamówienia");
