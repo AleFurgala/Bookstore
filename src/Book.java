@@ -12,6 +12,15 @@ public class Book {
     private static int price;
 
     private static String titleOrAuthor;
+    private static int amount;
+
+    public static int getAmount() {
+        return amount;
+    }
+
+    public static void setAmount(int amount) {
+        Book.amount = amount;
+    }
 
     public static String getTitle() {
         return title;
@@ -62,11 +71,11 @@ public class Book {
             Statement stmt = con.createStatement();
 
             ResultSet rs = stmt.executeQuery("select * from ksiazki");
-            System.out.println("id  | Autor ksiązki | Tytuł książki | cena ");
+            System.out.println("id  | Autor ksiązki | Tytuł książki | cena | ilosc");
             System.out.println();
             while (rs.next())
                 System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
-                        "  " + rs.getString(4));
+                        "  " + rs.getString(4) + "  " + rs.getInt(5));
 
             System.out.println("********************************************************");
 
@@ -88,11 +97,11 @@ public class Book {
             setTitleOrAuthor(scanner.nextLine());
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM ksiazki WHERE tytul LIKE '%" + getTitleOrAuthor() + "%' OR autor LIKE '%" + getTitleOrAuthor() + "%' ");
-            System.out.println("id  | Autor ksiązki | Tytuł książki | cena ");
+            System.out.println("id  | Autor ksiązki | Tytuł książki | cena | ilosc");
             System.out.println();
             while (rs.next())
                 System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
-                        "  " + rs.getString(4));
+                        "  " + rs.getString(4) +  "  " + rs.getInt(5));
 
             System.out.println("********************************************************");
             con.close();
@@ -119,9 +128,11 @@ public class Book {
             setAuthor(scanner1.nextLine());
             System.out.println("Wprowadź cenę: ");
             setPrice(scanner.nextInt());
+            System.out.println("Wprowadź ilosc: ");
+            setAmount(scanner.nextInt());
 
 
-            String query = "INSERT INTO ksiazki(tytul, autor, cena) VALUES('" + getTitle() + "' , '" + getAuthor() + "' , " + getPrice() + ")";
+            String query = "INSERT INTO ksiazki(tytul, autor, cena,ilosc) VALUES('" + getTitle() + "' , '" + getAuthor() + "' , " + getPrice() + " , " + getAmount() + ")";
 
             stmt.executeUpdate(query);
 
@@ -167,8 +178,11 @@ public class Book {
             setAuthor(scanner1.nextLine());
             System.out.println("Wprowadź cenę: ");
             setPrice(scanner.nextInt());
+            System.out.println("Wprowadź ilosc: ");
+            setAmount(scanner.nextInt());
 
-            String query = "UPDATE ksiazki SET tytul = '" + getTitle() + "', autor = '" + getAuthor() + "', cena =  '" + getPrice() +"' WHERE id = '" + getId() + "'";
+
+            String query = "UPDATE ksiazki SET tytul = '" + getTitle() + "', autor = '" + getAuthor() + "', cena =  '" + getPrice() +"', ilosc =  '" + getAmount() +"' WHERE id = '" + getId() + "'";
             stmt.executeUpdate(query);
 
             con.close();
@@ -176,4 +190,25 @@ public class Book {
             System.out.println(e);
         }
     }
-}
+
+    public static void deleteAmount(int number){
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
+            Statement stmt = con.createStatement();
+
+            ResultSet rs = stmt.executeQuery("SELECT ilosc FROM ksiazki WHERE id = " + number + "");
+            System.out.println("id  | Autor ksiązki | Tytuł książki | cena | ilosc");
+            System.out.println();
+            while (rs.next())
+                System.out.println(rs.getInt(1) );
+
+            System.out.println("********************************************************");
+
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+}}
