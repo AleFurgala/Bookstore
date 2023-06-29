@@ -11,6 +11,7 @@ public class Order {
 
     private static int idKlienci;
 
+
     public static int getId() {
         return id;
     }
@@ -57,7 +58,7 @@ public class Order {
         }
     }
 
-    public static void addBook() {
+    public static int addBook() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
@@ -82,7 +83,9 @@ public class Order {
         } catch (Exception e) {
             System.out.println(e);
         }
+        return getIdKsiazki();
     }
+
 
 
 }

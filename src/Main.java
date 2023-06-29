@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-
         System.out.println("Program księgarnia. Wybierz menu: ");
         int menu;
         do {
@@ -109,7 +108,7 @@ public class Main {
                         case 3:
                             Client.showAllClients();
                             Book.showAllBooks();
-                            Order.addBook();
+                            Book.deleteAmount(Order.addBook());
 
                             break;
                         case 4:

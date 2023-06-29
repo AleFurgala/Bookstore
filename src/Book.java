@@ -101,7 +101,7 @@ public class Book {
             System.out.println();
             while (rs.next())
                 System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
-                        "  " + rs.getString(4) +  "  " + rs.getInt(5));
+                        "  " + rs.getString(4) + "  " + rs.getInt(5));
 
             System.out.println("********************************************************");
             con.close();
@@ -182,7 +182,7 @@ public class Book {
             setAmount(scanner.nextInt());
 
 
-            String query = "UPDATE ksiazki SET tytul = '" + getTitle() + "', autor = '" + getAuthor() + "', cena =  '" + getPrice() +"', ilosc =  '" + getAmount() +"' WHERE id = '" + getId() + "'";
+            String query = "UPDATE ksiazki SET tytul = '" + getTitle() + "', autor = '" + getAuthor() + "', cena =  '" + getPrice() + "', ilosc =  '" + getAmount() + "' WHERE id = '" + getId() + "'";
             stmt.executeUpdate(query);
 
             con.close();
@@ -191,7 +191,7 @@ public class Book {
         }
     }
 
-    public static void deleteAmount(int number){
+    public static void deleteAmount(int number) {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -199,16 +199,24 @@ public class Book {
             Statement stmt = con.createStatement();
 
             ResultSet rs = stmt.executeQuery("SELECT ilosc FROM ksiazki WHERE id = " + number + "");
-            System.out.println("id  | Autor ksiązki | Tytuł książki | cena | ilosc");
+            System.out.println("id | Autor ksiązki | Tytuł książki | cena | ilosc");
             System.out.println();
-            while (rs.next())
-                System.out.println(rs.getInt(1) );
+
+            int AmountOfBooks = 0;
+            while (rs.next()) {
+                AmountOfBooks = rs.getInt(1);
+                AmountOfBooks = AmountOfBooks - 1;
+            }
 
             System.out.println("********************************************************");
+
+            String query = "UPDATE ksiazki SET ilosc = '" + AmountOfBooks + "' WHERE id = '" + number + "'";
+            stmt.executeUpdate(query);
 
             con.close();
         } catch (Exception e) {
             System.out.println(e);
         }
 
-}}
+    }
+}
