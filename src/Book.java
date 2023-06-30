@@ -1,10 +1,13 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Book {
+
+    private Connection connection;
+
+    public Book(Connection connection) {
+        this.connection = connection;
+    }
 
     private static int id;
     private static String title;
@@ -64,13 +67,12 @@ public class Book {
     }
 
 
-    public static void showAllBooks() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
-            Statement stmt = con.createStatement();
+    public void showAllBooks() throws SQLException {
+        String query = "select * from ksiazki";
 
-            ResultSet rs = stmt.executeQuery("select * from ksiazki");
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
             System.out.println("id  | Autor ksiązki | Tytuł książki | cena | ilosc");
             System.out.println();
             while (rs.next())
@@ -79,10 +81,11 @@ public class Book {
 
             System.out.println("********************************************************");
 
-            con.close();
         } catch (Exception e) {
             System.out.println(e);
         }
+
+
     }
 
     public static void showBooksByTitleOrAuthor() {

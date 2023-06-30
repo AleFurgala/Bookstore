@@ -1,11 +1,13 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+
+        JdbConnection jdbConnection = new JdbConnection();
+        Connection connection = jdbConnection.getConnection();
+        Book book = new Book(connection);
+
 
         System.out.println("Program księgarnia. Wybierz menu: ");
         int menu;
@@ -33,7 +35,8 @@ public class Main {
                     int menu2 = scanner.nextInt();
                     switch (menu2) {
                         case 1:
-                            Book.showAllBooks();
+                            book.showAllBooks();
+                            jdbConnection.closeConnection();
                             break;
                         case 2:
                             Book.showBooksByTitleOrAuthor();
@@ -42,11 +45,11 @@ public class Main {
                             Book.addBook();
                             break;
                         case 4:
-                            Book.showAllBooks();
+                            book.showAllBooks();
                             Book.deleteBook();
                             break;
                         case 5:
-                            Book.showAllBooks();
+                            book.showAllBooks();
                             Book.updateBook();
                             break;
                         case 6:
@@ -107,7 +110,7 @@ public class Main {
                             break;
                         case 3:
                             Client.showAllClients();
-                            Book.showAllBooks();
+                            book.showAllBooks();
                             Book.deleteAmount(Order.addBook());
 
                             break;
