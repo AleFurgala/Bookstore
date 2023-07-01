@@ -44,7 +44,7 @@ public class Order {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
             Statement stmt = con.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT zamowienia.id, klienci.imie, klienci.nazwisko, ksiazki.tytul FROM zamowienia,ksiazki,klienci WHERE ksiazki.id = zamowienia.id_ksiazki AND klienci.id = zamowienia.id_klienci");
+            ResultSet rs = stmt.executeQuery("SELECT zamowienia.id, klienci.imie, klienci.nazwisko, ksiazki.tytul FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki INNER JOIN klienci ON klienci.id = zamowienia.id_klienci");
             System.out.println("id  | klient | książka  ");
             System.out.println();
             while (rs.next())
