@@ -12,25 +12,14 @@ public class Main {
         System.out.println("Program księgarnia. Wybierz menu: ");
         int menu;
         do {
-            System.out.print("\n1.Książki");
-            System.out.print("\n2.Klienci");
-            System.out.print("\n3.Zamówienia");
-            System.out.print("\n0.Zamknij program");
-
+            System.out.println("1.Książki \n2.Klienci \n3.Zamówienia \n0.Zamknij program ");
 
             Scanner scanner = new Scanner(System.in);
             menu = scanner.nextInt();
 
             switch (menu) {
                 case 1:
-                    System.out.print("\n1.Wyświetl wszystkie książki");
-                    System.out.print("\n2.Wyszukaj ksiażkę");
-                    System.out.print("\n3.Dodaj książkę");
-                    System.out.print("\n4.Usuń książkę");
-                    System.out.print("\n5.Edytuj książke");
-                    System.out.print("\n6.Powrót do glównego menu");
-                    System.out.print("\n********************************************************");
-
+                    System.out.println("1.Wyświetl wszystkie książki \n2.Wyszukaj ksiażkę \n3.Dodaj książkę \n4.Usuń książkę \n5.Edytuj książke \n6.Powrót do glównego menu \n********************************************************");
 
                     int menu2 = scanner.nextInt();
                     switch (menu2) {
@@ -61,12 +50,7 @@ public class Main {
 
                     break;
                 case 2:
-                    System.out.print("\n1.Wyświetl wszystkich klienótw");
-                    System.out.print("\n2.Wyszukaj klienta");
-                    System.out.print("\n3.Dodaj klienta");
-                    System.out.print("\n4.Usuń klienta");
-                    System.out.print("\n5.Edytuj klienta");
-                    System.out.print("\n6.Powrót do glównego menu");
+                    System.out.println("\n1.Wyświetl wszystkich klienótw \n2.Wyszukaj klienta \n3.Dodaj klienta \n4.Usuń klienta \n5.Edytuj klienta \n6.Powrót do glównego menu");
 
                     int menu3 = scanner.nextInt();
                     switch (menu3) {
@@ -93,17 +77,12 @@ public class Main {
                             break;
                     }
                 case 3:
-                    System.out.print("\n1.Wyświetl wszystkie zamówienia");
-                    System.out.print("\n2.Wyszukaj zamówienie");
-                    System.out.print("\n3.Dodaj zamówienie");
-                    System.out.print("\n4.Usuń zamówienie");
-                    System.out.print("\n5.Edytuj zamówienie");
-                    System.out.print("\n6.Powrót do glównego menu");
+                    System.out.println("1.Wyświetl wszystkie zamówienia \n2.Wyszukaj zamówienie \n3.Dodaj zamówienie \n4.Usuń zamówienie \n5.Edytuj zamówienie \n6.Powrót do glównego menu");
 
                     int menu4 = scanner.nextInt();
                     switch (menu4) {
                         case 1:
-                          Order.showAllOrder();
+                            Order.showAllOrder();
                             break;
                         case 2:
                             System.out.println("2.Wyszukaj zamówienia");
@@ -134,7 +113,7 @@ public class Main {
                 default:
                     System.out.println("Wprowadziłeś blędny numer");
             }
-        }while (menu!=0);
+        } while (menu != 0);
 
     }
 
