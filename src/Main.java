@@ -28,18 +28,22 @@ public class Main {
                             jdbConnection.closeConnection();
                             break;
                         case 2:
-                            Book.showBooksByTitleOrAuthor();
+                            book.showBooksByTitleOrAuthor();
+                            jdbConnection.closeConnection();
                             break;
                         case 3:
-                            Book.addBook();
+                            book.addBook();
+                            jdbConnection.closeConnection();
                             break;
                         case 4:
                             book.showAllBooks();
-                            Book.deleteBook();
+                            book.deleteBook();
+                            jdbConnection.closeConnection();
                             break;
                         case 5:
                             book.showAllBooks();
-                            Book.updateBook();
+                            book.updateBook();
+                            jdbConnection.closeConnection();
                             break;
                         case 6:
                             System.out.println("6.Powrót do glównego menu");

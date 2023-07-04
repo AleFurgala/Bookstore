@@ -85,47 +85,41 @@ public class Book {
             System.out.println(e);
         }
 
-
     }
 
-    public static void showBooksByTitleOrAuthor() {
-
+    public void showBooksByTitleOrAuthor() {
+        String query = "SELECT * FROM ksiazki WHERE tytul LIKE '%" + getTitleOrAuthor() + "%' OR autor LIKE '%" + getTitleOrAuthor() + "%' ";
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
-            Statement stmt = con.createStatement();
 
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
             System.out.println("Podaj tytuł albo autora: ");
             Scanner scanner = new Scanner(System.in);
             setTitleOrAuthor(scanner.nextLine());
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM ksiazki WHERE tytul LIKE '%" + getTitleOrAuthor() + "%' OR autor LIKE '%" + getTitleOrAuthor() + "%' ");
             System.out.println("id  | Autor ksiązki | Tytuł książki | cena | ilosc");
             System.out.println();
             while (rs.next())
                 System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
                         "  " + rs.getString(4) + "  " + rs.getInt(5));
-
             System.out.println("********************************************************");
-            con.close();
+
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public static void addBook() {
+    public void addBook() {
+
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
-            Statement stmt = con.createStatement();
+
+            Statement stmt = connection.createStatement();
 
             Scanner scanner = new Scanner(System.in);
-
 
             Scanner scanner1 = new Scanner(System.in);
 
             System.out.println("Wprowadź tytuł: ");
-
             setTitle(scanner1.nextLine());
             System.out.println("Wprowadź autora: ");
             setAuthor(scanner1.nextLine());
@@ -133,24 +127,19 @@ public class Book {
             setPrice(scanner.nextInt());
             System.out.println("Wprowadź ilosc: ");
             setAmount(scanner.nextInt());
-
-
             String query = "INSERT INTO ksiazki(tytul, autor, cena,ilosc) VALUES('" + getTitle() + "' , '" + getAuthor() + "' , " + getPrice() + " , " + getAmount() + ")";
-
             stmt.executeUpdate(query);
 
-            con.close();
+            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public static void deleteBook() {
+    public  void deleteBook() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
-            Statement stmt = con.createStatement();
 
+            Statement stmt = connection.createStatement();
             System.out.println("Wprowadź numer id książki którą chcesz usunąć: ");
             Scanner scanner = new Scanner(System.in);
             setId(scanner.nextInt());
@@ -158,17 +147,16 @@ public class Book {
             String query = "DELETE FROM ksiazki WHERE id = '" + getId() + "'";
             stmt.executeUpdate(query);
 
-            con.close();
+            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public static void updateBook() {
+    public void updateBook() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
-            Statement stmt = con.createStatement();
+
+            Statement stmt = connection.createStatement();
             Scanner scanner = new Scanner(System.in);
             Scanner scanner1 = new Scanner(System.in);
 
@@ -188,7 +176,7 @@ public class Book {
             String query = "UPDATE ksiazki SET tytul = '" + getTitle() + "', autor = '" + getAuthor() + "', cena =  '" + getPrice() + "', ilosc =  '" + getAmount() + "' WHERE id = '" + getId() + "'";
             stmt.executeUpdate(query);
 
-            con.close();
+            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
