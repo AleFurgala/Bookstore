@@ -7,6 +7,7 @@ public class Main {
         JdbConnection jdbConnection = new JdbConnection();
         Connection connection = jdbConnection.getConnection();
         Book book = new Book(connection);
+        Client client = new Client(connection);
 
 
         System.out.println("Program księgarnia. Wybierz menu: ");
@@ -59,19 +60,24 @@ public class Main {
                     int menu3 = scanner.nextInt();
                     switch (menu3) {
                         case 1:
-                            Client.showAllClients();
+                            client.showAllClients();
+                            jdbConnection.closeConnection();
                             break;
                         case 2:
-                            Client.showClientByNameOrSurname();
+                            client.showClientByNameOrSurname();
+                            jdbConnection.closeConnection();
                             break;
                         case 3:
-                            Client.addClient();
+                            client.addClient();
+                            jdbConnection.closeConnection();
                             break;
                         case 4:
-                            Client.deleteClient();
+                            client.deleteClient();
+                            jdbConnection.closeConnection();
                             break;
                         case 5:
-                            Client.updateClient();
+                            client.updateClient();
+                            jdbConnection.closeConnection();
                             break;
                         case 6:
                             System.out.println("6.Powrót do glównego menu");
@@ -92,7 +98,8 @@ public class Main {
                             System.out.println("2.Wyszukaj zamówienia");
                             break;
                         case 3:
-                            Client.showAllClients();
+
+                            client.showAllClients();
                             book.showAllBooks();
                             Book.deleteAmount(Order.addBook());
 
