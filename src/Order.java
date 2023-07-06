@@ -1,10 +1,12 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Order {
+    public Order(Connection connection) {
+        this.connection = connection;
+    }
+
+    private Connection connection;
 
     private static int id;
     private static int idKsiazki;
@@ -38,13 +40,12 @@ public class Order {
 
 
 
-    public static void showAllOrder() {
+    public void showAllOrder() throws SQLException {
+        String query = "SELECT zamowienia.id, klienci.imie, klienci.nazwisko, ksiazki.tytul FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki INNER JOIN klienci ON klienci.id = zamowienia.id_klienci";
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
-            Statement stmt = con.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT zamowienia.id, klienci.imie, klienci.nazwisko, ksiazki.tytul FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki INNER JOIN klienci ON klienci.id = zamowienia.id_klienci");
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
             System.out.println("id  | klient | książka  ");
             System.out.println();
             while (rs.next())
@@ -52,34 +53,29 @@ public class Order {
 
             System.out.println("********************************************************");
 
-            con.close();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public static int addBook() {
+    public int addBook() throws SQLException {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
-            Statement stmt = con.createStatement();
+
+            Statement stmt = connection.createStatement();
 
             Scanner scanner = new Scanner(System.in);
             Scanner scanner1 = new Scanner(System.in);
 
             System.out.println("Wprowadź id  klienta: ");
-
             setIdKlienci(scanner1.nextInt());
             System.out.println("Wprowadź id książki: ");
-
             setIdKsiazki(scanner.nextInt());
-
 
             String query = "INSERT INTO zamowienia(id_klienci, id_ksiazki) VALUES(" + getIdKlienci() + " , " + getIdKsiazki() + ")";
 
             stmt.executeUpdate(query);
 
-            con.close();
+
         } catch (Exception e) {
             System.out.println(e);
         }

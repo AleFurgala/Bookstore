@@ -87,7 +87,7 @@ public class Book {
 
     }
 
-    public void showBooksByTitleOrAuthor() {
+    public void showBooksByTitleOrAuthor() throws SQLException{
         String query = "SELECT * FROM ksiazki WHERE tytul LIKE '%" + getTitleOrAuthor() + "%' OR autor LIKE '%" + getTitleOrAuthor() + "%' ";
         try {
 
@@ -109,7 +109,7 @@ public class Book {
         }
     }
 
-    public void addBook() {
+    public void addBook() throws SQLException{
 
         try {
 
@@ -136,7 +136,7 @@ public class Book {
         }
     }
 
-    public  void deleteBook() {
+    public  void deleteBook()throws SQLException {
         try {
 
             Statement stmt = connection.createStatement();
@@ -153,7 +153,7 @@ public class Book {
         }
     }
 
-    public void updateBook() {
+    public void updateBook() throws SQLException{
         try {
 
             Statement stmt = connection.createStatement();

@@ -8,7 +8,7 @@ public class Main {
         Connection connection = jdbConnection.getConnection();
         Book book = new Book(connection);
         Client client = new Client(connection);
-
+        Order order = new Order(connection);
 
         System.out.println("Program księgarnia. Wybierz menu: ");
         int menu;
@@ -92,16 +92,17 @@ public class Main {
                     int menu4 = scanner.nextInt();
                     switch (menu4) {
                         case 1:
-                            Order.showAllOrder();
+                            order.showAllOrder();
+                            jdbConnection.closeConnection();
                             break;
                         case 2:
                             System.out.println("2.Wyszukaj zamówienia");
                             break;
                         case 3:
-
                             client.showAllClients();
                             book.showAllBooks();
-                            Book.deleteAmount(Order.addBook());
+                            Book.deleteAmount(order.addBook());
+                            jdbConnection.closeConnection();
 
                             break;
                         case 4:
