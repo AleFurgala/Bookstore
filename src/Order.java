@@ -14,6 +14,7 @@ public class Order {
     private static int idKlienci;
 
 
+
     public static int getId() {
         return id;
     }
@@ -39,7 +40,6 @@ public class Order {
     }
 
 
-
     public void showAllOrder() throws SQLException {
         String query = "SELECT zamowienia.id, klienci.imie, klienci.nazwisko, ksiazki.tytul FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki INNER JOIN klienci ON klienci.id = zamowienia.id_klienci";
         try {
@@ -58,7 +58,9 @@ public class Order {
         }
     }
 
-    public int addBook() throws SQLException {
+
+
+    public int addOrder() throws SQLException {
         try {
 
             Statement stmt = connection.createStatement();
@@ -82,6 +84,21 @@ public class Order {
         return getIdKsiazki();
     }
 
+    public  void deleteOrder()throws SQLException {
+        try {
 
+            Statement stmt = connection.createStatement();
+            System.out.println("Wprowadź numer id zamowienia które chcesz usunąć: ");
+            Scanner scanner = new Scanner(System.in);
+            setId(scanner.nextInt());
+
+            String query = "DELETE FROM zamowienia WHERE id = '" + getId() + "'";
+            stmt.executeUpdate(query);
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
 }

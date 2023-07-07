@@ -96,17 +96,21 @@ public class Main {
                             jdbConnection.closeConnection();
                             break;
                         case 2:
-                            System.out.println("2.Wyszukaj zamówienia");
+
+                            System.out.println("bbbb");
                             break;
                         case 3:
                             client.showAllClients();
                             book.showAllBooks();
-                            Book.deleteAmount(order.addBook());
+                            Book.deleteAmount(order.addOrder());
                             jdbConnection.closeConnection();
 
                             break;
                         case 4:
-                            System.out.println("4.Usuń zamówienia");
+                            order.showAllOrder();
+                            order.deleteOrder();
+                            jdbConnection.closeConnection();
+
                             break;
                         case 5:
                             System.out.println("5.Edytuj zamówienia");
