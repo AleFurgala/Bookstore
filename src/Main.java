@@ -113,7 +113,10 @@ public class Main {
 
                             break;
                         case 5:
-                            System.out.println("5.Edytuj zamówienia");
+                            order.showAllOrder();
+                            order.updateOrder();
+                            jdbConnection.closeConnection();
+
                             break;
                         case 6:
                             System.out.println("6.Powrót do glównego menu");

@@ -100,5 +100,32 @@ public class Order {
             System.out.println(e);
         }
     }
+    public void updateOrder() throws SQLException {
+        try {
+
+            Statement stmt = connection.createStatement();
+
+            Scanner scanner = new Scanner(System.in);
+
+
+            System.out.println("Wprowadź id zamówienia, które chcesz edytować:");
+            setId(scanner.nextInt());
+
+            System.out.println("Wprowadź ID Kliena: ");
+            setIdKlienci(scanner.nextInt());
+
+            System.out.println("Wprowadź ID Książki: ");
+            setIdKsiazki(scanner.nextInt());
+
+
+            String query = "UPDATE zamowienia SET id_klienci = '" + getIdKlienci() + "', id_ksiazki = '" + getIdKsiazki() + "' WHERE id = '" + getId() + "'";
+            stmt.executeUpdate(query);
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+}
 
 }
