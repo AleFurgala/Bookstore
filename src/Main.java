@@ -96,8 +96,8 @@ public class Main {
                             jdbConnection.closeConnection();
                             break;
                         case 2:
-
-                            System.out.println("bbbb");
+                            order.showOrderById();
+                            jdbConnection.closeConnection();
                             break;
                         case 3:
                             client.showAllClients();
