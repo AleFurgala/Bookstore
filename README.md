@@ -18,5 +18,14 @@ This software helps Books Store how to manage with orders.
 - int amount - indicates the amount of the book
 
 
+### Files in Client.java 
+
+- int id - indicates a unique client number 
+- String name - shows clients name 
+- String surname - shows cliens surname 
+- String adress - show clients adress 
+- String nameOrSurname - shows clients name or surname 
+
+
 
 
