@@ -102,7 +102,7 @@ public class Main {
                         case 3:
                             client.showAllClients();
                             book.showAllBooks();
-                            Book.deleteAmount(order.addOrder());
+                            book.deleteAmount(order.addOrder());
                             jdbConnection.closeConnection();
 
                             break;

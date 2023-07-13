@@ -182,14 +182,12 @@ public class Book {
         }
     }
 
-    public static void deleteAmount(int number) {
+    public void deleteAmount(int number) throws SQLException{
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksiegarnia", "root", "");
-            Statement stmt = con.createStatement();
-
-            ResultSet rs = stmt.executeQuery("SELECT ilosc FROM ksiazki WHERE id = " + number + "");
+           String query1 ="SELECT ilosc FROM ksiazki WHERE id = " + number + "";
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query1);
             System.out.println("id | Autor ksiązki | Tytuł książki | cena | ilosc");
             System.out.println();
 
@@ -204,7 +202,7 @@ public class Book {
             String query = "UPDATE ksiazki SET ilosc = '" + AmountOfBooks + "' WHERE id = '" + number + "'";
             stmt.executeUpdate(query);
 
-            con.close();
+
         } catch (Exception e) {
             System.out.println(e);
         }
