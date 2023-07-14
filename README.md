@@ -26,6 +26,12 @@ This software helps Books Store how to manage with orders.
 - String adress - show clients adress 
 - String nameOrSurname - shows clients name or surname 
 
+### Files in Order.java
+
+- int id - indicates a unique order number
+- int idKsiazki - indicate a book that was ordered
+- int idKlienci - indicate client who made an order
+
 
 
 
