@@ -1,7 +1,7 @@
 import java.sql.*;
 import java.util.Scanner;
 
-public class Book {
+public class Book{
 
     private Connection connection;
 
