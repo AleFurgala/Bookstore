@@ -4,22 +4,27 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-        final String login = "Admin1";
-        final String password = "haslo1";
+        JdbConnection jdbConnection = new JdbConnection();
+        Connection connection = jdbConnection.getConnection();
+        Book book = new Book(connection);
+        Client client = new Client(connection);
+        Order order = new Order(connection);
+        AdminAccounts adminAccounts = new AdminAccounts(connection);
 
         String loginUser;
         String passwordUser;
 
-        System.out.println("Podaj login i hasło");
+        System.out.println("Podaj login");
         Scanner scanner1 = new Scanner(System.in);
         loginUser = scanner1.nextLine();
+
+        String passwordFromDB = adminAccounts.getPasswordBasedLogin(loginUser);
+
+        System.out.println("Podaj hasło");
         passwordUser = scanner1.nextLine();
-        if (login.equals(loginUser) && password.equals(passwordUser)) {
-            JdbConnection jdbConnection = new JdbConnection();
-            Connection connection = jdbConnection.getConnection();
-            Book book = new Book(connection);
-            Client client = new Client(connection);
-            Order order = new Order(connection);
+
+
+        if (passwordUser.equals(passwordFromDB)) {
 
             System.out.println("Program księgarnia. Wybierz menu: ");
             int menu;
