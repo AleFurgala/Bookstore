@@ -26,5 +26,21 @@ public class AdminAccounts {
         }
         return "0";
     }
+    public String getNameBasedLogin(String login) throws SQLException {
+        String query = "SELECT nazwa_uzytkownika FROM konta_administratorow WHERE login =  '" + login + "'";
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            System.out.println();
+            while (rs.next())
+                return  rs.getString(1);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return "0";
+    }
+
 }
 

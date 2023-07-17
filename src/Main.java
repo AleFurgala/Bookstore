@@ -26,6 +26,8 @@ public class Main {
 
         if (passwordUser.equals(passwordFromDB)) {
 
+            System.out.println("Witaj " + adminAccounts.getNameBasedLogin(loginUser));
+
             System.out.println("Program księgarnia. Wybierz menu: ");
             int menu;
             do {
@@ -149,7 +151,7 @@ public class Main {
                         System.out.println("Wprowadziłeś blędny numer");
                 }
             } while (menu != 0);
-        }else {
+        } else {
             System.out.println("Błędny login lub hasło");
         }
 
