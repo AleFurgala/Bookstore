@@ -31,7 +31,7 @@ public class Main {
             System.out.println("Program księgarnia. Wybierz menu: ");
             int menu;
             do {
-                System.out.println("1.Książki \n2.Klienci \n3.Zamówienia \n0.Zamknij program ");
+                System.out.println("1.Książki \n2.Klienci \n3.Zamówienia \n4.Panel administratora \n0.Zamknij program ");
 
                 Scanner scanner = new Scanner(System.in);
                 menu = scanner.nextInt();
@@ -144,17 +144,35 @@ public class Main {
                         }
 
                         break;
-                    case 0:
-                        System.out.println("Dziękuję za odwiedziny");
-                        break;
-                    default:
-                        System.out.println("Wprowadziłeś blędny numer");
-                }
-            } while (menu != 0);
-        } else {
-            System.out.println("Błędny login lub hasło");
+
+                    case 4:
+                        System.out.println("1.Opcja 1 \n2.Opcja 2 \n3.Opcja 3 \n4.Powrót do glównego menu");
+
+                        int menu5 = scanner.nextInt();
+                        switch (menu5) {
+                            case 1:
+                                System.out.println("Opcja 1");
+                                break;
+                            case 2:
+                                System.out.println("opcja 2 ");
+                                break;
+                            case 3:
+                                System.out.println("opcja 3 ");
+                            case 4:
+                                System.out.println("Powrót do menu glównego");
+                                break;
+                            case 0:
+                                System.out.println("Dziękuję za odwiedziny");
+                                break;
+                            default:
+                                System.out.println("Wprowadziłeś blędny numer");
+
+                }}}
+                while (menu != 0) ;
+            } else{
+                System.out.println("Błędny login lub hasło");
+            }
+
         }
 
     }
-
-}
