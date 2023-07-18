@@ -146,12 +146,13 @@ public class Main {
                         break;
 
                     case 4:
-                        System.out.println("1.Opcja 1 \n2.Opcja 2 \n3.Opcja 3 \n4.Powrót do glównego menu");
+                        System.out.println("1.Nowe konto administratora \n2.Opcja 2 \n3.Opcja 3 \n4.Powrót do glównego menu");
 
                         int menu5 = scanner.nextInt();
                         switch (menu5) {
                             case 1:
-                                System.out.println("Opcja 1");
+                                adminAccounts.addAdminAccount();
+                                jdbConnection.closeConnection();
                                 break;
                             case 2:
                                 System.out.println("opcja 2 ");
