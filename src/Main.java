@@ -20,12 +20,13 @@ public class Main {
         loginUser = scanner1.nextLine();
 
         String passwordFromDB = adminAccounts.getPasswordBasedLogin(loginUser);
+        String decryptedPasswordFromDB = adminAccounts.dataDecryption(passwordFromDB);
 
         System.out.println("Podaj hasło");
         passwordUser = scanner1.nextLine();
 
 
-        if (passwordUser.equals(passwordFromDB)) {
+        if (passwordUser.equals(decryptedPasswordFromDB)) {
 
             System.out.println("Witaj " + adminAccounts.getNameBasedLogin(loginUser));
 

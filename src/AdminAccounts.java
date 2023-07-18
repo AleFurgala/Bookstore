@@ -1,8 +1,12 @@
 import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Base64;
 import java.util.Scanner;
 
 public class AdminAccounts {
@@ -99,21 +103,28 @@ public class AdminAccounts {
         }
     }
 
-    public byte[] dataEncryption(String pw) throws Exception {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-        keyGenerator.init(128);
-        SecretKey secretKey = keyGenerator.generateKey();
+    public String dataEncryption(String pw) throws Exception {
+
+        SecretKeySpec secretKeySpec = new SecretKeySpec("kluczcvbnnmmjfds".getBytes(StandardCharsets.UTF_8),"AES");
 
         Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE,secretKey);
-        byte[] encryptedData = cipher.doFinal(pw.getBytes());
+        cipher.init(Cipher.ENCRYPT_MODE,secretKeySpec);
+        byte[] encryptedData = cipher.doFinal(pw.getBytes(StandardCharsets.UTF_8));
+        String encodedText = Base64.getEncoder().encodeToString(encryptedData);
 
-//        cipher.init(Cipher.DECRYPT_MODE,secretKey);
-//        byte[] decryptedData = cipher.doFinal(encryptedData);
-//
-//        System.out.println(new String(decryptedData));
+        return encodedText;
+    }
 
-        return encryptedData;
+    public String dataDecryption(String encryptedPassword) throws Exception {
+
+        SecretKeySpec secretKeySpec = new SecretKeySpec("kluczcvbnnmmjfds".getBytes(StandardCharsets.UTF_8),"AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE,secretKeySpec);
+        byte[] decodedBytes = Base64.getDecoder().decode(encryptedPassword);
+        byte[] decryptedData = cipher.doFinal(decodedBytes);
+
+        return new String(decryptedData,StandardCharsets.UTF_8);
+
     }
 
 }
