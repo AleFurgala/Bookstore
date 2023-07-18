@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws Exception {
 
         JdbConnection jdbConnection = new JdbConnection();
         Connection connection = jdbConnection.getConnection();
@@ -10,6 +10,7 @@ public class Main {
         Client client = new Client(connection);
         Order order = new Order(connection);
         AdminAccounts adminAccounts = new AdminAccounts(connection);
+
 
         String loginUser;
         String passwordUser;

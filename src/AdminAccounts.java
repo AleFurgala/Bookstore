@@ -1,3 +1,4 @@
+import javax.crypto.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -89,13 +90,30 @@ public class AdminAccounts {
             System.out.println("Wprowadź nazwę użytkownika: ");
             setUsername(scanner.nextLine());
 
-            String query = "INSERT INTO konta_administratorow(login, haslo, nazwa_uzytkownika) VALUES('" + getLogin() + "' , '" + getPassword() + "' , '" + getUsername() + "')";
+            String query = "INSERT INTO konta_administratorow(login, haslo, nazwa_uzytkownika) VALUES('" + getLogin() + "' , '" + dataEncryption(getPassword()) + "' , '" + getUsername() + "')";
             stmt.executeUpdate(query);
 
             connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public byte[] dataEncryption(String pw) throws Exception {
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        keyGenerator.init(128);
+        SecretKey secretKey = keyGenerator.generateKey();
+
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE,secretKey);
+        byte[] encryptedData = cipher.doFinal(pw.getBytes());
+
+//        cipher.init(Cipher.DECRYPT_MODE,secretKey);
+//        byte[] decryptedData = cipher.doFinal(encryptedData);
+//
+//        System.out.println(new String(decryptedData));
+
+        return encryptedData;
     }
 
 }
