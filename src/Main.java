@@ -11,7 +11,7 @@ public class Main {
         Order order = new Order(connection);
         AdminAccounts adminAccounts = new AdminAccounts(connection);
 
-        System.out.println(order.getDate());
+
 
 
         String loginUser;

@@ -42,15 +42,15 @@ public class Order {
 
 
     public void showAllOrder() throws SQLException {
-        String query = "SELECT zamowienia.id, klienci.imie, klienci.nazwisko, ksiazki.tytul FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki INNER JOIN klienci ON klienci.id = zamowienia.id_klienci";
+        String query = "SELECT zamowienia.id,zamowienia.data, klienci.imie, klienci.nazwisko, ksiazki.tytul FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki INNER JOIN klienci ON klienci.id = zamowienia.id_klienci";
         try {
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println("id | klient | książka  ");
+            System.out.println("id | klient | książka | data ");
             System.out.println();
             while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4));
+                System.out.println(rs.getInt(1) + "  " + rs.getString(2) +"  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getString(5));
 
             System.out.println("********************************************************");
 
@@ -66,12 +66,12 @@ public class Order {
             System.out.println("Podaj id zamowienia: ");
             Scanner scanner = new Scanner(System.in);
             setId(scanner.nextInt());
-            String query = "SELECT zamowienia.id, klienci.imie, klienci.nazwisko, ksiazki.tytul, ksiazki.autor FROM klienci, ksiazki, zamowienia WHERE zamowienia.id = '" + getId() + "' AND zamowienia.id_klienci = klienci.id AND zamowienia.id_ksiazki = ksiazki.id";
+            String query = "SELECT zamowienia.id, zamowienia.data, klienci.imie, klienci.nazwisko, ksiazki.tytul, ksiazki.autor FROM klienci, ksiazki, zamowienia WHERE zamowienia.id = '" + getId() + "' AND zamowienia.id_klienci = klienci.id AND zamowienia.id_ksiazki = ksiazki.id";
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println(" id zamówienia | imie klienta | nazwisko klient | tytuł książki | autor ksiazki ");
+            System.out.println(" id zamówienia | data zamowienia | imie klienta | nazwisko klient | tytuł książki | autor ksiazki ");
             System.out.println();
             while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getString(5));
+                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  "+ rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getString(5) + "  " + rs.getString(6));
 
             System.out.println("********************************************************");
 
