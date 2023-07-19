@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class Order {
@@ -91,8 +93,7 @@ public class Order {
             setIdKlienci(scanner1.nextInt());
             System.out.println("Wprowadź id książki: ");
             setIdKsiazki(scanner.nextInt());
-
-            String query = "INSERT INTO zamowienia(id_klienci, id_ksiazki) VALUES(" + getIdKlienci() + " , " + getIdKsiazki() + ")";
+            String query = "INSERT INTO zamowienia(id_klienci, id_ksiazki, data) VALUES(" + getIdKlienci() + " , " + getIdKsiazki() + " , " + getDate() + ")";
 
             stmt.executeUpdate(query);
 
@@ -146,6 +147,14 @@ public class Order {
             System.out.println(e);
         }
 
+    }
+
+    public String getDate() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        return dayOfMonth + "" + month + "" +year;
     }
 
 }
