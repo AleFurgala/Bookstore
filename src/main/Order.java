@@ -16,6 +16,10 @@ public class Order {
 
     private static int idKlienci;
 
+    public Order() {
+
+    }
+
 
     public static int getId() {
         return id;
