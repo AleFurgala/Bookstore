@@ -1,3 +1,10 @@
+package main;
+
+import main.AdminAccounts;
+import main.Book;
+import main.Client;
+import main.JdbConnection;
+
 import java.sql.*;
 import java.util.Scanner;
 

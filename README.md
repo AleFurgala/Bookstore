@@ -8,7 +8,7 @@ This software helps Books Store how to manage with orders.
 - MySql Database
 
 
-### Files in Book.java 
+### Files in main.Book.java 
 
 - int id - indicates a unique book number
 - String title - says the name of the book
@@ -18,7 +18,7 @@ This software helps Books Store how to manage with orders.
 - int amount - indicates the amount of the book
 
 
-### Files in Client.java 
+### Files in main.Client.java 
 
 - int id - indicates a unique client number 
 - String name - shows clients name 
@@ -26,7 +26,7 @@ This software helps Books Store how to manage with orders.
 - String adress - show clients adress 
 - String nameOrSurname - shows clients name or surname 
 
-### Files in Order.java
+### Files in main.Order.java
 
 - int id - indicates a unique order number
 - int idKsiazki - indicate a book that was ordered

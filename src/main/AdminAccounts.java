@@ -1,3 +1,5 @@
+package main;
+
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
