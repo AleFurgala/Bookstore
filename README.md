@@ -33,5 +33,16 @@ This software helps Books Store how to manage with orders.
 - int idKlienci - indicate client who made an order
 
 
+### Files in main.AdminAccounts.java
+
+- String password - indicate admin password 
+- String login - indicate admin login 
+- String username - show admin name 
+
+    AdminAccounts.java allows create new administrator accounts with
+    fully encrypted passwords.
 
 
+### Tests 
+
+Strat creating tests using junit 5
