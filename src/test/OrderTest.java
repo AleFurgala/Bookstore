@@ -1,14 +1,12 @@
 package test;
 
-
-import com.mysql.jdbc.Connection;
-import main.JdbConnection;
 import main.Order;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OrderTest {
 
@@ -23,6 +21,11 @@ class OrderTest {
             int expectedDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
             String expectedDate = expectedDayOfMonth + "" + expectedMonth + "" +expectedYear;
             assertEquals(expectedDate,result);
+
+    }
+
+    @Test
+    void showAllOrder() throws SQLException {
 
     }
 }

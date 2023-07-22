@@ -1,9 +1,8 @@
 package main;
 
-import javax.crypto.*;
+import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,11 +19,20 @@ public class AdminAccounts {
         this.connection = connection;
     }
 
+
+    private  int id;
+
     private String password;
     private String login;
 
     private String username;
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getPassword() {
         return password;
     }
@@ -97,6 +105,23 @@ public class AdminAccounts {
             setUsername(scanner.nextLine());
 
             String query = "INSERT INTO konta_administratorow(login, haslo, nazwa_uzytkownika) VALUES('" + getLogin() + "' , '" + dataEncryption(getPassword()) + "' , '" + getUsername() + "')";
+            stmt.executeUpdate(query);
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void deleteAdminAccount() throws SQLException {
+        try {
+
+            Statement stmt = connection.createStatement();
+            System.out.println("Wprowadź numer id Administratora którego chcesz usunąć: ");
+            Scanner scanner = new Scanner(System.in);
+            setId(scanner.nextInt());
+
+            String query = "DELETE FROM konta_administratorow WHERE id = '" + getId() + "'";
             stmt.executeUpdate(query);
 
             connection.close();

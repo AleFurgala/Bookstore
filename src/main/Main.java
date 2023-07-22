@@ -1,11 +1,6 @@
 package main;
 
-import main.AdminAccounts;
-import main.Book;
-import main.Client;
-import main.JdbConnection;
-
-import java.sql.*;
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class Main {
@@ -157,7 +152,7 @@ public class Main {
                         break;
 
                     case 4:
-                        System.out.println("1.Nowe konto administratora \n2.Opcja 2 \n3.Opcja 3 \n4.Powrót do glównego menu");
+                        System.out.println("1.Nowe konto administratora \n2.Usuń konto 2 \n3.Opcja 3 \n4.Powrót do glównego menu");
 
                         int menu5 = scanner.nextInt();
                         switch (menu5) {
@@ -166,7 +161,8 @@ public class Main {
                                 jdbConnection.closeConnection();
                                 break;
                             case 2:
-                                System.out.println("opcja 2 ");
+                                adminAccounts.deleteAdminAccount();
+                                jdbConnection.closeConnection();
                                 break;
                             case 3:
                                 System.out.println("opcja 3 ");
