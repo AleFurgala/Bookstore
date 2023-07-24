@@ -3,12 +3,19 @@ package test;
 import main.Order;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OrderTest {
+
+    private static final String url = "jdbc:mysql://localhost:3306/ksiegarnia";
+    private static final String user = "root";
+    private static final String password = "";
+
+    private Connection connection;
+
 
     @Test
     void getDate() {
@@ -26,6 +33,36 @@ class OrderTest {
 
     @Test
     void showAllOrder() throws SQLException {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Połączono z bazą danych");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        try {
+
+            Statement stmt = connection.createStatement();
+            String query = "CREATE TABLE test_zamowienia (id INT AUTO_INCREMENT, id_klienci INT, id_ksiazki INT, data VARCHAR(255), PRIMARY KEY (id))";
+            stmt.execute(query);
+
+            String query2 = "INSERT INTO test_zamowienia (id_klienci, id_ksiazki, data) VALUES(1 , 2 , '24072023'), (2 , 3 , '24072023')";
+            stmt.execute(query2);
+
+            String query3 = "SELECT * FROM test_zamowienia";
+
+            ResultSet rs = stmt.executeQuery(query3);
+            while (rs.next())
+                System.out.println(rs.getInt(1) + "  " + rs.getInt(2) +"  " + rs.getInt(3) + "  " + rs.getString(4));
+
+
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
 }
