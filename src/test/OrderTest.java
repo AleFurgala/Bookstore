@@ -48,21 +48,27 @@ class OrderTest {
             String query = "CREATE TABLE test_zamowienia (id INT AUTO_INCREMENT, id_klienci INT, id_ksiazki INT, data VARCHAR(255), PRIMARY KEY (id))";
             stmt.execute(query);
 
-            String query2 = "INSERT INTO test_zamowienia (id_klienci, id_ksiazki, data) VALUES(1 , 2 , '24072023'), (2 , 3 , '24072023')";
+            String query2 = "INSERT INTO test_zamowienia (id_klienci, id_ksiazki, data) VALUES(1 , 2 , '24072023')";
             stmt.execute(query2);
 
             String query3 = "SELECT * FROM test_zamowienia";
 
             ResultSet rs = stmt.executeQuery(query3);
-            while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getInt(2) +"  " + rs.getInt(3) + "  " + rs.getString(4));
+            String output = "";
+            while (rs.next()){
+                output = rs.getInt(1) + "  " + rs.getInt(2) +"  " + rs.getInt(3) + "  " + rs.getString(4);}
 
+            String expectedOutput = "1  1  2  24072023";
+            assertEquals(expectedOutput, output);
 
-
+            String query4 = "DROP table test_zamowienia";
+            stmt.execute(query4);
             connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
+
+
 
     }
 }
