@@ -167,8 +167,8 @@ class OrderTest {
 
             String query3 = "DELETE FROM test_zamowienia WHERE id = 1";
             stmt.executeUpdate(query3);
-            String query4 = "SELECT * FROM test_zamowienia WHERE id = 2";
 
+            String query4 = "SELECT * FROM test_zamowienia";
             ResultSet rs = stmt.executeQuery(query4);
             String output = "";
             while (rs.next()) {
