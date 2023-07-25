@@ -21,13 +21,13 @@ class OrderTest {
     void getDate() {
         Order order = new Order();
 
-            String result = order.getDate();
-            Calendar calendar = Calendar.getInstance();
-            int expectedYear = calendar.get(Calendar.YEAR);
-            int expectedMonth = calendar.get(Calendar.MONTH)+1;
-            int expectedDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-            String expectedDate = expectedDayOfMonth + "" + expectedMonth + "" +expectedYear;
-            assertEquals(expectedDate,result);
+        String result = order.getDate();
+        Calendar calendar = Calendar.getInstance();
+        int expectedYear = calendar.get(Calendar.YEAR);
+        int expectedMonth = calendar.get(Calendar.MONTH) + 1;
+        int expectedDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        String expectedDate = expectedDayOfMonth + "" + expectedMonth + "" + expectedYear;
+        assertEquals(expectedDate, result);
 
     }
 
@@ -55,8 +55,9 @@ class OrderTest {
 
             ResultSet rs = stmt.executeQuery(query3);
             String output = "";
-            while (rs.next()){
-                output = output + rs.getInt(1) + "  " + rs.getInt(2) +"  " + rs.getInt(3) + "  " + rs.getString(4);}
+            while (rs.next()) {
+                output = output + rs.getInt(1) + "  " + rs.getInt(2) + "  " + rs.getInt(3) + "  " + rs.getString(4);
+            }
 
             String expectedOutput = "1  1  2  24072023" +
                     "2  2  3  25072023";
@@ -70,6 +71,42 @@ class OrderTest {
         }
 
 
+    }
 
+    @Test
+    void showOrderById() throws SQLException {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Połączono z bazą danych");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        try {
+
+            Statement stmt = connection.createStatement();
+            String query = "CREATE TABLE test_zamowienia (id INT AUTO_INCREMENT, id_klienci INT, id_ksiazki INT, data VARCHAR(255), PRIMARY KEY (id))";
+            stmt.execute(query);
+
+            String query2 = "INSERT INTO test_zamowienia (id_klienci, id_ksiazki, data) VALUES(1 , 2 , '24072023'), (2 , 3 , '25072023')";
+            stmt.execute(query2);
+
+            String query3 = "SELECT * FROM test_zamowienia WHERE id = 1";
+            ResultSet rs = stmt.executeQuery(query3);
+            String output = "";
+            while (rs.next()) {
+                output = rs.getInt(1) + "  " + rs.getInt(2) + "  " + rs.getInt(3) + "  " + rs.getString(4);
+            }
+
+            String expectedOutput = "1  1  2  24072023";
+            assertEquals(expectedOutput, output);
+
+            String query4 = "DROP table test_zamowienia";
+            stmt.execute(query4);
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
