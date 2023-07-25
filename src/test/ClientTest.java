@@ -167,6 +167,42 @@ class ClientTest {
     }
 
     @Test
-    void updateClient() {
-    }}
+    void updateClient() throws SQLException {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                connection = DriverManager.getConnection(url, user, password);
+                System.out.println("Połączono z bazą danych");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            try {
+
+                Statement stmt = connection.createStatement();
+                String query = "CREATE TABLE test_klienci (id INT AUTO_INCREMENT, imie VARCHAR(255), nazwisko VARCHAR(255), adres VARCHAR(255), PRIMARY KEY (id))";
+                stmt.execute(query);
+
+                String query2 = "INSERT INTO test_klienci (imie, nazwisko, adres) VALUES('Jan' ,'Nowak', 'Rzeszow')";
+                stmt.execute(query2);
+
+                String query3 = "UPDATE test_klienci SET imie = 'Krystyna', nazwisko = 'Kowalska', adres = 'Warszawa' WHERE id = 1";
+                stmt.executeUpdate(query3);
+                String query4 = "SELECT * FROM test_klienci WHERE id = 1";
+
+                ResultSet rs = stmt.executeQuery(query4);
+                String output = "";
+                while (rs.next()) {
+                    output = rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4);
+                }
+
+                String expectedOutput = "1  Krystyna  Kowalska  Warszawa";
+                assertEquals(expectedOutput, output);
+
+                String query5 = "DROP table test_klienci";
+                stmt.execute(query5);
+                connection.close();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+    }
+}
 
