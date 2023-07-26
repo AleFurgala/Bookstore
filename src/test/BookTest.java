@@ -130,7 +130,42 @@ public class BookTest {
     }
 
     @Test
-    void deleteBook() {
+    void deleteBook() throws SQLException {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Połączono z bazą danych");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        try {
+
+            Statement stmt = connection.createStatement();
+            String query = "CREATE TABLE test_ksiazki (id INT AUTO_INCREMENT, tytul VARCHAR(255), autor VARCHAR(255), cena INT, ilosc INT, PRIMARY KEY (id))";
+            stmt.execute(query);
+
+            String query2 = "INSERT INTO test_ksiazki (tytul, autor, cena, ilosc) VALUES('Water' , 'Paula Hawkins' , 23 , 2), ('xyz' , 'abc' , 30 , 3)";
+            stmt.execute(query2);
+            String query3 = "DELETE FROM test_ksiazki WHERE id = 1";
+            stmt.executeUpdate(query3);
+
+            String query4 = "SELECT * FROM test_ksiazki";
+            ResultSet rs = stmt.executeQuery(query4);
+            String output = "";
+            while (rs.next()) {
+                output = rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getInt(4)+ "  " + rs.getInt(5);
+            }
+
+            String expectedOutput = "2  xyz  abc  30  3";
+            assertEquals(expectedOutput, output);
+
+            String query5 = "DROP table test_ksiazki";
+            stmt.execute(query5);
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Test
