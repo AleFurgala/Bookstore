@@ -71,7 +71,7 @@ class ClientTest {
                 String query2 = "INSERT INTO test_klienci (imie, nazwisko, adres) VALUES('Jan' ,'Nowak', 'Rzeszow'), ('Krystyna' , 'Kowalska' , 'Warszawa')";
                 stmt.execute(query2);
 
-                String query3 = "SELECT * FROM test_klienci WHERE imie ='Jan' OR nazwisko ='Nowak'";
+                String query3 = "SELECT * FROM test_klienci WHERE imie LIKE '%Jan%' OR '%Nowak%' OR nazwisko LIKE '%Jan%' OR '%Nowak%'";
                 ResultSet rs = stmt.executeQuery(query3);
                 String output = "";
                 while (rs.next()) {
