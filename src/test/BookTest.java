@@ -73,7 +73,7 @@ public class BookTest {
             String query2 = "INSERT INTO test_ksiazki (tytul, autor, cena, ilosc) VALUES('Water' , 'Paula Hawkins' , 23 , 2), ('xyz' , 'abc' , 30 , 3)";
             stmt.execute(query2);
 
-            String query3 = "SELECT * FROM test_ksiazki WHERE tytul LIKE '%Water%' OR autor LIKE '%Paula Hawkins%'";
+            String query3 = "SELECT * FROM test_ksiazki WHERE tytul LIKE '%Water%' OR '%Paula Hawkins%' OR autor LIKE '% Water%' OR '%Paula Hawkins%'";
             ResultSet rs = stmt.executeQuery(query3);
             String output = "";
             while (rs.next()) {
