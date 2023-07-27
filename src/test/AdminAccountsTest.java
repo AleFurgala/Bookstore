@@ -54,7 +54,41 @@ public class AdminAccountsTest {
     }
 
     @Test
-    void getNameBasedLogin() {
+    void getNameBasedLogin() throws SQLException {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Połączono z bazą danych");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        try {
+
+            Statement stmt = connection.createStatement();
+            String query = "CREATE TABLE test_konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), PRIMARY KEY (id))";
+            stmt.execute(query);
+
+            String query2 = "INSERT INTO test_konta_administratorow (login, haslo, nazwa_uzytkownika) VALUES('admin','ddd','Jurek'), ('admin2' ,'aaa','Krysia')";
+            stmt.execute(query2);
+
+            String query3 = "SELECT nazwa_uzytkownika FROM test_konta_administratorow WHERE login ='admin'";
+            ResultSet rs = stmt.executeQuery(query3);
+            String output = "";
+            while (rs.next()) {
+                output =  rs.getString(1);
+            }
+
+            String expectedOutput = "Jurek";
+            assertEquals(expectedOutput, output);
+
+            String query4 = "DROP table test_konta_administratorow";
+            stmt.execute(query4);
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Test
