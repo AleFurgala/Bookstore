@@ -174,8 +174,8 @@ public class AdminAccountsTest {
 
     @Test
     void dataEncryption() {
-    }
 
+    }
     @Test
     void dataDecryption() {
     }
