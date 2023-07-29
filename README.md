@@ -46,11 +46,6 @@ This software helps Books Store how to manage with orders.
 ### Tests 
 
 - Start creating tests using junit 5
-- created two separates files main and test
-- added to files test:  
-  - BookTest.java, 
-  - ClientTest.java, 
-  - OrderTest.java,
-  - AdminAccountsTest.java
+
 
 
