@@ -1,6 +1,3 @@
-package test;
-
-import main.Order;
 import org.junit.jupiter.api.Test;
 
 import java.sql.*;

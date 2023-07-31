@@ -1,5 +1,3 @@
-package main;
-
 import java.sql.*;
 import java.util.Calendar;
 import java.util.Scanner;
