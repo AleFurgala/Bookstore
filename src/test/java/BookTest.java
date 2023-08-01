@@ -11,49 +11,50 @@ public class BookTest {
 
     private Connection connection;
 
+
     @Test
     void showAllBooks() throws SQLException {
 
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                connection = DriverManager.getConnection(url, user, password);
-                System.out.println("Połączono z bazą danych");
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-
-            try {
-
-                Statement stmt = connection.createStatement();
-                String query = "CREATE TABLE test_ksiazki (id INT AUTO_INCREMENT, tytul VARCHAR(255), autor VARCHAR(255), cena INT, ilosc INT, PRIMARY KEY (id))";
-                stmt.execute(query);
-
-                String query2 = "INSERT INTO test_ksiazki (tytul, autor, cena, ilosc) VALUES('Water' , 'Paula Hawkins' , 23 , 2), ('xyz' , 'abc' , 30 , 3)";
-                stmt.execute(query2);
-
-                String query3 = "SELECT * FROM test_ksiazki";
-
-                ResultSet rs = stmt.executeQuery(query3);
-                String output = "";
-                while (rs.next()) {
-                    output = output + rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getInt(4)+ "  " + rs.getInt(5);
-                }
-
-                String expectedOutput = "1  Water  Paula Hawkins  23  2" +
-                        "2  xyz  abc  30  3";
-                assertEquals(expectedOutput, output);
-
-                String query4 = "DROP table test_ksiazki";
-                stmt.execute(query4);
-                connection.close();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Połączono z bazą danych");
+        } catch (Exception e) {
+            System.out.println(e);
         }
 
+        try {
+
+            Statement stmt = connection.createStatement();
+            String query = "CREATE TABLE test_ksiazki (id INT AUTO_INCREMENT, tytul VARCHAR(255), autor VARCHAR(255), cena INT, ilosc INT, PRIMARY KEY (id))";
+            stmt.execute(query);
+
+            String query2 = "INSERT INTO test_ksiazki (tytul, autor, cena, ilosc) VALUES('Water' , 'Paula Hawkins' , 23 , 2), ('xyz' , 'abc' , 30 , 3)";
+            stmt.execute(query2);
+
+            String query3 = "SELECT * FROM test_ksiazki";
+
+            ResultSet rs = stmt.executeQuery(query3);
+            String output = "";
+            while (rs.next()) {
+                output = output + rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getInt(4) + "  " + rs.getInt(5);
+            }
+
+            String expectedOutput = "1  Water  Paula Hawkins  23  2" +
+                    "2  xyz  abc  30  3";
+            assertEquals(expectedOutput, output);
+
+            String query4 = "DROP table test_ksiazki";
+            stmt.execute(query4);
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
     @Test
-    void showBooksByTitleOrAuthor()throws SQLException {
+    void showBooksByTitleOrAuthor() throws SQLException {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -75,7 +76,7 @@ public class BookTest {
             ResultSet rs = stmt.executeQuery(query3);
             String output = "";
             while (rs.next()) {
-                output = rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getInt(4)+ "  " + rs.getInt(5);
+                output = rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getInt(4) + "  " + rs.getInt(5);
             }
 
             String expectedOutput = "1  Water  Paula Hawkins  23  2";
@@ -113,7 +114,7 @@ public class BookTest {
 
             String output = "";
             while (rs.next()) {
-                output = rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getInt(4)+ "  " + rs.getInt(5);
+                output = rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getInt(4) + "  " + rs.getInt(5);
             }
 
             String expectedOutput = "1  Water  Paula Hawkins  23  2";
@@ -152,7 +153,7 @@ public class BookTest {
             ResultSet rs = stmt.executeQuery(query4);
             String output = "";
             while (rs.next()) {
-                output = rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getInt(4)+ "  " + rs.getInt(5);
+                output = rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getInt(4) + "  " + rs.getInt(5);
             }
 
             String expectedOutput = "2  xyz  abc  30  3";
@@ -192,7 +193,7 @@ public class BookTest {
             String output = "";
 
             while (rs.next()) {
-                output = rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getInt(4)+ "  " + rs.getInt(5);
+                output = rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getInt(4) + "  " + rs.getInt(5);
             }
 
             String expectedOutput = "1  Wind  Paul  23  4";
@@ -240,7 +241,7 @@ public class BookTest {
             String output = "";
 
             while (rs2.next()) {
-                output = rs2.getInt(1) + "  " + rs2.getString(2) + "  " + rs2.getString(3) + "  " + rs2.getInt(4)+ "  " + rs2.getInt(5);
+                output = rs2.getInt(1) + "  " + rs2.getString(2) + "  " + rs2.getString(3) + "  " + rs2.getInt(4) + "  " + rs2.getInt(5);
             }
 
             String expectedOutput = "1  Water  Paula Hawkins  23  2";
@@ -254,5 +255,5 @@ public class BookTest {
         }
 
 
-        }
+    }
 }
