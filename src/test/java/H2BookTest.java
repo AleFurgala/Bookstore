@@ -1,5 +1,7 @@
 import org.h2.jdbcx.JdbcDataSource;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
@@ -9,8 +11,9 @@ import java.sql.Statement;
 public class H2BookTest {
     private Connection connection;
 
-    @Test
-    void test() throws SQLException {
+    @BeforeEach
+   public void setUp() throws SQLException {
+
         JdbcDataSource dataSource = new JdbcDataSource();
         dataSource.setURL("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"); // Testowa baza H2 w pamięci
         dataSource.setUser("your_username");
@@ -18,6 +21,16 @@ public class H2BookTest {
 
         // Tworzenie połączenia z bazą danych
         connection = dataSource.getConnection();
+    }
+
+    @AfterEach
+    public void after() throws SQLException {
+        connection.close();
+
+    }
+
+    @Test
+    void showAllBooksTest() throws SQLException {
 
         Statement statement = connection.createStatement();
 
@@ -45,7 +58,6 @@ public class H2BookTest {
         Assertions.assertEquals("Paula Hawkins", resultSetSpy.getRow(1).getString("autor"));
         Assertions.assertEquals("xyz", resultSetSpy.getRow(2).getString("tytul"));
         Assertions.assertEquals("abc", resultSetSpy.getRow(2).getString("autor"));
-        connection.close();
 
     }
 
