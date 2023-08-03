@@ -60,7 +60,11 @@ public class Main {
                                 break;
                             case 4:
                                 book.showAllBooks();
-                                book.deleteBook();
+
+                                System.out.println("Wprowadź numer id książki którą chcesz usunąć: ");
+                                Scanner scanner2 = new Scanner(System.in);
+                                int bookId = scanner2.nextInt();
+                                book.deleteBook(bookId);
                                 jdbConnection.closeConnection();
                                 break;
                             case 5:

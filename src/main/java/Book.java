@@ -1,7 +1,7 @@
 import java.sql.*;
 import java.util.Scanner;
 
-public class Book{
+public class Book {
 
     private Connection connection;
 
@@ -87,7 +87,7 @@ public class Book{
 
     }
 
-    public void showBooksByTitleOrAuthor() throws SQLException{
+    public void showBooksByTitleOrAuthor() throws SQLException {
         String query = "SELECT * FROM ksiazki WHERE tytul LIKE '%" + getTitleOrAuthor() + "%' OR autor LIKE '%" + getTitleOrAuthor() + "%' ";
         try {
 
@@ -109,7 +109,7 @@ public class Book{
         }
     }
 
-    public void addBook() throws SQLException{
+    public void addBook() throws SQLException {
 
         try {
 
@@ -136,24 +136,17 @@ public class Book{
         }
     }
 
-    public  void deleteBook()throws SQLException {
+    public void deleteBook(int bookToDelete) throws SQLException {
         try {
-
             Statement stmt = connection.createStatement();
-            System.out.println("Wprowadź numer id książki którą chcesz usunąć: ");
-            Scanner scanner = new Scanner(System.in);
-            setId(scanner.nextInt());
-
-            String query = "DELETE FROM ksiazki WHERE id = '" + getId() + "'";
+            String query = "DELETE FROM ksiazki WHERE id = '" + bookToDelete + "'";
             stmt.executeUpdate(query);
-
-            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void updateBook() throws SQLException{
+    public void updateBook() throws SQLException {
         try {
 
             Statement stmt = connection.createStatement();
@@ -182,10 +175,10 @@ public class Book{
         }
     }
 
-    public void deleteAmount(int number) throws SQLException{
+    public void deleteAmount(int number) throws SQLException {
 
         try {
-           String query1 ="SELECT ilosc FROM ksiazki WHERE id = " + number + "";
+            String query1 = "SELECT ilosc FROM ksiazki WHERE id = " + number + "";
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query1);
             System.out.println("id | Autor ksiązki | Tytuł książki | cena | ilosc");
