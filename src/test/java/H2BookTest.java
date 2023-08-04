@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -13,7 +14,7 @@ public class H2BookTest {
     private Connection connection;
 
     @BeforeEach
-   public void setUp() throws SQLException {
+    public void setUp() throws SQLException {
 
         JdbcDataSource dataSource = new JdbcDataSource();
         dataSource.setURL("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"); // Testowa baza H2 w pamięci
@@ -29,6 +30,7 @@ public class H2BookTest {
         connection.close();
 
     }
+
     @Test
     void showAllBooksTest() throws SQLException {
 
@@ -61,26 +63,20 @@ public class H2BookTest {
     }
 
     @Test
-    void deleteBookTest () throws SQLException {
+    void deleteBookTest() throws SQLException {
         Statement statement = connection.createStatement();
 
-        // Utworzenie tabeli "users"
         statement.executeUpdate("CREATE TABLE ksiazki (id INT AUTO_INCREMENT, tytul VARCHAR(255), autor VARCHAR(255), cena INT, ilosc INT, PRIMARY KEY (id))");
 
-        // Wstawienie danych testowych
         statement.executeUpdate("INSERT INTO ksiazki (tytul, autor, cena, ilosc) VALUES('Water' , 'Paula Hawkins' , 23 , 2)");
         statement.executeUpdate("INSERT INTO ksiazki (tytul, autor, cena, ilosc) VALUES('xyz' , 'abc' , 30 , 3)");
 
-        statement.close();
         Book book = new Book(connection);
 
-         int bookToDelete = 1;
+        int bookToDelete = 1;
         book.deleteBook(bookToDelete);
-        //ResultSetSpy resultSetSpy = new ResultSetSpy(connection.createStatement().executeQuery("DELETE FROM ksiazki WHERE id = '" + bookToDelete + "'"));
-        ResultSetSpy resultSetSpy2 = new ResultSetSpy(connection.createStatement().executeQuery("SELECT * FROM ksiazki"));
-        assertEquals("xyz", resultSetSpy2.getRow(1).getString("tytul"));
-
-
-
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM ksiazki WHERE id = 1");
+        assertEquals(false, resultSet.next());
+        statement.close();
     }
 }
