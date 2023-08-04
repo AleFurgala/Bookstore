@@ -57,4 +57,22 @@ public class H2ClientTest {
         assertEquals("Kowalska", resultSet.getString(3));
     }
 
+    @Test
+    void showClientByNameOrSurnameTest() throws SQLException{
+
+        statement = connection.createStatement();
+
+        statement.executeUpdate("CREATE TABLE klienci (id INT AUTO_INCREMENT, imie VARCHAR(255), nazwisko VARCHAR(255), adres VARCHAR(255), PRIMARY KEY (id))");
+        statement.executeUpdate("INSERT INTO  klienci (imie, nazwisko, adres) VALUES('Jan' ,'Nowak', 'Rzeszow')");
+        statement.executeUpdate("INSERT INTO  klienci (imie, nazwisko, adres) VALUES('Krystyna' , 'Kowalska' , 'Warszawa')");
+
+        Client client = new Client(connection);
+        client.showClientByNameOrSurname("Jan");
+
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM klienci WHERE imie LIKE '%Jan%' OR nazwisko LIKE '%Jan%'");
+        resultSet.absolute(1);
+        assertEquals("Jan", resultSet.getString(2));
+        assertEquals("Nowak", resultSet.getString(3));
+    }
+
 }

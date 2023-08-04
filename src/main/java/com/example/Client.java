@@ -79,14 +79,12 @@ public class Client {
         }
     }
 
-    public void showClientByNameOrSurname() throws SQLException {
-        String query = "SELECT * FROM klienci WHERE imie LIKE '%" + getNameOrSurname() + "%' OR nazwisko LIKE '%" + getNameOrSurname() + "%' ";
+    public void showClientByNameOrSurname(String nameOrSurname) throws SQLException {
+        String query = "SELECT * FROM klienci WHERE imie LIKE '%" + nameOrSurname + "%' OR nazwisko LIKE '%" + nameOrSurname + "%' ";
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println("Podaj imię lub nazwisko: ");
-            Scanner scanner = new Scanner(System.in);
-            setNameOrSurname(scanner.nextLine());
+
 
             System.out.println("id  | Imię Kliena | Nazwisko Klienta | adres ");
             System.out.println();

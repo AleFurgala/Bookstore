@@ -119,7 +119,10 @@ public class Main {
                                 jdbConnection.closeConnection();
                                 break;
                             case 2:
-                                client.showClientByNameOrSurname();
+                                System.out.println("Podaj imię lub nazwisko: ");
+                                Scanner scanner8 = new Scanner(System.in);
+                                String nameOrSurname = scanner8.nextLine();
+                                client.showClientByNameOrSurname(nameOrSurname);
                                 jdbConnection.closeConnection();
                                 break;
                             case 3:
