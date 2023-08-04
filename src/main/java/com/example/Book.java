@@ -14,43 +14,6 @@ public class Book {
     }
 
     private static int id;
-    private static String title;
-    private static String author;
-    private static int price;
-
-    private static int amount;
-
-    public static int getAmount() {
-        return amount;
-    }
-
-    public static void setAmount(int amount) {
-        Book.amount = amount;
-    }
-
-    public static String getTitle() {
-        return title;
-    }
-
-    public static void setTitle(String title) {
-        Book.title = title;
-    }
-
-    public static String getAuthor() {
-        return author;
-    }
-
-    public static void setAuthor(String author) {
-        Book.author = author;
-    }
-
-    public static int getPrice() {
-        return price;
-    }
-
-    public static void setPrice(int price) {
-        Book.price = price;
-    }
 
     public static int getId() {
         return id;
