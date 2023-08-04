@@ -1,3 +1,5 @@
+package com.example;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -116,7 +118,6 @@ public class Book {
             Statement stmt = connection.createStatement();
 
             Scanner scanner = new Scanner(System.in);
-
             Scanner scanner1 = new Scanner(System.in);
 
             System.out.println("Wprowadź tytuł: ");

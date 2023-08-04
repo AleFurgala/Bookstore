@@ -1,3 +1,6 @@
+package com.example.H2JUnit;
+
+import com.example.Book;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class H2BookTest {
     private Connection connection;
+    private Statement statement;
 
     @BeforeEach
     public void setUp() throws SQLException {
@@ -27,6 +31,7 @@ public class H2BookTest {
 
     @AfterEach
     public void after() throws SQLException {
+        statement.close();
         connection.close();
 
     }
@@ -34,7 +39,7 @@ public class H2BookTest {
     @Test
     void showAllBooksTest() throws SQLException {
 
-        Statement statement = connection.createStatement();
+        statement = connection.createStatement();
 
         statement.executeUpdate("CREATE TABLE ksiazki (id INT AUTO_INCREMENT, tytul VARCHAR(255), autor VARCHAR(255), cena INT, ilosc INT, PRIMARY KEY (id))");
 
@@ -44,7 +49,7 @@ public class H2BookTest {
         Book book = new Book(connection);
         book.showAllBooks();
 
-        //ResultSetSpy resultSetSpy = new ResultSetSpy(connection.createStatement().executeQuery("SELECT * FROM ksiazki"));
+        //com.example.ResultSetSpy resultSetSpy = new com.example.ResultSetSpy(connection.createStatement().executeQuery("SELECT * FROM ksiazki"));
         //assertEquals(2, resultSetSpy.getCount()); // Oczekujemy 2 rekordów
         //assertEquals("Water", resultSetSpy.getRow(1).getString("tytul"));
 
@@ -55,12 +60,12 @@ public class H2BookTest {
         resultSet.absolute(2);
         assertEquals("xyz", resultSet.getString(2));
         assertEquals("abc", resultSet.getString(3));
-        statement.close();
+        statement.executeUpdate("DROP table ksiazki");
     }
 
     @Test
     void deleteBookTest() throws SQLException {
-        Statement statement = connection.createStatement();
+     statement = connection.createStatement();
 
         statement.executeUpdate("CREATE TABLE ksiazki (id INT AUTO_INCREMENT, tytul VARCHAR(255), autor VARCHAR(255), cena INT, ilosc INT, PRIMARY KEY (id))");
 
@@ -73,6 +78,7 @@ public class H2BookTest {
         book.deleteBook(bookToDelete);
         ResultSet resultSet = statement.executeQuery("SELECT * FROM ksiazki WHERE id = 1");
         assertEquals(false, resultSet.next());
-        statement.close();
+
+       statement.executeUpdate("DROP table ksiazki");
     }
 }

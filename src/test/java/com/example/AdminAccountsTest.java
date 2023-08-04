@@ -1,3 +1,5 @@
+package com.example;
+
 import org.junit.jupiter.api.Test;
 
 import java.sql.*;
@@ -78,7 +80,7 @@ public class AdminAccountsTest {
                 output =  rs.getString(1);
             }
 
-            String expectedOutput = "Jurekc";
+            String expectedOutput = "Jurek";
             assertEquals(expectedOutput, output);
 
             String query4 = "DROP table test_konta_administratorow";
@@ -162,7 +164,7 @@ public class AdminAccountsTest {
             assertEquals(expectedOutput, output);
 
             String query5 = "DROP table test_konta_administratorow";
-            stmt.execute(query4);
+            stmt.execute(query5);
             connection.close();
         } catch (Exception e) {
             System.out.println(e);
