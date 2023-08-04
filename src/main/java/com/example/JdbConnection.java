@@ -20,7 +20,7 @@ public class JdbConnection {
     public JdbConnection() throws ClassNotFoundException, SQLException {
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, password);
             System.out.println("Połączono z bazą danych");
         } catch (Exception e) {

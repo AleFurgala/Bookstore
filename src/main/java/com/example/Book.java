@@ -1,7 +1,9 @@
 package com.example;
 
-import java.sql.*;
-import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Book {
 
@@ -16,7 +18,6 @@ public class Book {
     private static String author;
     private static int price;
 
-    private static String titleOrAuthor;
     private static int amount;
 
     public static int getAmount() {
@@ -51,15 +52,6 @@ public class Book {
         Book.price = price;
     }
 
-
-    public static String getTitleOrAuthor() {
-        return titleOrAuthor;
-    }
-
-    public static void setTitleOrAuthor(String titleOrAuthor) {
-        Book.titleOrAuthor = titleOrAuthor;
-    }
-
     public static int getId() {
         return id;
     }
@@ -89,16 +81,11 @@ public class Book {
 
     }
 
-    public void showBooksByTitleOrAuthor() throws SQLException {
-        String query = "SELECT * FROM ksiazki WHERE tytul LIKE '%" + getTitleOrAuthor() + "%' OR autor LIKE '%" + getTitleOrAuthor() + "%' ";
+    public void showBooksByTitleOrAuthor(String titleOrAuthor) throws SQLException {
+        String query = "SELECT * FROM ksiazki WHERE tytul LIKE '%" + titleOrAuthor + "%' OR autor LIKE '%" + titleOrAuthor + "%' ";
         try {
-
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println("Podaj tytuł albo autora: ");
-            Scanner scanner = new Scanner(System.in);
-            setTitleOrAuthor(scanner.nextLine());
-
             System.out.println("id  | Autor ksiązki | Tytuł książki | cena | ilosc");
             System.out.println();
             while (rs.next())
@@ -111,27 +98,12 @@ public class Book {
         }
     }
 
-    public void addBook() throws SQLException {
+    public void addBook(String title, String author, int price, int amount) throws SQLException {
 
         try {
-
             Statement stmt = connection.createStatement();
-
-            Scanner scanner = new Scanner(System.in);
-            Scanner scanner1 = new Scanner(System.in);
-
-            System.out.println("Wprowadź tytuł: ");
-            setTitle(scanner1.nextLine());
-            System.out.println("Wprowadź autora: ");
-            setAuthor(scanner1.nextLine());
-            System.out.println("Wprowadź cenę: ");
-            setPrice(scanner.nextInt());
-            System.out.println("Wprowadź ilosc: ");
-            setAmount(scanner.nextInt());
-            String query = "INSERT INTO ksiazki(tytul, autor, cena,ilosc) VALUES('" + getTitle() + "' , '" + getAuthor() + "' , " + getPrice() + " , " + getAmount() + ")";
+            String query = "INSERT INTO ksiazki(tytul, autor, cena,ilosc) VALUES('" + title + "' , '" + author + "' , " + price + " , " + amount + ")";
             stmt.executeUpdate(query);
-
-            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -147,37 +119,20 @@ public class Book {
         }
     }
 
-    public void updateBook() throws SQLException {
+    public void updateBook(int id, String title, String author, int price, int amount) throws SQLException {
         try {
 
             Statement stmt = connection.createStatement();
-            Scanner scanner = new Scanner(System.in);
-            Scanner scanner1 = new Scanner(System.in);
 
-            System.out.println("Wprowadź id książki, którą chcesz edytować");
-            setId(scanner.nextInt());
-
-            System.out.println("Wprowadź tytuł: ");
-            setTitle(scanner1.nextLine());
-            System.out.println("Wprowadź autora: ");
-            setAuthor(scanner1.nextLine());
-            System.out.println("Wprowadź cenę: ");
-            setPrice(scanner.nextInt());
-            System.out.println("Wprowadź ilosc: ");
-            setAmount(scanner.nextInt());
-
-
-            String query = "UPDATE ksiazki SET tytul = '" + getTitle() + "', autor = '" + getAuthor() + "', cena =  '" + getPrice() + "', ilosc =  '" + getAmount() + "' WHERE id = '" + getId() + "'";
+            String query = "UPDATE ksiazki SET tytul = '" + title + "', autor = '" + author + "', cena =  '" + price + "', ilosc =  '" + amount + "' WHERE id = '" + id + "'";
             stmt.executeUpdate(query);
 
-            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
     public void deleteAmount(int number) throws SQLException {
-
         try {
             String query1 = "SELECT ilosc FROM ksiazki WHERE id = " + number + "";
             Statement stmt = connection.createStatement();
@@ -195,7 +150,6 @@ public class Book {
 
             String query = "UPDATE ksiazki SET ilosc = '" + AmountOfBooks + "' WHERE id = '" + number + "'";
             stmt.executeUpdate(query);
-
 
         } catch (Exception e) {
             System.out.println(e);

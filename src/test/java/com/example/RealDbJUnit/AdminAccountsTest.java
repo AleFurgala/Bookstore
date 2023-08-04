@@ -1,4 +1,4 @@
-package com.example;
+package com.example.RealDbJUnit;
 
 import org.junit.jupiter.api.Test;
 

@@ -54,25 +54,51 @@ public class Main {
                                 jdbConnection.closeConnection();
                                 break;
                             case 2:
-                                book.showBooksByTitleOrAuthor();
+                                System.out.println("Podaj tytuł lub autora ksiązki, której szukasz");
+                                Scanner scanner2 = new Scanner(System.in);
+                                String titleOrAuthor = scanner2.nextLine();
+                                book.showBooksByTitleOrAuthor(titleOrAuthor);
                                 jdbConnection.closeConnection();
                                 break;
                             case 3:
-                                book.addBook();
+                                Scanner scanner3 = new Scanner(System.in);
+                                Scanner scanner4 = new Scanner(System.in);
+
+                                System.out.println("Wprowadź tytuł: ");
+                                String title = scanner3.nextLine();
+                                System.out.println("Wprowadź autora: ");
+                                String author = scanner3.nextLine();
+                                System.out.println("Wprowadź cenę: ");
+                                int price = scanner4.nextInt();
+                                System.out.println("Wprowadź ilosc: ");
+                                int amount = scanner4.nextInt();
+                                book.addBook(title,author,price,amount);
                                 jdbConnection.closeConnection();
                                 break;
                             case 4:
                                 book.showAllBooks();
 
                                 System.out.println("Wprowadź numer id książki którą chcesz usunąć: ");
-                                Scanner scanner2 = new Scanner(System.in);
-                                int bookId = scanner2.nextInt();
+                                Scanner scanner5 = new Scanner(System.in);
+                                int bookId = scanner5.nextInt();
                                 book.deleteBook(bookId);
                                 jdbConnection.closeConnection();
                                 break;
                             case 5:
                                 book.showAllBooks();
-                                book.updateBook();
+                                Scanner scanner6 = new Scanner(System.in);
+                                Scanner scanner7 = new Scanner(System.in);
+                                System.out.println("Wprowadź id książki, którą chcesz edytować ");
+                                int id = scanner6.nextInt();
+                                System.out.println("Wprowadź tytuł: ");
+                                title = scanner7.nextLine();
+                                System.out.println("Wprowadź autora: ");
+                                author = scanner7.nextLine();
+                                System.out.println("Wprowadź cenę: ");
+                                price = scanner7.nextInt();
+                                System.out.println("Wprowadź ilosc: ");
+                                amount = scanner6.nextInt();
+                                book.updateBook(id,title,author,price,amount);
                                 jdbConnection.closeConnection();
                                 break;
                             case 6:

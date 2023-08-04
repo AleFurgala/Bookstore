@@ -1,4 +1,4 @@
-package com.example;
+package com.example.RealDbJUnit;
 
 import org.junit.jupiter.api.Test;
 
@@ -74,7 +74,7 @@ public class BookTest {
             String query2 = "INSERT INTO test_ksiazki (tytul, autor, cena, ilosc) VALUES('Water' , 'Paula Hawkins' , 23 , 2), ('xyz' , 'abc' , 30 , 3)";
             stmt.execute(query2);
 
-            String query3 = "SELECT * FROM test_ksiazki WHERE tytul LIKE '%Water%' OR '%Paula Hawkins%' OR autor LIKE '% Water%' OR '%Paula Hawkins%'";
+            String query3 = "SELECT * FROM test_ksiazki WHERE tytul LIKE '%Water%' OR autor LIKE '%Water%'";
             ResultSet rs = stmt.executeQuery(query3);
             String output = "";
             while (rs.next()) {
@@ -234,7 +234,7 @@ public class BookTest {
                 AmountOfBooks = rs.getInt(1);
                 AmountOfBooks = AmountOfBooks - 1;
             }
-            String query4 = "UPDATE ksiazki SET ilosc = '" + AmountOfBooks + "' WHERE id = 1";
+            String query4 = "UPDATE test_ksiazki SET ilosc = '" + AmountOfBooks + "' WHERE id = 1";
             stmt.executeUpdate(query4);
 
             String query5 = "SELECT * FROM test_ksiazki WHERE id = 1";

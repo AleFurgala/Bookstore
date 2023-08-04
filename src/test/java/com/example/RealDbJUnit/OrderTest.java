@@ -1,5 +1,6 @@
-package com.example;
+package com.example.RealDbJUnit;
 
+import com.example.Order;
 import org.junit.jupiter.api.Test;
 
 import java.sql.*;
