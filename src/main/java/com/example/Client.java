@@ -1,7 +1,9 @@
 package com.example;
 
-import java.sql.*;
-import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Client {
     public Client(Connection connection) {
@@ -9,57 +11,6 @@ public class Client {
     }
 
     private Connection connection;
-
-    private static int id;
-    private static String name;
-
-    private static String surname;
-    private static String adress;
-
-    public static String getAdress() {
-        return adress;
-    }
-
-    public static void setAdress(String adress) {
-        Client.adress = adress;
-    }
-
-
-    private static String nameOrSurname;
-
-    public static String getNameOrSurname() {
-        return nameOrSurname;
-    }
-
-    public static void setNameOrSurname(String nameOrSurname) {
-        Client.nameOrSurname = nameOrSurname;
-    }
-
-
-    public static int getId() {
-        return id;
-    }
-
-    public static void setId(int id) {
-        Client.id = id;
-    }
-
-    public static String getName() {
-        return name;
-    }
-
-    public static void setName(String name) {
-        Client.name = name;
-    }
-
-    public static String getSurname() {
-        return surname;
-    }
-
-    public static void setSurname(String surname) {
-        Client.surname = surname;
-    }
-
 
     public void showAllClients() throws SQLException {
         String query = "select * from klienci";
@@ -99,22 +50,11 @@ public class Client {
         }
     }
 
-    public void addClient() throws SQLException {
+    public void addClient(String name, String surname, String address) throws SQLException {
         try {
-
             Statement stmt = connection.createStatement();
 
-            Scanner scanner = new Scanner(System.in);
-            Scanner scanner1 = new Scanner(System.in);
-
-            System.out.println("Wprowadź imie: ");
-            setName(scanner1.nextLine());
-            System.out.println("Wprowadź nazwisko: ");
-            setSurname(scanner1.nextLine());
-            System.out.println("Wprowadź adres: ");
-            setAdress(scanner.nextLine());
-
-            String query = "INSERT INTO klienci(imie, nazwisko, adres) VALUES('" + getName() + "' , '" + getSurname() + "' , '" + getAdress() + "')";
+            String query = "INSERT INTO klienci(imie, nazwisko, adres) VALUES('" + name + "' , '" + surname + "' , '" + address + "')";
 
             stmt.executeUpdate(query);
 
@@ -123,52 +63,29 @@ public class Client {
         }
     }
 
-    public void deleteClient() throws SQLException {
+    public void deleteClient(int clientToDelete) throws SQLException {
         try {
-
             Statement stmt = connection.createStatement();
 
-            System.out.println("Wprowadź numer id klienta, którego chcesz usunąć: ");
-            Scanner scanner = new Scanner(System.in);
-            setId(scanner.nextInt());
+            String query = "DELETE FROM klienci WHERE id = '" + clientToDelete + "'";
 
-            String query = "DELETE FROM klienci WHERE id = '" + getId() + "'";
             stmt.executeUpdate(query);
-
 
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void updateClient() throws SQLException {
+    public void updateClient(int id, String name, String surname, String address) throws SQLException {
         try {
-
             Statement stmt = connection.createStatement();
 
-            Scanner scanner = new Scanner(System.in);
-            Scanner scanner1 = new Scanner(System.in);
+            String query = "UPDATE klienci SET imie = '" + name + "', nazwisko = '" + surname + "', adres =  '" + address + "' WHERE id = '" + id + "'";
 
-            System.out.println("Wprowadź id klienta, którego chcesz edytować");
-            setId(scanner.nextInt());
-
-            System.out.println("Wprowadź imie: ");
-            setName(scanner1.nextLine());
-
-            System.out.println("Wprowadź nazwisko: ");
-            setSurname(scanner1.nextLine());
-
-            System.out.println("Wprowadź adres: ");
-            setAdress(scanner1.nextLine());
-
-            String query = "UPDATE klienci SET imie = '" + getName() + "', nazwisko = '" + getSurname() + "', adres =  '" + getAdress() + "' WHERE id = '" + getId() + "'";
             stmt.executeUpdate(query);
-
 
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-
-
 }

@@ -74,5 +74,47 @@ public class H2ClientTest {
         assertEquals("Jan", resultSet.getString(2));
         assertEquals("Nowak", resultSet.getString(3));
     }
+    @Test
+    void addClientTest() throws SQLException {
+        statement = connection.createStatement();
 
+        statement.executeUpdate("CREATE TABLE klienci (id INT AUTO_INCREMENT, imie VARCHAR(255), nazwisko VARCHAR(255), adres VARCHAR(255), PRIMARY KEY (id))");
+
+        Client client = new Client(connection);
+        client.addClient("Jan", "Nowak", "Rzeszów");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM klienci");
+        resultSet.absolute(1);
+        assertEquals("Jan", resultSet.getString(2));
+        assertEquals("Nowak", resultSet.getString(3));
+    }
+    @Test
+    void deleteClientTest() throws SQLException {
+        statement = connection.createStatement();
+
+        statement.executeUpdate("CREATE TABLE klienci (id INT AUTO_INCREMENT, imie VARCHAR(255), nazwisko VARCHAR(255), adres VARCHAR(255), PRIMARY KEY (id))");
+        statement.executeUpdate("INSERT INTO  klienci (imie, nazwisko, adres) VALUES('Jan' ,'Nowak', 'Rzeszow')");
+        statement.executeUpdate("INSERT INTO  klienci (imie, nazwisko, adres) VALUES('Krystyna' , 'Kowalska' , 'Warszawa')");
+
+        Client client = new Client(connection);
+        client.deleteClient(1);
+
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM klienci WHERE id = 1");
+        assertEquals(false, resultSet.next());
+    }
+
+    @Test
+    void updateClientTest() throws SQLException {
+        statement = connection.createStatement();
+
+        statement.executeUpdate("CREATE TABLE klienci (id INT AUTO_INCREMENT, imie VARCHAR(255), nazwisko VARCHAR(255), adres VARCHAR(255), PRIMARY KEY (id))");
+        statement.executeUpdate("INSERT INTO  klienci (imie, nazwisko, adres) VALUES('Jan' ,'Nowak', 'Rzeszow')");
+
+        Client client = new Client(connection);
+        client.updateClient(1, "Janusz", "Nowakowski", "Lublin");
+
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM klienci");
+        resultSet.absolute(1);
+        assertEquals("Janusz", resultSet.getString(2));
+        assertEquals("Nowakowski", resultSet.getString(3));
+    }
 }

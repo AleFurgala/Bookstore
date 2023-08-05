@@ -107,7 +107,6 @@ public class H2BookTest {
 
         ResultSet resultSet = statement.executeQuery("SELECT * FROM ksiazki WHERE id = 1");
         assertEquals(false, resultSet.next());
-
     }
 
     @Test

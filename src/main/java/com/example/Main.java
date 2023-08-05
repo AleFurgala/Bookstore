@@ -126,15 +126,38 @@ public class Main {
                                 jdbConnection.closeConnection();
                                 break;
                             case 3:
-                                client.addClient();
+                                Scanner scanner9 = new Scanner(System.in);
+                                System.out.println("Wprowadź imie: ");
+                                String name = scanner9.nextLine();
+                                System.out.println("Wprowadź nazwisko: ");
+                                String surname = scanner9.nextLine();
+                                System.out.println("Wprowadź adres: ");
+                                String address = scanner9.nextLine();
+                                client.addClient(name,surname,address);
                                 jdbConnection.closeConnection();
                                 break;
                             case 4:
-                                client.deleteClient();
+                                client.showAllClients();
+                                System.out.println("Wprowadź numer id klienta, którego chcesz usunąć: ");
+                                Scanner scanner10 = new Scanner(System.in);
+                                int clientToDelete= scanner10.nextInt();
+                                client.deleteClient(clientToDelete);
                                 jdbConnection.closeConnection();
                                 break;
                             case 5:
-                                client.updateClient();
+                                Scanner scanner11 = new Scanner(System.in);
+                                Scanner scanner12 = new Scanner(System.in);
+
+                                System.out.println("Wprowadź id klienta, którego chcesz edytować");
+                                int id = scanner11.nextInt();
+                                System.out.println("Wprowadź imie: ");
+                                name = scanner12.nextLine();
+                                System.out.println("Wprowadź nazwisko: ");
+                                surname = scanner12.nextLine();
+                                System.out.println("Wprowadź adres: ");
+                                address = scanner12.nextLine();
+
+                                client.updateClient(id,name,surname,address);
                                 jdbConnection.closeConnection();
                                 break;
                             case 6:
