@@ -15,8 +15,6 @@ public class Main {
         AdminAccounts adminAccounts = new AdminAccounts(connection);
 
 
-
-
         String loginUser;
         String passwordUser;
 
@@ -72,7 +70,7 @@ public class Main {
                                 int price = scanner4.nextInt();
                                 System.out.println("Wprowadź ilosc: ");
                                 int amount = scanner4.nextInt();
-                                book.addBook(title,author,price,amount);
+                                book.addBook(title, author, price, amount);
                                 jdbConnection.closeConnection();
                                 break;
                             case 4:
@@ -98,7 +96,7 @@ public class Main {
                                 price = scanner7.nextInt();
                                 System.out.println("Wprowadź ilosc: ");
                                 amount = scanner6.nextInt();
-                                book.updateBook(id,title,author,price,amount);
+                                book.updateBook(id, title, author, price, amount);
                                 jdbConnection.closeConnection();
                                 break;
                             case 6:
@@ -133,14 +131,14 @@ public class Main {
                                 String surname = scanner9.nextLine();
                                 System.out.println("Wprowadź adres: ");
                                 String address = scanner9.nextLine();
-                                client.addClient(name,surname,address);
+                                client.addClient(name, surname, address);
                                 jdbConnection.closeConnection();
                                 break;
                             case 4:
                                 client.showAllClients();
                                 System.out.println("Wprowadź numer id klienta, którego chcesz usunąć: ");
                                 Scanner scanner10 = new Scanner(System.in);
-                                int clientToDelete= scanner10.nextInt();
+                                int clientToDelete = scanner10.nextInt();
                                 client.deleteClient(clientToDelete);
                                 jdbConnection.closeConnection();
                                 break;
@@ -157,7 +155,7 @@ public class Main {
                                 System.out.println("Wprowadź adres: ");
                                 address = scanner12.nextLine();
 
-                                client.updateClient(id,name,surname,address);
+                                client.updateClient(id, name, surname, address);
                                 jdbConnection.closeConnection();
                                 break;
                             case 6:
@@ -177,25 +175,49 @@ public class Main {
                                 jdbConnection.closeConnection();
                                 break;
                             case 2:
-                                order.showOrderById();
+                                System.out.println("Podaj id zamowienia: ");
+                                Scanner scanner13 = new Scanner(System.in);
+                                int id = scanner13.nextInt();
+                                order.showOrderById(id);
                                 jdbConnection.closeConnection();
                                 break;
                             case 3:
                                 client.showAllClients();
                                 book.showAllBooks();
-                                book.deleteAmount(order.addOrder());
+
+                                Scanner scanner14 = new Scanner(System.in);
+
+                                System.out.println("Wprowadź id  klienta: ");
+                                int idClients = scanner14.nextInt();
+                                System.out.println("Wprowadź id książki: ");
+                                int idBooks = scanner14.nextInt();
+
+                                book.deleteAmount(order.addOrder(idClients, idBooks));
                                 jdbConnection.closeConnection();
 
                                 break;
                             case 4:
                                 order.showAllOrder();
-                                order.deleteOrder();
+
+                                System.out.println("Wprowadź numer id zamowienia które chcesz usunąć: ");
+                                Scanner scanner15 = new Scanner(System.in);
+                                id = scanner15.nextInt();
+
+                                order.deleteOrder(id);
                                 jdbConnection.closeConnection();
 
                                 break;
                             case 5:
                                 order.showAllOrder();
-                                order.updateOrder();
+
+                                Scanner scanner16 = new Scanner(System.in);
+                                System.out.println("Wprowadź id zamówienia, które chcesz edytować:");
+                                id = scanner16.nextInt();
+                                System.out.println("Wprowadź ID Kliena: ");
+                                 idClients = scanner16.nextInt();
+                                System.out.println("Wprowadź ID Książki: ");
+                                idBooks = scanner16.nextInt();
+                                order.updateOrder(id, idClients, idBooks);
                                 jdbConnection.closeConnection();
 
                                 break;
@@ -232,12 +254,14 @@ public class Main {
                             default:
                                 System.out.println("Wprowadziłeś blędny numer");
 
-                }}}
-                while (menu != 0) ;
-            } else{
-                System.out.println("Błędny login lub hasło");
+                        }
+                }
             }
-
+            while (menu != 0);
+        } else {
+            System.out.println("Błędny login lub hasło");
         }
 
     }
+
+}

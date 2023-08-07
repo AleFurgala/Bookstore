@@ -1,8 +1,10 @@
 package com.example;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
-import java.util.Scanner;
 
 public class Order {
     public Order(Connection connection) {
@@ -64,14 +66,11 @@ public class Order {
         }
     }
 
-    public void showOrderById() throws SQLException {
+    public void showOrderById(int id) throws SQLException {
 
         try {
             Statement stmt = connection.createStatement();
-            System.out.println("Podaj id zamowienia: ");
-            Scanner scanner = new Scanner(System.in);
-            setId(scanner.nextInt());
-            String query = "SELECT zamowienia.id, zamowienia.data, klienci.imie, klienci.nazwisko, ksiazki.tytul, ksiazki.autor FROM klienci, ksiazki, zamowienia WHERE zamowienia.id = '" + getId() + "' AND zamowienia.id_klienci = klienci.id AND zamowienia.id_ksiazki = ksiazki.id";
+            String query = "SELECT zamowienia.id, zamowienia.data, klienci.imie, klienci.nazwisko, ksiazki.tytul, ksiazki.autor FROM klienci, ksiazki, zamowienia WHERE zamowienia.id = '" + id + "' AND zamowienia.id_klienci = klienci.id AND zamowienia.id_ksiazki = ksiazki.id";
             ResultSet rs = stmt.executeQuery(query);
             System.out.println(" id zamówienia | data zamowienia | imie klienta | nazwisko klient | tytuł książki | autor ksiazki ");
             System.out.println();
@@ -86,22 +85,13 @@ public class Order {
     }
 
 
-    public int addOrder() throws SQLException {
+    public int addOrder(int idClients, int idBooks){
         try {
-
             Statement stmt = connection.createStatement();
 
-            Scanner scanner = new Scanner(System.in);
-            Scanner scanner1 = new Scanner(System.in);
-
-            System.out.println("Wprowadź id  klienta: ");
-            setIdKlienci(scanner1.nextInt());
-            System.out.println("Wprowadź id książki: ");
-            setIdKsiazki(scanner.nextInt());
-            String query = "INSERT INTO zamowienia(id_klienci, id_ksiazki, data) VALUES(" + getIdKlienci() + " , " + getIdKsiazki() + " , " + getDate() + ")";
+            String query = "INSERT INTO zamowienia(id_klienci, id_ksiazki, data) VALUES(" + idClients + " , " + idBooks + " , " + getDate() + ")";
 
             stmt.executeUpdate(query);
-
 
         } catch (Exception e) {
             System.out.println(e);
@@ -109,49 +99,28 @@ public class Order {
         return getIdKsiazki();
     }
 
-    public void deleteOrder() throws SQLException {
+    public void deleteOrder(int id) throws SQLException {
         try {
-
             Statement stmt = connection.createStatement();
-            System.out.println("Wprowadź numer id zamowienia które chcesz usunąć: ");
-            Scanner scanner = new Scanner(System.in);
-            setId(scanner.nextInt());
 
-            String query = "DELETE FROM zamowienia WHERE id = '" + getId() + "'";
+            String query = "DELETE FROM zamowienia WHERE id = '" + id + "'";
             stmt.executeUpdate(query);
 
-            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void updateOrder() throws SQLException {
+    public void updateOrder(int id, int idClients, int idBooks) throws SQLException {
         try {
-
             Statement stmt = connection.createStatement();
 
-            Scanner scanner = new Scanner(System.in);
-
-
-            System.out.println("Wprowadź id zamówienia, które chcesz edytować:");
-            setId(scanner.nextInt());
-
-            System.out.println("Wprowadź ID Kliena: ");
-            setIdKlienci(scanner.nextInt());
-
-            System.out.println("Wprowadź ID Książki: ");
-            setIdKsiazki(scanner.nextInt());
-
-
-            String query = "UPDATE zamowienia SET id_klienci = '" + getIdKlienci() + "', id_ksiazki = '" + getIdKsiazki() + "' WHERE id = '" + getId() + "'";
+            String query = "UPDATE zamowienia SET id_klienci = '" + idClients + "', id_ksiazki = '" + idBooks + "' WHERE id = '" + id + "'";
             stmt.executeUpdate(query);
-
 
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
 
     public String getDate() {
