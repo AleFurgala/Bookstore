@@ -43,7 +43,14 @@ public class Main {
 
                 switch (menu) {
                     case 1:
-                        System.out.println("1.Wyświetl wszystkie książki \n2.Wyszukaj ksiażkę \n3.Dodaj książkę \n4.Usuń książkę \n5.Edytuj książke \n6.Powrót do glównego menu \n********************************************************");
+                        System.out.println("1.Wyświetl wszystkie książki \n" +
+                                "2.Wyświetl dostępne książki \n" +
+                                "3.Wyszukaj ksiażkę \n" +
+                                "4.Dodaj książkę \n" +
+                                "5.Usuń książkę \n" +
+                                "6.Edytuj książke \n" +
+                                "7.Powrót do glównego menu \n" +
+                                "********************************************************");
 
                         int menu2 = scanner.nextInt();
                         switch (menu2) {
@@ -52,13 +59,17 @@ public class Main {
                                 jdbConnection.closeConnection();
                                 break;
                             case 2:
+                                book.showAvailableBooks();
+                                jdbConnection.closeConnection();
+                                break;
+                            case 3:
                                 System.out.println("Podaj tytuł lub autora ksiązki, której szukasz");
                                 Scanner scanner2 = new Scanner(System.in);
                                 String titleOrAuthor = scanner2.nextLine();
                                 book.showBooksByTitleOrAuthor(titleOrAuthor);
                                 jdbConnection.closeConnection();
                                 break;
-                            case 3:
+                            case 4:
                                 Scanner scanner3 = new Scanner(System.in);
                                 Scanner scanner4 = new Scanner(System.in);
 
@@ -73,7 +84,7 @@ public class Main {
                                 book.addBook(title, author, price, amount);
                                 jdbConnection.closeConnection();
                                 break;
-                            case 4:
+                            case 5:
                                 book.showAllBooks();
 
                                 System.out.println("Wprowadź numer id książki którą chcesz usunąć: ");
@@ -82,7 +93,7 @@ public class Main {
                                 book.deleteBook(bookId);
                                 jdbConnection.closeConnection();
                                 break;
-                            case 5:
+                            case 6:
                                 book.showAllBooks();
                                 Scanner scanner6 = new Scanner(System.in);
                                 Scanner scanner7 = new Scanner(System.in);
@@ -99,7 +110,7 @@ public class Main {
                                 book.updateBook(id, title, author, price, amount);
                                 jdbConnection.closeConnection();
                                 break;
-                            case 6:
+                            case 7:
                                 System.out.println("6.Powrót do glównego menu");
                                 break;
                             default:

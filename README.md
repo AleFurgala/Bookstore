@@ -6,6 +6,8 @@ This software helps Books Store how to manage with orders.
 
 - java
 - MySql Database
+- Maven
+- H2 Database
 
 
 ### Files in main.Book.java 

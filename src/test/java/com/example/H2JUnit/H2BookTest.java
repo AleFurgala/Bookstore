@@ -59,6 +59,23 @@ public class H2BookTest {
         resultSet.absolute(2);
         assertEquals("xyz", resultSet.getString(2));
         assertEquals("abc", resultSet.getString(3));
+    } @Test
+    void showAvailableBooksTest() throws SQLException {
+        statement = connection.createStatement();
+
+        statement.executeUpdate("CREATE TABLE ksiazki (id INT AUTO_INCREMENT, tytul VARCHAR(255), autor VARCHAR(255), cena INT, ilosc INT, PRIMARY KEY (id))");
+
+        statement.executeUpdate("INSERT INTO ksiazki (tytul, autor, cena, ilosc) VALUES('Water' , 'Paula Hawkins' , 23 , 0)");
+        statement.executeUpdate("INSERT INTO ksiazki (tytul, autor, cena, ilosc) VALUES('xyz' , 'abc' , 30 , 3)");
+
+        Book book = new Book(connection);
+        book.showAvailableBooks();
+
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM ksiazki WHERE ilosc > 0");
+        resultSet.absolute(1);
+        assertEquals("xyz", resultSet.getString(2));
+        assertEquals("abc", resultSet.getString(3));
+
     }
 
     @Test

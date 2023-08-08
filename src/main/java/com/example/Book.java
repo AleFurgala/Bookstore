@@ -44,6 +44,25 @@ public class Book {
 
     }
 
+    public void showAvailableBooks() throws SQLException {
+        String query = "select * from ksiazki WHERE ilosc > 0";
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            System.out.println("id  | Autor ksiązki | Tytuł książki | cena | ilosc");
+            System.out.println();
+            while (rs.next())
+                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
+                        "  " + rs.getString(4) + "  " + rs.getInt(5));
+
+            System.out.println("********************************************************");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public void showBooksByTitleOrAuthor(String titleOrAuthor) throws SQLException {
         String query = "SELECT * FROM ksiazki WHERE tytul LIKE '%" + titleOrAuthor + "%' OR autor LIKE '%" + titleOrAuthor + "%' ";
         try {
