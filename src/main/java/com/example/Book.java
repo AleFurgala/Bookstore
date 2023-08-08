@@ -122,15 +122,20 @@ public class Book {
             System.out.println("id | Autor ksiązki | Tytuł książki | cena | ilosc");
             System.out.println();
 
-            int AmountOfBooks = 0;
+            int amountOfBooks = 0;
             while (rs.next()) {
-                AmountOfBooks = rs.getInt(1);
-                AmountOfBooks = AmountOfBooks - 1;
+                amountOfBooks = rs.getInt(1);
+                if (amountOfBooks <= 0) {
+                    System.out.println("Brak książek w magazynie");
+                } else {
+                    amountOfBooks = amountOfBooks - 1;
+                }
+
             }
 
             System.out.println("********************************************************");
 
-            String query = "UPDATE ksiazki SET ilosc = '" + AmountOfBooks + "' WHERE id = '" + number + "'";
+            String query = "UPDATE ksiazki SET ilosc = '" + amountOfBooks + "' WHERE id = '" + number + "'";
             stmt.executeUpdate(query);
 
         } catch (Exception e) {

@@ -85,7 +85,7 @@ public class Order {
     }
 
 
-    public int addOrder(int idClients, int idBooks){
+    public void addOrder(int idClients, int idBooks) {
         try {
             Statement stmt = connection.createStatement();
 
@@ -96,7 +96,6 @@ public class Order {
         } catch (Exception e) {
             System.out.println(e);
         }
-        return getIdKsiazki();
     }
 
     public void deleteOrder(int id) throws SQLException {

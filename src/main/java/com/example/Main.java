@@ -193,17 +193,18 @@ public class Main {
                                 jdbConnection.closeConnection();
                                 break;
                             case 3:
-                                client.showAllClients();
-                                book.showAllBooks();
-
                                 Scanner scanner14 = new Scanner(System.in);
 
+                                client.showAllClients();
                                 System.out.println("Wprowadź id  klienta: ");
                                 int idClients = scanner14.nextInt();
+
+                                book.showAvailableBooks();
                                 System.out.println("Wprowadź id książki: ");
                                 int idBooks = scanner14.nextInt();
 
-                                book.deleteAmount(order.addOrder(idClients, idBooks));
+                                order.addOrder(idClients, idBooks);
+                                book.deleteAmount(idBooks);
                                 jdbConnection.closeConnection();
 
                                 break;

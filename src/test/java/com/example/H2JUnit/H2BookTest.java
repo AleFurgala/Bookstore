@@ -148,6 +148,7 @@ public class H2BookTest {
 
         statement.executeUpdate("CREATE TABLE ksiazki (id INT AUTO_INCREMENT, tytul VARCHAR(255), autor VARCHAR(255), cena INT, ilosc INT, PRIMARY KEY (id))");
         statement.executeUpdate("INSERT INTO ksiazki (tytul, autor, cena, ilosc) VALUES('Water' , 'Paula Hawkins' , 23 , 3)");
+        statement.executeUpdate("INSERT INTO ksiazki (tytul, autor, cena, ilosc) VALUES('xyz' , 'abc' , 23 , 0)");
 
         Book book = new Book(connection);
         book.deleteAmount(1);
@@ -155,5 +156,7 @@ public class H2BookTest {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM ksiazki");
         resultSet.absolute(1);
         assertEquals(2, resultSet.getInt(5));
+        resultSet.absolute(2);
+        assertEquals(0, resultSet.getInt(5));
     }
 }
