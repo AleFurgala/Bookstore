@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Base64;
-import java.util.Scanner;
 
 public class AdminAccounts {
 
@@ -89,42 +88,26 @@ public class AdminAccounts {
         return "0";
     }
 
-    public void addAdminAccount() throws SQLException{
+    public void addAdminAccount(String login, String password, String userName) throws SQLException{
 
         try {
-
             Statement stmt = connection.createStatement();
 
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("Wprowadź login: ");
-            setLogin(scanner.nextLine());
-            System.out.println("Wprowadź haslo: ");
-            setPassword(scanner.nextLine());
-            System.out.println("Wprowadź nazwę użytkownika: ");
-            setUsername(scanner.nextLine());
-
-            String query = "INSERT INTO konta_administratorow(login, haslo, nazwa_uzytkownika) VALUES('" + getLogin() + "' , '" + dataEncryption(getPassword()) + "' , '" + getUsername() + "')";
+            String query = "INSERT INTO konta_administratorow(login, haslo, nazwa_uzytkownika) VALUES('" + login + "' , '" + dataEncryption(password) + "' , '" + userName + "')";
             stmt.executeUpdate(query);
 
-            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void deleteAdminAccount() throws SQLException {
+    public void deleteAdminAccount(int id) throws SQLException {
         try {
-
             Statement stmt = connection.createStatement();
-            System.out.println("Wprowadź numer id Administratora którego chcesz usunąć: ");
-            Scanner scanner = new Scanner(System.in);
-            setId(scanner.nextInt());
 
-            String query = "DELETE FROM konta_administratorow WHERE id = '" + getId() + "'";
+            String query = "DELETE FROM konta_administratorow WHERE id = '" + id + "'";
             stmt.executeUpdate(query);
 
-            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }

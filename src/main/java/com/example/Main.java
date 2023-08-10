@@ -248,11 +248,24 @@ public class Main {
                         int menu5 = scanner.nextInt();
                         switch (menu5) {
                             case 1:
-                                adminAccounts.addAdminAccount();
+
+                                Scanner scanner17 = new Scanner(System.in);
+
+                                System.out.println("Wprowadź login: ");
+                                String login = scanner17.nextLine();
+                                System.out.println("Wprowadź haslo: ");
+                                String password = scanner17.nextLine();
+                                System.out.println("Wprowadź nazwę użytkownika: ");
+                                String userName = scanner17.nextLine();
+
+                                adminAccounts.addAdminAccount(login,password, userName);
                                 jdbConnection.closeConnection();
                                 break;
                             case 2:
-                                adminAccounts.deleteAdminAccount();
+                                System.out.println("Wprowadź numer id Administratora którego chcesz usunąć: ");
+                                Scanner scanner18 = new Scanner(System.in);
+                                int id = scanner18.nextInt();
+                                adminAccounts.deleteAdminAccount(id);
                                 jdbConnection.closeConnection();
                                 break;
                             case 3:

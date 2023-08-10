@@ -52,4 +52,47 @@ public class H2AdminAccountsTest {
 
     }
 
+    @Test
+
+    void getNameBasedLoginTest() throws SQLException {
+        statement = connection.createStatement();
+
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), PRIMARY KEY (id))");
+
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika) VALUES('admin','ddd','Jurek')");
+
+        AdminAccounts adminAccounts = new AdminAccounts(connection);
+        adminAccounts.getNameBasedLogin("admin");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM konta_administratorow WHERE login = 'admin'");
+        resultSet.absolute(1);
+        assertEquals("Jurek", resultSet.getString(4));
+    }
+
+    @Test
+
+    void addAdminAccountTest() throws SQLException {
+        statement = connection.createStatement();
+
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), PRIMARY KEY (id))");
+
+        AdminAccounts adminAccounts = new AdminAccounts(connection);
+        adminAccounts.addAdminAccount("admin", "ddd", "Jurek");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM konta_administratorow ");
+        resultSet.absolute(1);
+        assertEquals("lDHFY6qkS4Oi1WNNmw002A==", resultSet.getString(3));
+        assertEquals("Jurek", resultSet.getString(4));
+    }
+    @Test
+    void deleteAdminAccountTest() throws SQLException {
+        statement = connection.createStatement();
+
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), PRIMARY KEY (id))");
+
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika) VALUES('admin','ddd','Jurek')");
+
+        AdminAccounts adminAccounts = new AdminAccounts(connection);
+        adminAccounts.deleteAdminAccount(1);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM konta_administratorow ");
+        assertEquals(false, resultSet.next());
+    }
 }
