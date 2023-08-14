@@ -56,18 +56,18 @@ public class Main {
                         switch (menu2) {
                             case 1:
                                 book.showAllBooks();
-                                jdbConnection.closeConnection();
+                                //jdbConnection.closeConnection();
                                 break;
                             case 2:
                                 book.showAvailableBooks();
-                                jdbConnection.closeConnection();
+                                // jdbConnection.closeConnection();
                                 break;
                             case 3:
                                 System.out.println("Podaj tytuł lub autora ksiązki, której szukasz");
                                 Scanner scanner2 = new Scanner(System.in);
                                 String titleOrAuthor = scanner2.nextLine();
                                 book.showBooksByTitleOrAuthor(titleOrAuthor);
-                                jdbConnection.closeConnection();
+                                // jdbConnection.closeConnection();
                                 break;
                             case 4:
                                 Scanner scanner3 = new Scanner(System.in);
@@ -82,7 +82,7 @@ public class Main {
                                 System.out.println("Wprowadź ilosc: ");
                                 int amount = scanner4.nextInt();
                                 book.addBook(title, author, price, amount);
-                                jdbConnection.closeConnection();
+                                //jdbConnection.closeConnection();
                                 break;
                             case 5:
                                 book.showAllBooks();
@@ -91,7 +91,7 @@ public class Main {
                                 Scanner scanner5 = new Scanner(System.in);
                                 int bookId = scanner5.nextInt();
                                 book.deleteBook(bookId);
-                                jdbConnection.closeConnection();
+                                //jdbConnection.closeConnection();
                                 break;
                             case 6:
                                 book.showAllBooks();
@@ -108,7 +108,7 @@ public class Main {
                                 System.out.println("Wprowadź ilosc: ");
                                 amount = scanner6.nextInt();
                                 book.updateBook(id, title, author, price, amount);
-                                jdbConnection.closeConnection();
+                                // jdbConnection.closeConnection();
                                 break;
                             case 7:
                                 System.out.println("6.Powrót do glównego menu");
@@ -119,20 +119,22 @@ public class Main {
 
                         break;
                     case 2:
-                        System.out.println("\n1.Wyświetl wszystkich klienótw \n2.Wyszukaj klienta \n3.Dodaj klienta \n4.Usuń klienta \n5.Edytuj klienta \n6.Powrót do glównego menu");
+                        System.out.println("\n1.Wyświetl wszystkich klienótw \n2.Wyszukaj klienta \n3.Dodaj klienta \n4.Usuń klienta \n5.Edytuj klienta \n6.Powrót do glównego menun" +
+                                "********************************************************");
+
 
                         int menu3 = scanner.nextInt();
                         switch (menu3) {
                             case 1:
                                 client.showAllClients();
-                                jdbConnection.closeConnection();
+                                // jdbConnection.closeConnection();
                                 break;
                             case 2:
                                 System.out.println("Podaj imię lub nazwisko: ");
                                 Scanner scanner8 = new Scanner(System.in);
                                 String nameOrSurname = scanner8.nextLine();
                                 client.showClientByNameOrSurname(nameOrSurname);
-                                jdbConnection.closeConnection();
+                                //jdbConnection.closeConnection();
                                 break;
                             case 3:
                                 Scanner scanner9 = new Scanner(System.in);
@@ -143,7 +145,7 @@ public class Main {
                                 System.out.println("Wprowadź adres: ");
                                 String address = scanner9.nextLine();
                                 client.addClient(name, surname, address);
-                                jdbConnection.closeConnection();
+                                // jdbConnection.closeConnection();
                                 break;
                             case 4:
                                 client.showAllClients();
@@ -151,7 +153,7 @@ public class Main {
                                 Scanner scanner10 = new Scanner(System.in);
                                 int clientToDelete = scanner10.nextInt();
                                 client.deleteClient(clientToDelete);
-                                jdbConnection.closeConnection();
+                                // jdbConnection.closeConnection();
                                 break;
                             case 5:
                                 Scanner scanner11 = new Scanner(System.in);
@@ -167,15 +169,16 @@ public class Main {
                                 address = scanner12.nextLine();
 
                                 client.updateClient(id, name, surname, address);
-                                jdbConnection.closeConnection();
+                                //  jdbConnection.closeConnection();
                                 break;
                             case 6:
                                 System.out.println("6.Powrót do glównego menu");
                                 break;
                             default:
                                 System.out.println("Wprowadziłeś błędny numer ");
-                                break;
+
                         }
+                        break;
                     case 3:
                         System.out.println("1.Wyświetl wszystkie zamówienia \n2.Wyszukaj zamówienie \n3.Dodaj zamówienie \n4.Usuń zamówienie \n5.Edytuj zamówienie \n6.Powrót do glównego menu");
 
@@ -183,14 +186,14 @@ public class Main {
                         switch (menu4) {
                             case 1:
                                 order.showAllOrder();
-                                jdbConnection.closeConnection();
+                                //jdbConnection.closeConnection();
                                 break;
                             case 2:
                                 System.out.println("Podaj id zamowienia: ");
                                 Scanner scanner13 = new Scanner(System.in);
                                 int id = scanner13.nextInt();
                                 order.showOrderById(id);
-                                jdbConnection.closeConnection();
+                                //jdbConnection.closeConnection();
                                 break;
                             case 3:
                                 Scanner scanner14 = new Scanner(System.in);
@@ -205,7 +208,7 @@ public class Main {
 
                                 order.addOrder(idClients, idBooks);
                                 book.deleteAmount(idBooks);
-                                jdbConnection.closeConnection();
+                                // jdbConnection.closeConnection();
 
                                 break;
                             case 4:
@@ -216,7 +219,7 @@ public class Main {
                                 id = scanner15.nextInt();
 
                                 order.deleteOrder(id);
-                                jdbConnection.closeConnection();
+                                // jdbConnection.closeConnection();
 
                                 break;
                             case 5:
@@ -226,11 +229,11 @@ public class Main {
                                 System.out.println("Wprowadź id zamówienia, które chcesz edytować:");
                                 id = scanner16.nextInt();
                                 System.out.println("Wprowadź ID Kliena: ");
-                                 idClients = scanner16.nextInt();
+                                idClients = scanner16.nextInt();
                                 System.out.println("Wprowadź ID Książki: ");
                                 idBooks = scanner16.nextInt();
                                 order.updateOrder(id, idClients, idBooks);
-                                jdbConnection.closeConnection();
+                                // jdbConnection.closeConnection();
 
                                 break;
                             case 6:
@@ -258,15 +261,15 @@ public class Main {
                                 System.out.println("Wprowadź nazwę użytkownika: ");
                                 String userName = scanner17.nextLine();
 
-                                adminAccounts.addAdminAccount(login,password, userName);
-                                jdbConnection.closeConnection();
+                                adminAccounts.addAdminAccount(login, password, userName);
+                                //jdbConnection.closeConnection();
                                 break;
                             case 2:
                                 System.out.println("Wprowadź numer id Administratora którego chcesz usunąć: ");
                                 Scanner scanner18 = new Scanner(System.in);
                                 int id = scanner18.nextInt();
                                 adminAccounts.deleteAdminAccount(id);
-                                jdbConnection.closeConnection();
+                                //jdbConnection.closeConnection();
                                 break;
                             case 3:
                                 System.out.println("opcja 3 ");
@@ -275,6 +278,7 @@ public class Main {
                                 break;
                             case 0:
                                 System.out.println("Dziękuję za odwiedziny");
+                                jdbConnection.closeConnection();
                                 break;
                             default:
                                 System.out.println("Wprowadziłeś blędny numer");
