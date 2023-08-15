@@ -29,11 +29,10 @@ public class Main {
 
             System.out.println("Program księgarnia. Wybierz menu: ");
             int menu;
-            do {
+              do {
                 System.out.println("1.Książki \n2.Klienci \n3.Zamówienia \n4.Panel administratora \n0.Zamknij program ");
 
-                Scanner scanner19 = new Scanner(System.in);
-                menu = scanner19.nextInt();
+                  menu = Integer.parseInt(readValue(scanner," "));
 
                 switch (menu) {
                     case 1:
@@ -46,7 +45,7 @@ public class Main {
                                 "7.Powrót do glównego menu \n" +
                                 "********************************************************");
 
-                        int menu2 = scanner19.nextInt();
+                        int menu2 = Integer.parseInt(readValue(scanner," "));
                         switch (menu2) {
                             case 1:
                                 book.showAllBooks();
@@ -117,7 +116,7 @@ public class Main {
                                 "********************************************************");
 
 
-                        int menu3 = scanner19.nextInt();
+                        int menu3 = Integer.parseInt(readValue(scanner," "));
                         switch (menu3) {
                             case 1:
                                 client.showAllClients();
@@ -176,7 +175,7 @@ public class Main {
                     case 3:
                         System.out.println("1.Wyświetl wszystkie zamówienia \n2.Wyszukaj zamówienie \n3.Dodaj zamówienie \n4.Usuń zamówienie \n5.Edytuj zamówienie \n6.Powrót do glównego menu");
 
-                        int menu4 = scanner19.nextInt();
+                        int menu4 = Integer.parseInt(readValue(scanner," "));
                         switch (menu4) {
                             case 1:
                                 order.showAllOrder();
@@ -242,7 +241,7 @@ public class Main {
                     case 4:
                         System.out.println("1.Nowe konto administratora \n2.Usuń konto 2 \n3.Opcja 3 \n4.Powrót do glównego menu");
 
-                        int menu5 = scanner19.nextInt();
+                        int menu5 = Integer.parseInt(readValue(scanner," "));
                         switch (menu5) {
                             case 1:
 
@@ -284,14 +283,9 @@ public class Main {
         } else {
             System.out.println("Błędny login lub hasło");
         }
-
     }
-
     public static String readValue(Scanner scanner, String message){
-
         System.out.println(message);
-
         return scanner.nextLine();
     }
-
 }
