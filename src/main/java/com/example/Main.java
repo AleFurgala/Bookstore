@@ -31,9 +31,7 @@ public class Main {
             int menu;
               do {
                 System.out.println("1.Książki \n2.Klienci \n3.Zamówienia \n4.Panel administratora \n0.Zamknij program ");
-
-                  menu = Integer.parseInt(readValue(scanner," "));
-
+                  menu = Integer.parseInt(readValue(scanner,""));
                 switch (menu) {
                     case 1:
                         System.out.println("1.Wyświetl wszystkie książki \n" +
@@ -44,47 +42,31 @@ public class Main {
                                 "6.Edytuj książke \n" +
                                 "7.Powrót do glównego menu \n" +
                                 "********************************************************");
-
-                        int menu2 = Integer.parseInt(readValue(scanner," "));
+                        int menu2 = Integer.parseInt(readValue(scanner,""));
                         switch (menu2) {
                             case 1:
                                 book.showAllBooks();
-                                //jdbConnection.closeConnection();
                                 break;
                             case 2:
                                 book.showAvailableBooks();
-                                // jdbConnection.closeConnection();
                                 break;
                             case 3:
-                                System.out.println("Podaj tytuł lub autora ksiązki, której szukasz");
-                                Scanner scanner2 = new Scanner(System.in);
-                                String titleOrAuthor = scanner2.nextLine();
+                                String titleOrAuthor =readValue(scanner,"Podaj tytuł lub autora ksiązki, której szukasz");
                                 book.showBooksByTitleOrAuthor(titleOrAuthor);
-                                // jdbConnection.closeConnection();
                                 break;
                             case 4:
-                                Scanner scanner3 = new Scanner(System.in);
-                                Scanner scanner4 = new Scanner(System.in);
-
-                                System.out.println("Wprowadź tytuł: ");
-                                String title = scanner3.nextLine();
-                                System.out.println("Wprowadź autora: ");
-                                String author = scanner3.nextLine();
-                                System.out.println("Wprowadź cenę: ");
-                                int price = scanner4.nextInt();
-                                System.out.println("Wprowadź ilosc: ");
-                                int amount = scanner4.nextInt();
+                                String title = readValue(scanner,"Wprowadź tytuł: ");
+                                String author = readValue(scanner,"Wprowadź autora: ");
+                                int price = Integer.parseInt(readValue(scanner,"Wprowadź cenę: "));
+                                int amount = Integer.parseInt(readValue(scanner,"Wprowadź ilosc: "));
                                 book.addBook(title, author, price, amount);
-                                //jdbConnection.closeConnection();
                                 break;
                             case 5:
                                 book.showAllBooks();
-
                                 System.out.println("Wprowadź numer id książki którą chcesz usunąć: ");
                                 Scanner scanner5 = new Scanner(System.in);
                                 int bookId = scanner5.nextInt();
                                 book.deleteBook(bookId);
-                                //jdbConnection.closeConnection();
                                 break;
                             case 6:
                                 book.showAllBooks();
@@ -101,7 +83,6 @@ public class Main {
                                 System.out.println("Wprowadź ilosc: ");
                                 amount = scanner6.nextInt();
                                 book.updateBook(id, title, author, price, amount);
-                                // jdbConnection.closeConnection();
                                 break;
                             case 7:
                                 System.out.println("6.Powrót do glównego menu");
@@ -109,13 +90,10 @@ public class Main {
                             default:
                                 System.out.println("Wprowadziłeś błędny numer ");
                         }
-
                         break;
                     case 2:
                         System.out.println("\n1.Wyświetl wszystkich klienótw \n2.Wyszukaj klienta \n3.Dodaj klienta \n4.Usuń klienta \n5.Edytuj klienta \n6.Powrót do glównego menun" +
                                 "********************************************************");
-
-
                         int menu3 = Integer.parseInt(readValue(scanner," "));
                         switch (menu3) {
                             case 1:
@@ -169,12 +147,10 @@ public class Main {
                                 break;
                             default:
                                 System.out.println("Wprowadziłeś błędny numer ");
-
                         }
                         break;
                     case 3:
                         System.out.println("1.Wyświetl wszystkie zamówienia \n2.Wyszukaj zamówienie \n3.Dodaj zamówienie \n4.Usuń zamówienie \n5.Edytuj zamówienie \n6.Powrót do glównego menu");
-
                         int menu4 = Integer.parseInt(readValue(scanner," "));
                         switch (menu4) {
                             case 1:
@@ -235,12 +211,9 @@ public class Main {
                             default:
                                 System.out.println("Wprowadziłeś błędny numer ");
                         }
-
                         break;
-
                     case 4:
                         System.out.println("1.Nowe konto administratora \n2.Usuń konto 2 \n3.Opcja 3 \n4.Powrót do glównego menu");
-
                         int menu5 = Integer.parseInt(readValue(scanner," "));
                         switch (menu5) {
                             case 1:
@@ -275,7 +248,6 @@ public class Main {
                                 break;
                             default:
                                 System.out.println("Wprowadziłeś blędny numer");
-
                         }
                 }
             }
