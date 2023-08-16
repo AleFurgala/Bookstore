@@ -52,6 +52,7 @@ public class Main {
                                 break;
                             case 3:
                                 String titleOrAuthor =readValue(scanner,"Podaj tytuł lub autora ksiązki, której szukasz");
+
                                 book.showBooksByTitleOrAuthor(titleOrAuthor);
                                 break;
                             case 4:
@@ -59,29 +60,25 @@ public class Main {
                                 String author = readValue(scanner,"Wprowadź autora: ");
                                 int price = Integer.parseInt(readValue(scanner,"Wprowadź cenę: "));
                                 int amount = Integer.parseInt(readValue(scanner,"Wprowadź ilosc: "));
+
                                 book.addBook(title, author, price, amount);
                                 break;
                             case 5:
                                 book.showAllBooks();
-                                System.out.println("Wprowadź numer id książki którą chcesz usunąć: ");
-                                Scanner scanner5 = new Scanner(System.in);
-                                int bookId = scanner5.nextInt();
+
+                                int bookId = Integer.parseInt(readValue(scanner, "Wprowadź numer id książki którą chcesz usunąć: " ));
+
                                 book.deleteBook(bookId);
                                 break;
                             case 6:
                                 book.showAllBooks();
-                                Scanner scanner6 = new Scanner(System.in);
-                                Scanner scanner7 = new Scanner(System.in);
-                                System.out.println("Wprowadź id książki, którą chcesz edytować ");
-                                int id = scanner6.nextInt();
-                                System.out.println("Wprowadź tytuł: ");
-                                title = scanner7.nextLine();
-                                System.out.println("Wprowadź autora: ");
-                                author = scanner7.nextLine();
-                                System.out.println("Wprowadź cenę: ");
-                                price = scanner7.nextInt();
-                                System.out.println("Wprowadź ilosc: ");
-                                amount = scanner6.nextInt();
+
+                                int id = Integer.parseInt(readValue(scanner, "Wprowadź id książki, którąchcesz edytować "));
+                                title = readValue(scanner,"Wprowadź tytuł: ");
+                                author = readValue(scanner,"Wprowadź autora: ");
+                                price = Integer.parseInt(readValue(scanner, "Wprowadź cenę: "));
+                                amount = Integer.parseInt(readValue(scanner,"Wprowadź ilosc: "));
+
                                 book.updateBook(id, title, author, price, amount);
                                 break;
                             case 7:
@@ -98,49 +95,33 @@ public class Main {
                         switch (menu3) {
                             case 1:
                                 client.showAllClients();
-                                // jdbConnection.closeConnection();
                                 break;
                             case 2:
-                                System.out.println("Podaj imię lub nazwisko: ");
-                                Scanner scanner8 = new Scanner(System.in);
-                                String nameOrSurname = scanner8.nextLine();
+                                String nameOrSurname = readValue(scanner,"Podaj imię lub nazwisko: ");
+
                                 client.showClientByNameOrSurname(nameOrSurname);
-                                //jdbConnection.closeConnection();
                                 break;
                             case 3:
-                                Scanner scanner9 = new Scanner(System.in);
-                                System.out.println("Wprowadź imie: ");
-                                String name = scanner9.nextLine();
-                                System.out.println("Wprowadź nazwisko: ");
-                                String surname = scanner9.nextLine();
-                                System.out.println("Wprowadź adres: ");
-                                String address = scanner9.nextLine();
+                                String name = readValue(scanner,"Wprowadź imie: ");
+                                String surname = readValue(scanner,"Wprowadź nazwisko: ");
+                                String address = readValue(scanner,"Wprowadź adres: ");
+
                                 client.addClient(name, surname, address);
-                                // jdbConnection.closeConnection();
                                 break;
                             case 4:
                                 client.showAllClients();
-                                System.out.println("Wprowadź numer id klienta, którego chcesz usunąć: ");
-                                Scanner scanner10 = new Scanner(System.in);
-                                int clientToDelete = scanner10.nextInt();
+
+                                int clientToDelete = Integer.parseInt(readValue(scanner, "Wprowadź numer id klienta, którego chcesz usunąć: "));
+
                                 client.deleteClient(clientToDelete);
-                                // jdbConnection.closeConnection();
                                 break;
                             case 5:
-                                Scanner scanner11 = new Scanner(System.in);
-                                Scanner scanner12 = new Scanner(System.in);
-
-                                System.out.println("Wprowadź id klienta, którego chcesz edytować");
-                                int id = scanner11.nextInt();
-                                System.out.println("Wprowadź imie: ");
-                                name = scanner12.nextLine();
-                                System.out.println("Wprowadź nazwisko: ");
-                                surname = scanner12.nextLine();
-                                System.out.println("Wprowadź adres: ");
-                                address = scanner12.nextLine();
+                                int id = Integer.parseInt(readValue(scanner,"Wprowadź id klienta, którego chcesz edytować"));
+                                name = readValue(scanner,"Wprowadź imie: ");
+                                surname = readValue(scanner,"Wprowadź nazwisko: ");
+                                address = readValue(scanner,"Wprowadź adres: ");
 
                                 client.updateClient(id, name, surname, address);
-                                //  jdbConnection.closeConnection();
                                 break;
                             case 6:
                                 System.out.println("6.Powrót do glównego menu");
@@ -155,55 +136,39 @@ public class Main {
                         switch (menu4) {
                             case 1:
                                 order.showAllOrder();
-                                //jdbConnection.closeConnection();
                                 break;
                             case 2:
-                                System.out.println("Podaj id zamowienia: ");
-                                Scanner scanner13 = new Scanner(System.in);
-                                int id = scanner13.nextInt();
+                                int id = Integer.parseInt(readValue(scanner,"Podaj id zamowienia: "));
+
                                 order.showOrderById(id);
-                                //jdbConnection.closeConnection();
                                 break;
                             case 3:
-                                Scanner scanner14 = new Scanner(System.in);
-
                                 client.showAllClients();
-                                System.out.println("Wprowadź id  klienta: ");
-                                int idClients = scanner14.nextInt();
+
+                                int idClients = Integer.parseInt(readValue(scanner,"Wprowadź id  klienta: "));
 
                                 book.showAvailableBooks();
-                                System.out.println("Wprowadź id książki: ");
-                                int idBooks = scanner14.nextInt();
+
+                                int idBooks = Integer.parseInt(readValue(scanner,"Wprowadź id książki: "));
 
                                 order.addOrder(idClients, idBooks);
                                 book.deleteAmount(idBooks);
-                                // jdbConnection.closeConnection();
-
                                 break;
                             case 4:
                                 order.showAllOrder();
 
-                                System.out.println("Wprowadź numer id zamowienia które chcesz usunąć: ");
-                                Scanner scanner15 = new Scanner(System.in);
-                                id = scanner15.nextInt();
+                                id = Integer.parseInt(readValue(scanner,"Wprowadź numer id zamowienia które chcesz usunąć: "));
 
                                 order.deleteOrder(id);
-                                // jdbConnection.closeConnection();
-
                                 break;
                             case 5:
                                 order.showAllOrder();
 
-                                Scanner scanner16 = new Scanner(System.in);
-                                System.out.println("Wprowadź id zamówienia, które chcesz edytować:");
-                                id = scanner16.nextInt();
-                                System.out.println("Wprowadź ID Kliena: ");
-                                idClients = scanner16.nextInt();
-                                System.out.println("Wprowadź ID Książki: ");
-                                idBooks = scanner16.nextInt();
-                                order.updateOrder(id, idClients, idBooks);
-                                // jdbConnection.closeConnection();
+                                id = Integer.parseInt(readValue(scanner,"Wprowadź id zamówienia, które chcesz edytować:"));
+                                idClients = Integer.parseInt(readValue(scanner,"Wprowadź ID Kliena: "));
+                                idBooks = Integer.parseInt(readValue(scanner,"Wprowadź ID Książki: "));
 
+                                order.updateOrder(id, idClients, idBooks);
                                 break;
                             case 6:
                                 System.out.println("6.Powrót do glównego menu");
@@ -217,25 +182,16 @@ public class Main {
                         int menu5 = Integer.parseInt(readValue(scanner," "));
                         switch (menu5) {
                             case 1:
-
-                                Scanner scanner17 = new Scanner(System.in);
-
-                                System.out.println("Wprowadź login: ");
-                                String login = scanner17.nextLine();
-                                System.out.println("Wprowadź haslo: ");
-                                String password = scanner17.nextLine();
-                                System.out.println("Wprowadź nazwę użytkownika: ");
-                                String userName = scanner17.nextLine();
+                                String login = readValue(scanner,"Wprowadź login: ");
+                                String password = readValue(scanner,"Wprowadź haslo: ");
+                                String userName = readValue(scanner,"Wprowadź nazwę użytkownika: ");
 
                                 adminAccounts.addAdminAccount(login, password, userName);
-                                //jdbConnection.closeConnection();
                                 break;
                             case 2:
-                                System.out.println("Wprowadź numer id Administratora którego chcesz usunąć: ");
-                                Scanner scanner18 = new Scanner(System.in);
-                                int id = scanner18.nextInt();
+                                int id = Integer.parseInt(readValue(scanner,"Wprowadź numer id Administratora którego chcesz usunąć: "));
+
                                 adminAccounts.deleteAdminAccount(id);
-                                //jdbConnection.closeConnection();
                                 break;
                             case 3:
                                 System.out.println("opcja 3 ");
