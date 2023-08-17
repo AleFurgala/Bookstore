@@ -9,6 +9,42 @@ This software helps Books Store how to manage with orders.
 - Maven
 - H2 Database
 
+### Main Menu Structure
+
+- Books
+  * show all books
+  * show available books
+  * search for a book
+  * add book
+  * delete book 
+  * update book 
+  * back to main menu
+  
+
+- Clients
+  * show all clients 
+  * search for a client
+  * add client
+  * delete client 
+  * update client 
+  * back to main menu
+  
+
+- Orders
+  * show all orders 
+  * search for a order
+  * add order
+  * delete order 
+  * update order
+  * back to main menu 
+
+
+- Administrator panel
+  * new administrator account
+  * delete account
+  * option 
+  * back to main menu 
+- Close the program 
 
 ### Files in main.Book.java 
 
