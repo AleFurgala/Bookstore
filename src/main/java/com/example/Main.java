@@ -30,7 +30,11 @@ public class Main {
             System.out.println("Program księgarnia. Wybierz menu: ");
             int menu;
               do {
-                System.out.println("1.Książki \n2.Klienci \n3.Zamówienia \n4.Panel administratora \n0.Zamknij program ");
+                System.out.println("1.Książki \n" +
+                        "2.Klienci \n" +
+                        "3.Zamówienia \n" +
+                        "4.Panel administratora \n" +
+                        "0.Zamknij program ");
                   menu = Integer.parseInt(readValue(scanner,""));
                 switch (menu) {
                     case 1:
@@ -89,7 +93,12 @@ public class Main {
                         }
                         break;
                     case 2:
-                        System.out.println("\n1.Wyświetl wszystkich klienótw \n2.Wyszukaj klienta \n3.Dodaj klienta \n4.Usuń klienta \n5.Edytuj klienta \n6.Powrót do glównego menun" +
+                        System.out.println("1.Wyświetl wszystkich klienótw \n" +
+                                "2.Wyszukaj klienta \n" +
+                                "3.Dodaj klienta \n" +
+                                "4.Usuń klienta \n" +
+                                "5.Edytuj klienta \n" +
+                                "6.Powrót do glównego menun \n" +
                                 "********************************************************");
                         int menu3 = Integer.parseInt(readValue(scanner," "));
                         switch (menu3) {
@@ -131,7 +140,13 @@ public class Main {
                         }
                         break;
                     case 3:
-                        System.out.println("1.Wyświetl wszystkie zamówienia \n2.Wyszukaj zamówienie \n3.Dodaj zamówienie \n4.Usuń zamówienie \n5.Edytuj zamówienie \n6.Powrót do glównego menu");
+                        System.out.println("1.Wyświetl wszystkie zamówienia \n" +
+                                "2.Wyszukaj zamówienie \n" +
+                                "3.Dodaj zamówienie \n" +
+                                "4.Usuń zamówienie \n" +
+                                "5.Edytuj zamówienie \n" +
+                                "6.Powrót do glównego menu \n" +
+                                "********************************************************");
                         int menu4 = Integer.parseInt(readValue(scanner," "));
                         switch (menu4) {
                             case 1:
@@ -178,7 +193,11 @@ public class Main {
                         }
                         break;
                     case 4:
-                        System.out.println("1.Nowe konto administratora \n2.Usuń konto 2 \n3.Opcja 3 \n4.Powrót do glównego menu");
+                        System.out.println("1.Nowe konto administratora \n" +
+                                "2.Usuń konto 2 \n" +
+                                "3.Opcja \n" +
+                                "4.Powrót do glównego menu \n" +
+                                "********************************************************");
                         int menu5 = Integer.parseInt(readValue(scanner," "));
                         switch (menu5) {
                             case 1:
