@@ -17,13 +17,20 @@ public class Client {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println("id  | Imie klienta | Nazwisko Klienta | adres ");
-            System.out.println();
-            while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
-                        "  " + rs.getString(4));
 
-            System.out.println("********************************************************");
+            System.out.println("id  | Imię Kliena     | Nazwisko Klienta    | adres ");
+            System.out.println("---------------------------------------------------------------");
+            System.out.println();
+            while (rs.next()) {
+                int column1 = rs.getInt(1);
+                String column2 = rs.getString(2);
+                String column3 = rs.getString(3);
+                String column4 = rs.getString(4);
+
+                System.out.printf("%-5d %-15s %-20s %-20s%n", column1, column2, column3, column4);
+            }
+            System.out.println("---------------------------------------------------------------");
+
 
         } catch (Exception e) {
             System.out.println(e);
@@ -36,14 +43,18 @@ public class Client {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
-
-            System.out.println("id  | Imię Kliena | Nazwisko Klienta | adres ");
+            System.out.println("id  | Imię Kliena         | Nazwisko Klienta    | adres ");
+            System.out.println("---------------------------------------------------------------");
             System.out.println();
-            while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
-                        "  " + rs.getString(4));
+            while (rs.next()) {
+                int column1 = rs.getInt(1);
+                String column2 = rs.getString(2);
+                String column3 = rs.getString(3);
+                String column4 = rs.getString(4);
 
-            System.out.println("********************************************************");
+                System.out.printf("%-5d %-20s %-20s %-20s%n", column1, column2, column3, column4);
+            }
+            System.out.println("---------------------------------------------------------------");
 
         } catch (Exception e) {
             System.out.println(e);
