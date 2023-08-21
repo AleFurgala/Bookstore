@@ -24,20 +24,25 @@ public class Book {
     }
 
 
-    public void showAllBooks() throws SQLException {
+    public void showAllBooks() throws SQLException{
         String query = "select * from ksiazki";
 
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println("id  | Autor ksiązki | Tytuł książki | cena | ilosc");
+            System.out.println("id  | Autor książki       | Tytuł książki      | cena  | ilość");
+            System.out.println("---------------------------------------------------------------");
             System.out.println();
-            while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
-                        "  " + rs.getString(4) + "  " + rs.getInt(5));
+            while (rs.next()) {
+                int column1 = rs.getInt(1);
+                String column2 = rs.getString(2);
+                String column3 = rs.getString(3);
+                int column4 = rs.getInt(4);
+                int column5 = rs.getInt(5);
 
-            System.out.println("********************************************************");
-
+                System.out.printf("%-5d %-20s %-20s %-5d %-5d%n", column1, column2, column3, column4, column5);
+            }
+            System.out.println("---------------------------------------------------------------");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -50,14 +55,19 @@ public class Book {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println("id  | Autor ksiązki | Tytuł książki | cena | ilosc");
+            System.out.println("id  | Autor książki       | Tytuł książki      | cena  | ilość");
+            System.out.println("---------------------------------------------------------------");
             System.out.println();
-            while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
-                        "  " + rs.getString(4) + "  " + rs.getInt(5));
+            while (rs.next()) {
+                int column1 = rs.getInt(1);
+                String column2 = rs.getString(2);
+                String column3 = rs.getString(3);
+                int column4 = rs.getInt(4);
+                int column5 = rs.getInt(5);
 
-            System.out.println("********************************************************");
-
+                System.out.printf("%-5d %-20s %-20s %-5d %-5d%n", column1, column2, column3, column4, column5);
+            }
+            System.out.println("---------------------------------------------------------------");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -68,13 +78,19 @@ public class Book {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println("id  | Autor ksiązki | Tytuł książki | cena | ilosc");
+            System.out.println("id  | Autor książki       | Tytuł książki      | cena  | ilość");
+            System.out.println("---------------------------------------------------------------");
             System.out.println();
-            while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) +
-                        "  " + rs.getString(4) + "  " + rs.getInt(5));
-            System.out.println("********************************************************");
+            while (rs.next()) {
+                int column1 = rs.getInt(1);
+                String column2 = rs.getString(2);
+                String column3 = rs.getString(3);
+                int column4 = rs.getInt(4);
+                int column5 = rs.getInt(5);
 
+                System.out.printf("%-5d %-20s %-20s %-5d %-5d%n", column1, column2, column3, column4, column5);
+            }
+            System.out.println("---------------------------------------------------------------");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -119,8 +135,6 @@ public class Book {
             String query1 = "SELECT ilosc FROM ksiazki WHERE id = " + number + "";
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query1);
-            System.out.println("id | Autor ksiązki | Tytuł książki | cena | ilosc");
-            System.out.println();
 
             int amountOfBooks = 0;
             while (rs.next()) {
@@ -130,11 +144,7 @@ public class Book {
                 } else {
                     amountOfBooks = amountOfBooks - 1;
                 }
-
             }
-
-            System.out.println("********************************************************");
-
             String query = "UPDATE ksiazki SET ilosc = '" + amountOfBooks + "' WHERE id = '" + number + "'";
             stmt.executeUpdate(query);
 

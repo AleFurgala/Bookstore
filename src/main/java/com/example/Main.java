@@ -29,13 +29,13 @@ public class Main {
 
             System.out.println("Program księgarnia. Wybierz menu: ");
             int menu;
-              do {
+            do {
                 System.out.println("1.Książki \n" +
                         "2.Klienci \n" +
                         "3.Zamówienia \n" +
                         "4.Panel administratora \n" +
                         "0.Zamknij program ");
-                  menu = Integer.parseInt(readValue(scanner,""));
+                menu = Integer.parseInt(readValue(scanner, ""));
                 switch (menu) {
                     case 1:
                         System.out.println("1.Wyświetl wszystkie książki \n" +
@@ -46,7 +46,7 @@ public class Main {
                                 "6.Edytuj książke \n" +
                                 "7.Powrót do glównego menu \n" +
                                 "********************************************************");
-                        int menu2 = Integer.parseInt(readValue(scanner,""));
+                        int menu2 = Integer.parseInt(readValue(scanner, ""));
                         switch (menu2) {
                             case 1:
                                 book.showAllBooks();
@@ -55,22 +55,22 @@ public class Main {
                                 book.showAvailableBooks();
                                 break;
                             case 3:
-                                String titleOrAuthor =readValue(scanner,"Podaj tytuł lub autora ksiązki, której szukasz");
+                                String titleOrAuthor = readValue(scanner, "Podaj tytuł lub autora ksiązki, której szukasz");
 
                                 book.showBooksByTitleOrAuthor(titleOrAuthor);
                                 break;
                             case 4:
-                                String title = readValue(scanner,"Wprowadź tytuł: ");
-                                String author = readValue(scanner,"Wprowadź autora: ");
-                                int price = Integer.parseInt(readValue(scanner,"Wprowadź cenę: "));
-                                int amount = Integer.parseInt(readValue(scanner,"Wprowadź ilosc: "));
+                                String title = readValue(scanner, "Wprowadź tytuł: ");
+                                String author = readValue(scanner, "Wprowadź autora: ");
+                                int price = Integer.parseInt(readValue(scanner, "Wprowadź cenę: "));
+                                int amount = Integer.parseInt(readValue(scanner, "Wprowadź ilosc: "));
 
                                 book.addBook(title, author, price, amount);
                                 break;
                             case 5:
                                 book.showAllBooks();
 
-                                int bookId = Integer.parseInt(readValue(scanner, "Wprowadź numer id książki którą chcesz usunąć: " ));
+                                int bookId = Integer.parseInt(readValue(scanner, "Wprowadź numer id książki którą chcesz usunąć: "));
 
                                 book.deleteBook(bookId);
                                 break;
@@ -78,10 +78,10 @@ public class Main {
                                 book.showAllBooks();
 
                                 int id = Integer.parseInt(readValue(scanner, "Wprowadź id książki, którąchcesz edytować "));
-                                title = readValue(scanner,"Wprowadź tytuł: ");
-                                author = readValue(scanner,"Wprowadź autora: ");
+                                title = readValue(scanner, "Wprowadź tytuł: ");
+                                author = readValue(scanner, "Wprowadź autora: ");
                                 price = Integer.parseInt(readValue(scanner, "Wprowadź cenę: "));
-                                amount = Integer.parseInt(readValue(scanner,"Wprowadź ilosc: "));
+                                amount = Integer.parseInt(readValue(scanner, "Wprowadź ilosc: "));
 
                                 book.updateBook(id, title, author, price, amount);
                                 break;
@@ -100,20 +100,20 @@ public class Main {
                                 "5.Edytuj klienta \n" +
                                 "6.Powrót do glównego menun \n" +
                                 "********************************************************");
-                        int menu3 = Integer.parseInt(readValue(scanner," "));
+                        int menu3 = Integer.parseInt(readValue(scanner, " "));
                         switch (menu3) {
                             case 1:
                                 client.showAllClients();
                                 break;
                             case 2:
-                                String nameOrSurname = readValue(scanner,"Podaj imię lub nazwisko: ");
+                                String nameOrSurname = readValue(scanner, "Podaj imię lub nazwisko: ");
 
                                 client.showClientByNameOrSurname(nameOrSurname);
                                 break;
                             case 3:
-                                String name = readValue(scanner,"Wprowadź imie: ");
-                                String surname = readValue(scanner,"Wprowadź nazwisko: ");
-                                String address = readValue(scanner,"Wprowadź adres: ");
+                                String name = readValue(scanner, "Wprowadź imie: ");
+                                String surname = readValue(scanner, "Wprowadź nazwisko: ");
+                                String address = readValue(scanner, "Wprowadź adres: ");
 
                                 client.addClient(name, surname, address);
                                 break;
@@ -125,10 +125,10 @@ public class Main {
                                 client.deleteClient(clientToDelete);
                                 break;
                             case 5:
-                                int id = Integer.parseInt(readValue(scanner,"Wprowadź id klienta, którego chcesz edytować"));
-                                name = readValue(scanner,"Wprowadź imie: ");
-                                surname = readValue(scanner,"Wprowadź nazwisko: ");
-                                address = readValue(scanner,"Wprowadź adres: ");
+                                int id = Integer.parseInt(readValue(scanner, "Wprowadź id klienta, którego chcesz edytować"));
+                                name = readValue(scanner, "Wprowadź imie: ");
+                                surname = readValue(scanner, "Wprowadź nazwisko: ");
+                                address = readValue(scanner, "Wprowadź adres: ");
 
                                 client.updateClient(id, name, surname, address);
                                 break;
@@ -147,24 +147,24 @@ public class Main {
                                 "5.Edytuj zamówienie \n" +
                                 "6.Powrót do glównego menu \n" +
                                 "********************************************************");
-                        int menu4 = Integer.parseInt(readValue(scanner," "));
+                        int menu4 = Integer.parseInt(readValue(scanner, " "));
                         switch (menu4) {
                             case 1:
                                 order.showAllOrder();
                                 break;
                             case 2:
-                                int id = Integer.parseInt(readValue(scanner,"Podaj id zamowienia: "));
+                                int id = Integer.parseInt(readValue(scanner, "Podaj id zamowienia: "));
 
                                 order.showOrderById(id);
                                 break;
                             case 3:
                                 client.showAllClients();
 
-                                int idClients = Integer.parseInt(readValue(scanner,"Wprowadź id  klienta: "));
+                                int idClients = Integer.parseInt(readValue(scanner, "Wprowadź id  klienta: "));
 
                                 book.showAvailableBooks();
 
-                                int idBooks = Integer.parseInt(readValue(scanner,"Wprowadź id książki: "));
+                                int idBooks = Integer.parseInt(readValue(scanner, "Wprowadź id książki: "));
 
                                 order.addOrder(idClients, idBooks);
                                 book.deleteAmount(idBooks);
@@ -172,16 +172,16 @@ public class Main {
                             case 4:
                                 order.showAllOrder();
 
-                                id = Integer.parseInt(readValue(scanner,"Wprowadź numer id zamowienia które chcesz usunąć: "));
+                                id = Integer.parseInt(readValue(scanner, "Wprowadź numer id zamowienia które chcesz usunąć: "));
 
                                 order.deleteOrder(id);
                                 break;
                             case 5:
                                 order.showAllOrder();
 
-                                id = Integer.parseInt(readValue(scanner,"Wprowadź id zamówienia, które chcesz edytować:"));
-                                idClients = Integer.parseInt(readValue(scanner,"Wprowadź ID Kliena: "));
-                                idBooks = Integer.parseInt(readValue(scanner,"Wprowadź ID Książki: "));
+                                id = Integer.parseInt(readValue(scanner, "Wprowadź id zamówienia, które chcesz edytować:"));
+                                idClients = Integer.parseInt(readValue(scanner, "Wprowadź ID Kliena: "));
+                                idBooks = Integer.parseInt(readValue(scanner, "Wprowadź ID Książki: "));
 
                                 order.updateOrder(id, idClients, idBooks);
                                 break;
@@ -198,17 +198,17 @@ public class Main {
                                 "3.Opcja \n" +
                                 "4.Powrót do glównego menu \n" +
                                 "********************************************************");
-                        int menu5 = Integer.parseInt(readValue(scanner," "));
+                        int menu5 = Integer.parseInt(readValue(scanner, " "));
                         switch (menu5) {
                             case 1:
-                                String login = readValue(scanner,"Wprowadź login: ");
-                                String password = readValue(scanner,"Wprowadź haslo: ");
-                                String userName = readValue(scanner,"Wprowadź nazwę użytkownika: ");
+                                String login = readValue(scanner, "Wprowadź login: ");
+                                String password = readValue(scanner, "Wprowadź haslo: ");
+                                String userName = readValue(scanner, "Wprowadź nazwę użytkownika: ");
 
                                 adminAccounts.addAdminAccount(login, password, userName);
                                 break;
                             case 2:
-                                int id = Integer.parseInt(readValue(scanner,"Wprowadź numer id Administratora którego chcesz usunąć: "));
+                                int id = Integer.parseInt(readValue(scanner, "Wprowadź numer id Administratora którego chcesz usunąć: "));
 
                                 adminAccounts.deleteAdminAccount(id);
                                 break;
@@ -231,7 +231,8 @@ public class Main {
             System.out.println("Błędny login lub hasło");
         }
     }
-    public static String readValue(Scanner scanner, String message){
+
+    public static String readValue(Scanner scanner, String message) {
         System.out.println(message);
         return scanner.nextLine();
     }
