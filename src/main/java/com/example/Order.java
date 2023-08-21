@@ -54,12 +54,22 @@ public class Order {
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println("id | klient | książka | data ");
-            System.out.println();
-            while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) +"  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getString(5));
 
-            System.out.println("********************************************************");
+            System.out.println("id   | Data                    | Klient                        | Książka ");
+            System.out.println("------------------------------------------------------------------------------------------------------");
+            System.out.println();
+
+            while (rs.next()) {
+                int column1 = rs.getInt(1);
+                String column2 = rs.getString(2);
+                String column3 = rs.getString(3);
+                String column4 = rs.getString(4);
+                String column5 = rs.getString(5);
+
+                System.out.printf("%-5d %-25s %-15s %-15s %-15s%n", column1, column2, column3, column4, column5);
+
+            }
+            System.out.println("------------------------------------------------------------------------------------------------------");
 
         } catch (Exception e) {
             System.out.println(e);
@@ -72,12 +82,24 @@ public class Order {
             Statement stmt = connection.createStatement();
             String query = "SELECT zamowienia.id, zamowienia.data, klienci.imie, klienci.nazwisko, ksiazki.tytul, ksiazki.autor FROM klienci, ksiazki, zamowienia WHERE zamowienia.id = '" + id + "' AND zamowienia.id_klienci = klienci.id AND zamowienia.id_ksiazki = ksiazki.id";
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println(" id zamówienia | data zamowienia | imie klienta | nazwisko klient | tytuł książki | autor ksiazki ");
-            System.out.println();
-            while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  "+ rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getString(5) + "  " + rs.getString(6));
 
-            System.out.println("********************************************************");
+
+            System.out.println("id   | Data                    | Klient                        | Książka ");
+            System.out.println("------------------------------------------------------------------------------------------------------");
+            System.out.println();
+
+            while (rs.next()) {
+                int column1 = rs.getInt(1);
+                String column2 = rs.getString(2);
+                String column3 = rs.getString(3);
+                String column4 = rs.getString(4);
+                String column5 = rs.getString(5);
+                String column6 = rs.getString(6);
+
+                System.out.printf("%-5d %-25s %-15s %-15s %-15s %-15s%n", column1, column2, column3, column4, column5, column6);
+
+            }
+            System.out.println("------------------------------------------------------------------------------------------------------");
 
         } catch (Exception e) {
             System.out.println(e);
