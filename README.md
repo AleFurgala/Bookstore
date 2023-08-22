@@ -8,6 +8,8 @@ This software helps Books Store how to manage with orders.
 - MySql Database
 - Maven
 - H2 Database
+- triggers
+
 
 ### Main Menu Structure
 
