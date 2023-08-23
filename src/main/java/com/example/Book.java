@@ -50,7 +50,7 @@ public class Book {
     }
 
     public void showAvailableBooks() throws SQLException {
-        String query = "select * from ksiazki WHERE ilosc > 0";
+        String query = "SELECT * FROM ksiazki WHERE ilosc > 0";
 
         try {
             Statement stmt = connection.createStatement();
