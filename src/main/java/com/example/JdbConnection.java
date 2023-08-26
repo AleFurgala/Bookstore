@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class JdbConnection {
 
-    private static final String url = "jdbc:mysql://localhost:3306/ksiegarnia2";
+    private static final String url = "jdbc:mysql://localhost:3306/ksiegarnia3";
     private static final String user = "root";
     private static final String password = "";
 
@@ -31,7 +31,9 @@ public class JdbConnection {
             System.out.println("Połączono z bazą danych");
             Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
             Liquibase liquibase = new Liquibase("schema.sql",new ClassLoaderResourceAccessor(),database);
+            Liquibase liquibase2 = new Liquibase("testData.sql",new ClassLoaderResourceAccessor(),database);
             liquibase.update("");
+            liquibase2.update("");
         } catch (Exception e) {
             System.out.println(e);
         }

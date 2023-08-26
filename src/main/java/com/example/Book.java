@@ -13,13 +13,13 @@ public class Book {
         this.connection = connection;
     }
 
-    private static int id;
+    private static Long id;
 
-    public static int getId() {
+    public static Long getId() {
         return id;
     }
 
-    public static void setId(int id) {
+    public static void setId(Long id) {
         Book.id = id;
     }
 
@@ -34,7 +34,7 @@ public class Book {
             System.out.println("---------------------------------------------------------------");
             System.out.println();
             while (rs.next()) {
-                int column1 = rs.getInt(1);
+                Long column1 = rs.getLong(1);
                 String column2 = rs.getString(2);
                 String column3 = rs.getString(3);
                 int column4 = rs.getInt(4);
@@ -59,7 +59,7 @@ public class Book {
             System.out.println("---------------------------------------------------------------");
             System.out.println();
             while (rs.next()) {
-                int column1 = rs.getInt(1);
+                Long column1 = rs.getLong(1);
                 String column2 = rs.getString(2);
                 String column3 = rs.getString(3);
                 int column4 = rs.getInt(4);
@@ -82,7 +82,7 @@ public class Book {
             System.out.println("---------------------------------------------------------------");
             System.out.println();
             while (rs.next()) {
-                int column1 = rs.getInt(1);
+                Long column1 = rs.getLong(1);
                 String column2 = rs.getString(2);
                 String column3 = rs.getString(3);
                 int column4 = rs.getInt(4);
@@ -107,7 +107,7 @@ public class Book {
         }
     }
 
-    public void deleteBook(int bookToDelete) throws SQLException {
+    public void deleteBook(Long bookToDelete) throws SQLException {
         try {
             Statement stmt = connection.createStatement();
             String query = "DELETE FROM ksiazki WHERE id = '" + bookToDelete + "'";
@@ -117,7 +117,7 @@ public class Book {
         }
     }
 
-    public void updateBook(int id, String title, String author, int price, int amount) throws SQLException {
+    public void updateBook(Long id, String title, String author, int price, int amount) throws SQLException {
         try {
 
             Statement stmt = connection.createStatement();
@@ -130,7 +130,7 @@ public class Book {
         }
     }
 
-    public void deleteAmount(int number) throws SQLException {
+    public void deleteAmount(Long number) throws SQLException {
         try {
             String query1 = "SELECT ilosc FROM ksiazki WHERE id = " + number + "";
             Statement stmt = connection.createStatement();

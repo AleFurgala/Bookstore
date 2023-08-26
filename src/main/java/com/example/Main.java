@@ -70,14 +70,14 @@ public class Main {
                             case 5:
                                 book.showAllBooks();
 
-                                int bookId = Integer.parseInt(readValue(scanner, "Wprowadź numer id książki którą chcesz usunąć: "));
+                                Long bookId = Long.valueOf((readValue(scanner, "Wprowadź numer id książki którą chcesz usunąć: ")));
 
                                 book.deleteBook(bookId);
                                 break;
                             case 6:
                                 book.showAllBooks();
 
-                                int id = Integer.parseInt(readValue(scanner, "Wprowadź id książki, którąchcesz edytować "));
+                                Long id = Long.valueOf((readValue(scanner, "Wprowadź id książki, którąchcesz edytować ")));
                                 title = readValue(scanner, "Wprowadź tytuł: ");
                                 author = readValue(scanner, "Wprowadź autora: ");
                                 price = Integer.parseInt(readValue(scanner, "Wprowadź cenę: "));
@@ -125,7 +125,7 @@ public class Main {
                                 client.deleteClient(clientToDelete);
                                 break;
                             case 5:
-                                int id = Integer.parseInt(readValue(scanner, "Wprowadź id klienta, którego chcesz edytować"));
+                                Long id = Long.valueOf((readValue(scanner, "Wprowadź id klienta, którego chcesz edytować")));
                                 name = readValue(scanner, "Wprowadź imie: ");
                                 surname = readValue(scanner, "Wprowadź nazwisko: ");
                                 address = readValue(scanner, "Wprowadź adres: ");
@@ -153,18 +153,18 @@ public class Main {
                                 order.showAllOrder();
                                 break;
                             case 2:
-                                int id = Integer.parseInt(readValue(scanner, "Podaj id zamowienia: "));
+                                Long id = Long.valueOf((readValue(scanner, "Podaj id zamowienia: ")));
 
                                 order.showOrderById(id);
                                 break;
                             case 3:
                                 client.showAllClients();
 
-                                int idClients = Integer.parseInt(readValue(scanner, "Wprowadź id  klienta: "));
+                                Long idClients = Long.valueOf((readValue(scanner, "Wprowadź id  klienta: ")));
 
                                 book.showAvailableBooks();
 
-                                int idBooks = Integer.parseInt(readValue(scanner, "Wprowadź id książki: "));
+                                Long idBooks = Long.valueOf((readValue(scanner, "Wprowadź id książki: ")));
 
                                 order.addOrder(idClients, idBooks);
                                 book.deleteAmount(idBooks);
@@ -172,16 +172,16 @@ public class Main {
                             case 4:
                                 order.showAllOrder();
 
-                                id = Integer.parseInt(readValue(scanner, "Wprowadź numer id zamowienia które chcesz usunąć: "));
+                                id = Long.valueOf((readValue(scanner, "Wprowadź numer id zamowienia które chcesz usunąć: ")));
 
                                 order.deleteOrder(id);
                                 break;
                             case 5:
                                 order.showAllOrder();
 
-                                id = Integer.parseInt(readValue(scanner, "Wprowadź id zamówienia, które chcesz edytować:"));
-                                idClients = Integer.parseInt(readValue(scanner, "Wprowadź ID Kliena: "));
-                                idBooks = Integer.parseInt(readValue(scanner, "Wprowadź ID Książki: "));
+                                id = Long.valueOf((readValue(scanner, "Wprowadź id zamówienia, które chcesz edytować:")));
+                                idClients = Long.valueOf((readValue(scanner, "Wprowadź ID Kliena: ")));
+                                idBooks = Long.valueOf((readValue(scanner, "Wprowadź ID Książki: ")));
 
                                 order.updateOrder(id, idClients, idBooks);
                                 break;
@@ -208,7 +208,7 @@ public class Main {
                                 adminAccounts.addAdminAccount(login, password, userName);
                                 break;
                             case 2:
-                                int id = Integer.parseInt(readValue(scanner, "Wprowadź numer id Administratora którego chcesz usunąć: "));
+                                Long id = Long.valueOf((readValue(scanner, "Wprowadź numer id Administratora którego chcesz usunąć: ")));
 
                                 adminAccounts.deleteAdminAccount(id);
                                 break;

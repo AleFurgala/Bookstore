@@ -91,7 +91,7 @@ public class H2AdminAccountsTest {
         statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika) VALUES('admin','ddd','Jurek')");
 
         AdminAccounts adminAccounts = new AdminAccounts(connection);
-        adminAccounts.deleteAdminAccount(1);
+        adminAccounts.deleteAdminAccount(1L);
         ResultSet resultSet = statement.executeQuery("SELECT * FROM konta_administratorow ");
         assertEquals(false, resultSet.next());
     }

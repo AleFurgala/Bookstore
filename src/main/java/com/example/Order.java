@@ -13,37 +13,37 @@ public class Order {
 
     private Connection connection;
 
-    private static int id;
-    private static int idKsiazki;
+    private static Long id;
+    private static Long idKsiazki;
 
-    private static int idKlienci;
+    private static Long idKlienci;
 
     public Order() {
 
     }
 
 
-    public static int getId() {
+    public static Long getId() {
         return id;
     }
 
-    public static void setId(int id) {
+    public static void setId(Long id) {
         Order.id = id;
     }
 
-    public static int getIdKsiazki() {
+    public static Long getIdKsiazki() {
         return idKsiazki;
     }
 
-    public static void setIdKsiazki(int idKsiazki) {
+    public static void setIdKsiazki(Long idKsiazki) {
         Order.idKsiazki = idKsiazki;
     }
 
-    public static int getIdKlienci() {
+    public static Long getIdKlienci() {
         return idKlienci;
     }
 
-    public static void setIdKlienci(int idKlienci) {
+    public static void setIdKlienci(Long idKlienci) {
         Order.idKlienci = idKlienci;
     }
 
@@ -60,7 +60,7 @@ public class Order {
             System.out.println();
 
             while (rs.next()) {
-                int column1 = rs.getInt(1);
+                Long column1 = rs.getLong(1);
                 String column2 = rs.getString(2);
                 String column3 = rs.getString(3);
                 String column4 = rs.getString(4);
@@ -76,7 +76,7 @@ public class Order {
         }
     }
 
-    public void showOrderById(int id) throws SQLException {
+    public void showOrderById(Long id) throws SQLException {
 
         try {
             Statement stmt = connection.createStatement();
@@ -89,7 +89,7 @@ public class Order {
             System.out.println();
 
             while (rs.next()) {
-                int column1 = rs.getInt(1);
+                Long column1 = rs.getLong(1);
                 String column2 = rs.getString(2);
                 String column3 = rs.getString(3);
                 String column4 = rs.getString(4);
@@ -107,7 +107,7 @@ public class Order {
     }
 
 
-    public void addOrder(int idClients, int idBooks) {
+    public void addOrder(Long idClients, Long idBooks) {
         try {
             Statement stmt = connection.createStatement();
 
@@ -120,7 +120,7 @@ public class Order {
         }
     }
 
-    public void deleteOrder(int id) throws SQLException {
+    public void deleteOrder(Long id) throws SQLException {
         try {
             Statement stmt = connection.createStatement();
 
@@ -132,7 +132,7 @@ public class Order {
         }
     }
 
-    public void updateOrder(int id, int idClients, int idBooks) throws SQLException {
+    public void updateOrder(Long id, Long idClients, Long idBooks) throws SQLException {
         try {
             Statement stmt = connection.createStatement();
 

@@ -110,7 +110,7 @@ public class H2ClientTest {
         statement.executeUpdate("INSERT INTO  klienci (imie, nazwisko, adres) VALUES('Jan' ,'Nowak', 'Rzeszow')");
 
         Client client = new Client(connection);
-        client.updateClient(1, "Janusz", "Nowakowski", "Lublin");
+        client.updateClient(1L, "Janusz", "Nowakowski", "Lublin");
 
         ResultSet resultSet = statement.executeQuery("SELECT * FROM klienci");
         resultSet.absolute(1);

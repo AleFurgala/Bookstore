@@ -120,7 +120,7 @@ public class H2BookTest {
         statement.executeUpdate("INSERT INTO ksiazki (tytul, autor, cena, ilosc) VALUES('xyz' , 'abc' , 30 , 3)");
 
         Book book = new Book(connection);
-        book.deleteBook(1);
+        book.deleteBook(1L);
 
         ResultSet resultSet = statement.executeQuery("SELECT * FROM ksiazki WHERE id = 1");
         assertEquals(false, resultSet.next());
@@ -134,7 +134,7 @@ public class H2BookTest {
         statement.executeUpdate("INSERT INTO ksiazki (tytul, autor, cena, ilosc) VALUES('Water' , 'Paula Hawkins' , 23 , 2)");
 
         Book book = new Book(connection);
-        book.updateBook(1, "zz", "yy", 20, 3);
+        book.updateBook(1L, "zz", "yy", 20, 3);
 
         ResultSet resultSet = statement.executeQuery("SELECT * FROM ksiazki");
         resultSet.absolute(1);
@@ -151,7 +151,7 @@ public class H2BookTest {
         statement.executeUpdate("INSERT INTO ksiazki (tytul, autor, cena, ilosc) VALUES('xyz' , 'abc' , 23 , 0)");
 
         Book book = new Book(connection);
-        book.deleteAmount(1);
+        book.deleteAmount(1L);
 
         ResultSet resultSet = statement.executeQuery("SELECT * FROM ksiazki");
         resultSet.absolute(1);

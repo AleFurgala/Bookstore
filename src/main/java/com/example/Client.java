@@ -22,7 +22,7 @@ public class Client {
             System.out.println("---------------------------------------------------------------");
             System.out.println();
             while (rs.next()) {
-                int column1 = rs.getInt(1);
+                Long column1 = rs.getLong(1);
                 String column2 = rs.getString(2);
                 String column3 = rs.getString(3);
                 String column4 = rs.getString(4);
@@ -47,7 +47,7 @@ public class Client {
             System.out.println("---------------------------------------------------------------");
             System.out.println();
             while (rs.next()) {
-                int column1 = rs.getInt(1);
+                Long column1 = rs.getLong(1);
                 String column2 = rs.getString(2);
                 String column3 = rs.getString(3);
                 String column4 = rs.getString(4);
@@ -87,7 +87,7 @@ public class Client {
         }
     }
 
-    public void updateClient(int id, String name, String surname, String address) throws SQLException {
+    public void updateClient(Long id, String name, String surname, String address) throws SQLException {
         try {
             Statement stmt = connection.createStatement();
 

@@ -67,7 +67,7 @@ public class H2OrderTest {
         statement.executeUpdate("INSERT INTO zamowienia (id_klienci, id_ksiazki, data) VALUES(2 , 3 , '25072023')");
 
         Order order = new Order(connection);
-        order.showOrderById(1);
+        order.showOrderById(1L);
         ResultSet resultSet = statement.executeQuery("SELECT * FROM zamowienia WHERE id = 1");
         resultSet.absolute(1);
         assertEquals(1, resultSet.getInt(2));
@@ -80,7 +80,7 @@ public class H2OrderTest {
         statement.executeUpdate( "CREATE TABLE zamowienia (id INT AUTO_INCREMENT, id_klienci INT, id_ksiazki INT, data VARCHAR(255), PRIMARY KEY (id))");
 
         Order order = new Order(connection);
-        order.addOrder(1,2);
+        order.addOrder(1L,2L);
         ResultSet resultSet = statement.executeQuery("SELECT * FROM zamowienia");
         resultSet.absolute(1);
         assertEquals(1, resultSet.getInt(2));
@@ -94,7 +94,7 @@ public class H2OrderTest {
         statement.executeUpdate("INSERT INTO zamowienia (id_klienci, id_ksiazki, data) VALUES(1 , 2 , '24072023')");
 
         Order order = new Order(connection);
-        order.deleteOrder(1);
+        order.deleteOrder(1L);
         ResultSet resultSet = statement.executeQuery("SELECT * FROM zamowienia WHERE id = 1");
         assertEquals(false, resultSet.next());
     }
@@ -108,7 +108,7 @@ public class H2OrderTest {
         statement.executeUpdate("INSERT INTO zamowienia (id_klienci, id_ksiazki, data) VALUES(2 , 3 , '25072023')");
 
         Order order = new Order(connection);
-        order.updateOrder(1,2,2);
+        order.updateOrder(1L,2L,2L);
 
         ResultSet resultSet = statement.executeQuery("SELECT * FROM zamowienia");
         resultSet.absolute(1);
