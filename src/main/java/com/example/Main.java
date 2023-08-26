@@ -210,7 +210,9 @@ public class Main {
                             case 2:
                                 Long id = Long.valueOf((readValue(scanner, "Wprowadź numer id Administratora którego chcesz usunąć: ")));
 
-                                adminAccounts.deleteAdminAccount(id);
+                                if (adminAccounts.checkAccountType(id)) {
+                                    adminAccounts.deleteAdminAccount(id);
+                                }
                                 break;
                             case 3:
                                 System.out.println("opcja 3 ");
