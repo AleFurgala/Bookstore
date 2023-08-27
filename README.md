@@ -2,6 +2,21 @@
 
 This software helps Books Store how to manage with orders.
 
+### Versions
+
+- 0.1
+  * admin panel 
+  * password encryption
+  * authentication 
+  * adding client, book and order
+  * JUnit tests
+  * liquibase
+  
+- 0.2
+  * log table using trigger
+  
+
+
 ### Tools
 
 - java
