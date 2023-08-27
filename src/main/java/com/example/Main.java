@@ -193,9 +193,9 @@ public class Main {
                         }
                         break;
                     case 4:
-                        System.out.println("1.Nowe konto administratora \n" +
-                                "2.Usuń konto 2 \n" +
-                                "3.Opcja \n" +
+                        System.out.println("1.Dodaj konto \n" +
+                                "2.Usuń konto \n" +
+                                "3.Wyświetl konta \n" +
                                 "4.Powrót do glównego menu \n" +
                                 "********************************************************");
                         int menu5 = Integer.parseInt(readValue(scanner, " "));
