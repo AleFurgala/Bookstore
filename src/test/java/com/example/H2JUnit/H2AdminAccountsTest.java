@@ -53,7 +53,6 @@ public class H2AdminAccountsTest {
     }
 
     @Test
-
     void getNameBasedLoginTest() throws SQLException {
         statement = connection.createStatement();
 
@@ -69,7 +68,6 @@ public class H2AdminAccountsTest {
     }
 
     @Test
-
     void addAdminAccountTest() throws SQLException {
         statement = connection.createStatement();
 
@@ -82,6 +80,33 @@ public class H2AdminAccountsTest {
         assertEquals("lDHFY6qkS4Oi1WNNmw002A==", resultSet.getString(3));
         assertEquals("Jurek", resultSet.getString(4));
     }
+
+    @Test
+    void checkAccountType() throws SQLException {
+        statement = connection.createStatement();
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
+
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin','ddd','Jurek', 'admin')");
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin','ddd','Jurek', 'user')");
+
+        AdminAccounts adminAccounts = new AdminAccounts(connection);
+        adminAccounts.checkAccountType(1L);
+
+        ResultSet resultSet = statement.executeQuery("SELECT rodzaj_konta FROM konta_administratorow WHERE id = 1");
+        resultSet.absolute(1);
+        while (resultSet.next()) {
+            String type = resultSet.getString(5);
+            if (type.equals("admin")) {
+                System.out.println("Nie masz uprawnień do usunięcia konta administratora");
+            }else
+            assertEquals(false, resultSet.next());
+        }
+
+        //       assertEquals("Jurek", resultSet.getString(5));
+        //       assertEquals("admin", resultSet.getString(5));
+
+    }
+
     @Test
     void deleteAdminAccountTest() throws SQLException {
         statement = connection.createStatement();
