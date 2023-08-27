@@ -82,30 +82,39 @@ public class H2AdminAccountsTest {
     }
 
     @Test
-    void checkAccountType() throws SQLException {
+    void checkAccountTypeForAdmin() throws SQLException {
         statement = connection.createStatement();
         statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
 
-        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin','ddd','Jurek', 'admin')");
-        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin','ddd','Jurek', 'user')");
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin1','ddd','Jurek', 'admin')");
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin2','ddd','Dona', 'user')");
 
         AdminAccounts adminAccounts = new AdminAccounts(connection);
         adminAccounts.checkAccountType(1L);
 
-        ResultSet resultSet = statement.executeQuery("SELECT rodzaj_konta FROM konta_administratorow WHERE id = 1");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM konta_administratorow WHERE id = 1");
         resultSet.absolute(1);
-        while (resultSet.next()) {
-            String type = resultSet.getString(5);
-            if (type.equals("admin")) {
-                System.out.println("Nie masz uprawnień do usunięcia konta administratora");
-            }else
-            assertEquals(false, resultSet.next());
-        }
-
-        //       assertEquals("Jurek", resultSet.getString(5));
-        //       assertEquals("admin", resultSet.getString(5));
-
+        assertEquals("admin", resultSet.getString(5));
+        assertEquals(false, adminAccounts.checkAccountType(1L));
     }
+
+    @Test
+    void checkAccountTypeForUser() throws SQLException {
+        statement = connection.createStatement();
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
+
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin1','ddd','Jurek', 'admin')");
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin2','ddd','Dona', 'user')");
+
+        AdminAccounts adminAccounts = new AdminAccounts(connection);
+        adminAccounts.checkAccountType(2L);
+
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM konta_administratorow WHERE id = 2");
+        resultSet.absolute(1);
+        assertEquals("user", resultSet.getString(5));
+        assertEquals(true, adminAccounts.checkAccountType(2L));
+    }
+
 
     @Test
     void deleteAdminAccountTest() throws SQLException {
