@@ -48,7 +48,7 @@ public class H2BookTest {
         Book book = new Book(connection);
         book.showAllBooks();
 
-        //com.example.RealDbJUnit.ResultSetSpy resultSetSpy = new com.example.RealDbJUnit.ResultSetSpy(connection.createStatement().executeQuery("SELECT * FROM ksiazki"));
+        //com.example.ResultSetSpy resultSetSpy = new com.example.ResultSetSpy(connection.createStatement().executeQuery("SELECT * FROM ksiazki"));
         //assertEquals(2, resultSetSpy.getCount()); // Oczekujemy 2 rekordów
         //assertEquals("Water", resultSetSpy.getRow(1).getString("tytul"));
 

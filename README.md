@@ -11,6 +11,7 @@ This software helps Books Store how to manage with orders.
   * adding client, book and order
   * JUnit tests
   * liquibase
+  * Maven
   
 - 0.2
   * log table using trigger
