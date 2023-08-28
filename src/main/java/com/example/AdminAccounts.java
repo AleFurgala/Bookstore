@@ -13,11 +13,9 @@ public class AdminAccounts {
 
     private Connection connection;
 
-
     public AdminAccounts(Connection connection) {
         this.connection = connection;
     }
-
 
     private Long id;
 
@@ -25,6 +23,7 @@ public class AdminAccounts {
     private String login;
 
     private String username;
+    private String accountType;
 
     public Long getId() {
         return id;
@@ -33,31 +32,6 @@ public class AdminAccounts {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
 
     public String getPasswordBasedLogin(String login) throws SQLException {
         String query = "SELECT haslo FROM konta_administratorow WHERE login =  '" + login + "'";
@@ -91,12 +65,12 @@ public class AdminAccounts {
         return "0";
     }
 
-    public void addAdminAccount(String login, String password, String userName) throws SQLException {
+    public void addAdminAccount(String login, String password, String userName, String accountType) throws SQLException {
 
         try {
             Statement stmt = connection.createStatement();
 
-            String query = "INSERT INTO konta_administratorow(login, haslo, nazwa_uzytkownika) VALUES('" + login + "' , '" + dataEncryption(password) + "' , '" + userName + "')";
+            String query = "INSERT INTO konta_administratorow(login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('" + login + "' , '" + dataEncryption(password) + "' , '" + userName + "' , '" + accountType + "')";
             stmt.executeUpdate(query);
 
         } catch (Exception e) {

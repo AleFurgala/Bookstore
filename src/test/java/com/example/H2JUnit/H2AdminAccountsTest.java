@@ -40,9 +40,9 @@ public class H2AdminAccountsTest {
     void getPasswordBasedLoginTest() throws SQLException {
         statement = connection.createStatement();
 
-        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), PRIMARY KEY (id))");
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
 
-        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika) VALUES('admin','ddd','Jurek')");
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin','ddd','Jurek', 'user')");
 
         AdminAccounts adminAccounts = new AdminAccounts(connection);
         adminAccounts.getPasswordBasedLogin("admin");
@@ -56,9 +56,9 @@ public class H2AdminAccountsTest {
     void getNameBasedLoginTest() throws SQLException {
         statement = connection.createStatement();
 
-        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), PRIMARY KEY (id))");
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
 
-        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika) VALUES('admin','ddd','Jurek')");
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin','ddd','Jurek', 'user')");
 
         AdminAccounts adminAccounts = new AdminAccounts(connection);
         adminAccounts.getNameBasedLogin("admin");
@@ -71,10 +71,10 @@ public class H2AdminAccountsTest {
     void addAdminAccountTest() throws SQLException {
         statement = connection.createStatement();
 
-        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), PRIMARY KEY (id))");
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
 
         AdminAccounts adminAccounts = new AdminAccounts(connection);
-        adminAccounts.addAdminAccount("admin", "ddd", "Jurek");
+        adminAccounts.addAdminAccount("admin", "ddd", "Jurek", "user");
         ResultSet resultSet = statement.executeQuery("SELECT * FROM konta_administratorow ");
         resultSet.absolute(1);
         assertEquals("lDHFY6qkS4Oi1WNNmw002A==", resultSet.getString(3));
@@ -120,9 +120,9 @@ public class H2AdminAccountsTest {
     void deleteAdminAccountTest() throws SQLException {
         statement = connection.createStatement();
 
-        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), PRIMARY KEY (id))");
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255),rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
 
-        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika) VALUES('admin','ddd','Jurek')");
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin','ddd','Jurek', 'user')");
 
         AdminAccounts adminAccounts = new AdminAccounts(connection);
         adminAccounts.deleteAdminAccount(1L);
