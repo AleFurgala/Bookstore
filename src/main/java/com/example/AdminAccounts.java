@@ -109,6 +109,32 @@ public class AdminAccounts {
         }
     }
 
+    public void showAllAccounts() throws SQLException {
+        String query = "SELECT * from konta_administratorow";
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            System.out.println("id  | Login     |           Hasło              | Nazwa użytkownia   | Rodzaj Konta  ");
+            System.out.println("-------------------------------------------------------------------------------------------------");
+            System.out.println();
+            while (rs.next()) {
+                Long column1 = rs.getLong(1);
+                String column2 = rs.getString(2);
+                String column3 = rs.getString(3);
+                String column4 = rs.getString(4);
+                String column5 = rs.getString(5);
+
+                System.out.printf("%-5d %-10s %-35s %-20s %-20s%n", column1, column2, column3, column4, column5);
+            }
+            System.out.println("-------------------------------------------------------------------------------------------------");
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public String dataEncryption(String pw) throws Exception {
 
         SecretKeySpec secretKeySpec = new SecretKeySpec("kluczcvbnnmmjfds".getBytes(StandardCharsets.UTF_8), "AES");

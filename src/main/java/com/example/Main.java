@@ -216,7 +216,7 @@ public class Main {
                                 }
                                 break;
                             case 3:
-                                System.out.println("opcja 3 ");
+                                adminAccounts.showAllAccounts();
                             case 4:
                                 System.out.println("Powrót do menu glównego");
                                 break;

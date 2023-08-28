@@ -129,4 +129,24 @@ public class H2AdminAccountsTest {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM konta_administratorow ");
         assertEquals(false, resultSet.next());
     }
+
+    @Test
+    void showAllAccountsTest() throws SQLException {
+        statement = connection.createStatement();
+
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
+
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin1','ddd','Jurek', 'admin')");
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin2','ddd','Dona', 'user')");
+
+        AdminAccounts adminAccounts = new AdminAccounts(connection);
+        adminAccounts.showAllAccounts();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM konta_administratorow");
+        resultSet.absolute(1);
+        assertEquals("admin1", resultSet.getString(2));
+        assertEquals("ddd", resultSet.getString(3));
+        resultSet.absolute(2);
+        assertEquals("admin2", resultSet.getString(2));
+        assertEquals("ddd", resultSet.getString(3));
+    }
 }
