@@ -12,6 +12,8 @@ public class Client {
 
     private Connection connection;
 
+    AdminAccounts adminAccounts = new AdminAccounts(connection);
+
     public void showAllClients() throws SQLException {
         String query = "select * from klienci";
         try {
@@ -62,10 +64,15 @@ public class Client {
     }
 
     public void addClient(String name, String surname, String address) throws SQLException {
+        //System.out.println(Main.loginUser);
+
+        //System.out.println(adminAccounts.getIdBasedLogin(Main.loginUser));
+        int x = 1;
         try {
             Statement stmt = connection.createStatement();
 
-            String query = "INSERT INTO klienci(imie, nazwisko, adres) VALUES('" + name + "' , '" + surname + "' , '" + address + "')";
+            //String query = "INSERT INTO klienci(imie, nazwisko, adres, id_admin) VALUES('" + name + "' , '" + surname + "' , '" + address + "', '" + x + "')";
+            String query = "INSERT INTO klienci(imie, nazwisko, adres, id_admin) VALUES('" + name + "' , '" + surname + "' , '" + address + "', '1')";
 
             stmt.executeUpdate(query);
 

@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 
 public class Main {
+
+    public static String loginUser;
     public static void main(String[] args) throws Exception {
 
         JdbConnection jdbConnection = new JdbConnection();
@@ -17,7 +19,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
 
-        String loginUser = readValue(scanner, "Podaj login");
+        loginUser = readValue(scanner, "Podaj login");
         String passwordUser = readValue(scanner, "Podaj haslo");
 
         String passwordFromDB = adminAccounts.getPasswordBasedLogin(loginUser);

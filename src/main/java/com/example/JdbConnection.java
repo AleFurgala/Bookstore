@@ -12,15 +12,15 @@ import java.sql.SQLException;
 
 public class JdbConnection {
 
-    private static final String url = "jdbc:mysql://localhost:3306/ksiegarnia3";
+    private static final String url = "jdbc:mysql://localhost:3306/ksiegarnia";
     private static final String user = "root";
     private static final String password = "";
 
     private Connection connection;
+
     public Connection getConnection() {
         return connection;
     }
-
 
 
     public JdbConnection() throws ClassNotFoundException, SQLException {
@@ -30,10 +30,14 @@ public class JdbConnection {
             connection = DriverManager.getConnection(url, user, password);
             System.out.println("Połączono z bazą danych");
             Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
-            Liquibase liquibase = new Liquibase("schema.sql",new ClassLoaderResourceAccessor(),database);
-            Liquibase liquibase2 = new Liquibase("testData.sql",new ClassLoaderResourceAccessor(),database);
+            Liquibase liquibase = new Liquibase("liquibase/table_schema.sql", new ClassLoaderResourceAccessor(), database);
+            Liquibase liquibase2 = new Liquibase("liquibase/table_log_schema.sql", new ClassLoaderResourceAccessor(), database);
+            Liquibase liquibase3 = new Liquibase("liquibase/testData.sql", new ClassLoaderResourceAccessor(), database);
+            Liquibase liquibase4 = new Liquibase("liquibase/triggers/klienci_triggers.sql", new ClassLoaderResourceAccessor(), database);
             liquibase.update("");
             liquibase2.update("");
+            liquibase3.update("");
+            liquibase4.update("");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -43,12 +47,12 @@ public class JdbConnection {
 
     public void closeConnection() throws SQLException {
         if (connection != null) {
-           try {
-               connection.close();
-               System.out.println("Połączenie z bazą danych jest zakończone");
-           }catch (Exception e) {
-               System.out.println(e);
-           }
+            try {
+                connection.close();
+                System.out.println("Połączenie z bazą danych jest zakończone");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
 
         }
     }
