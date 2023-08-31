@@ -1,5 +1,10 @@
 package com.example;
 
+import liquibase.database.Database;
+import liquibase.database.DatabaseFactory;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.resource.ClassLoaderResourceAccessor;
+
 import java.sql.Connection;
 import java.util.Scanner;
 
@@ -14,8 +19,13 @@ public class Main {
         Order order = new Order(connection);
         AdminAccounts adminAccounts = new AdminAccounts(connection);
 
-        Scanner scanner = new Scanner(System.in);
+        Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+        liquibase.Liquibase liquibase = new liquibase.Liquibase("schema.sql",new ClassLoaderResourceAccessor(),database);
+        liquibase.Liquibase liquibase2 = new liquibase.Liquibase("testData.sql",new ClassLoaderResourceAccessor(),database);
+        liquibase.update("");
+        liquibase2.update("");
 
+        Scanner scanner = new Scanner(System.in);
 
         String loginUser = readValue(scanner, "Podaj login");
         String passwordUser = readValue(scanner, "Podaj haslo");
@@ -233,6 +243,7 @@ public class Main {
         } else {
             System.out.println("Błędny login lub hasło");
         }
+        liquibase.update();
     }
 
     public static String readValue(Scanner scanner, String message) {
