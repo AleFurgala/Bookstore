@@ -20,10 +20,9 @@ public class Main {
         AdminAccounts adminAccounts = new AdminAccounts(connection);
 
         Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
-        liquibase.Liquibase liquibase = new liquibase.Liquibase("schema.sql",new ClassLoaderResourceAccessor(),database);
-        liquibase.Liquibase liquibase2 = new liquibase.Liquibase("testData.sql",new ClassLoaderResourceAccessor(),database);
+        liquibase.Liquibase liquibase = new liquibase.Liquibase("changelog.xml",new ClassLoaderResourceAccessor(),database);
         liquibase.update("");
-        liquibase2.update("");
+
 
         Scanner scanner = new Scanner(System.in);
 
