@@ -10,7 +10,7 @@ This software helps Books Store how to manage with orders.
   * authentication 
   * adding client, book and order
   * JUnit tests
-  * liquibase
+  * liquibaseConfiguration
   * Maven
   
 - 0.2

@@ -32,7 +32,7 @@
             <artifactId>liquibase-core</artifactId>
             <version>4.0.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
+        <!-- https://mvnrepository.com/artifact/org.liquibaseConfiguration/liquibaseConfiguration-core -->
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
@@ -51,8 +51,8 @@
                 </configuration>
             </plugin>
 <!--            <plugin>-->
-<!--                <groupId>org.liquibase</groupId>-->
-<!--                <artifactId>liquibase-maven-plugin</artifactId>-->
+<!--                <groupId>org.liquibaseConfiguration</groupId>-->
+<!--                <artifactId>liquibaseConfiguration-maven-plugin</artifactId>-->
 <!--                <version>4.0.0</version>-->
 <!--                <configuration>-->
 <!--                    <changeLogFile>src/main/resources/changelog.xml</changeLogFile>-->

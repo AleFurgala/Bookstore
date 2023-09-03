@@ -1,10 +1,5 @@
 package com.example;
 
-import liquibase.database.Database;
-import liquibase.database.DatabaseFactory;
-import liquibase.database.jvm.JdbcConnection;
-import liquibase.resource.ClassLoaderResourceAccessor;
-
 import java.sql.Connection;
 import java.util.Scanner;
 
@@ -12,6 +7,7 @@ import java.util.Scanner;
 public class Main {
 
     static String adminLogin;
+
     public static void main(String[] args) throws Exception {
 
         DbConnection dbConnection = new DbConnection();
@@ -20,11 +16,9 @@ public class Main {
         Client client = new Client(connection);
         Order order = new Order(connection);
         AdminAccounts adminAccounts = new AdminAccounts(connection);
+        LiquibaseConfiguration liquibaseConfiguration = new LiquibaseConfiguration(connection);
 
-        Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
-        liquibase.Liquibase liquibase = new liquibase.Liquibase("liquibase/changelog.xml",new ClassLoaderResourceAccessor(),database);
-        liquibase.update("");
-
+        liquibaseConfiguration.addLiquibase();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -76,7 +70,7 @@ public class Main {
                                 int price = Integer.parseInt(readValue(scanner, "Wprowadź cenę: "));
                                 int amount = Integer.parseInt(readValue(scanner, "Wprowadź ilosc: "));
 
-                                Long idAdmin= adminAccounts.getIdBasedLogin(adminLogin);
+                                Long idAdmin = adminAccounts.getIdBasedLogin(adminLogin);
 
                                 book.addBook(title, author, price, amount, idAdmin);
                                 break;
@@ -127,7 +121,7 @@ public class Main {
                                 String name = readValue(scanner, "Wprowadź imie: ");
                                 String surname = readValue(scanner, "Wprowadź nazwisko: ");
                                 String address = readValue(scanner, "Wprowadź adres: ");
-                                Long idAdmin= adminAccounts.getIdBasedLogin(adminLogin);
+                                Long idAdmin = adminAccounts.getIdBasedLogin(adminLogin);
                                 client.addClient(name, surname, address, idAdmin);
                                 break;
                             case 4:
@@ -246,7 +240,7 @@ public class Main {
         } else {
             System.out.println("Błędny login lub hasło");
         }
-        liquibase.update();
+        liquibaseConfiguration.updateLiquibase();
     }
 
     public static String readValue(Scanner scanner, String message) {
