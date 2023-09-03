@@ -20,7 +20,7 @@ public class Main {
         AdminAccounts adminAccounts = new AdminAccounts(connection);
 
         Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
-        liquibase.Liquibase liquibase = new liquibase.Liquibase("changelog.xml",new ClassLoaderResourceAccessor(),database);
+        liquibase.Liquibase liquibase = new liquibase.Liquibase("liquibase/changelog.xml",new ClassLoaderResourceAccessor(),database);
         liquibase.update("");
 
 
