@@ -37,4 +37,7 @@ FOREIGN KEY (id_klienci) REFERENCES klienci(id),
 FOREIGN KEY (id_ksiazki) REFERENCES ksiazki(id)
 );
 
+--changeset AleFurgala:2
 
+ALTER TABLE klienci ADD id_admin INT;
+ALTER TABLE `klienci` ADD FOREIGN KEY (`id_admin`) REFERENCES `konta_administratorow`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;

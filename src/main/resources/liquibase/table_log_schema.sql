@@ -9,5 +9,6 @@ adres VARCHAR(255),
 id_klienci INT,
 id_admin INT,
 rodzaj_operacji VARCHAR(255),
+data VARCHAR(255),
 PRIMARY KEY (id)
 );

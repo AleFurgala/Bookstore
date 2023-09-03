@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 
 public class Main {
+
+    static String adminLogin;
     public static void main(String[] args) throws Exception {
 
         JdbConnection jdbConnection = new JdbConnection();
@@ -26,15 +28,15 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        String loginUser = readValue(scanner, "Podaj login");
+        adminLogin = readValue(scanner, "Podaj login");
         String passwordUser = readValue(scanner, "Podaj haslo");
 
-        String passwordFromDB = adminAccounts.getPasswordBasedLogin(loginUser);
+        String passwordFromDB = adminAccounts.getPasswordBasedLogin(adminLogin);
         String decryptedPasswordFromDB = adminAccounts.dataDecryption(passwordFromDB);
 
         if (passwordUser.equals(decryptedPasswordFromDB)) {
 
-            System.out.println("Witaj " + adminAccounts.getNameBasedLogin(loginUser));
+            System.out.println("Witaj " + adminAccounts.getNameBasedLogin(adminLogin));
 
             System.out.println("Program księgarnia. Wybierz menu: ");
             int menu;

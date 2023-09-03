@@ -19,12 +19,6 @@ public class AdminAccounts {
 
     private Long id;
 
-    private String password;
-    private String login;
-
-    private String username;
-    private String accountType;
-
     public Long getId() {
         return id;
     }
@@ -63,6 +57,22 @@ public class AdminAccounts {
             System.out.println(e);
         }
         return "0";
+    }
+
+    public Long getIdBasedLogin(String login) throws SQLException {
+        String query = "SELECT id FROM konta_administratorow WHERE login =  '" + login + "'";
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            System.out.println();
+            while (rs.next())
+                return rs.getLong(1);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0L;
     }
 
     public void addAdminAccount(String login, String password, String userName, String accountType) throws SQLException {

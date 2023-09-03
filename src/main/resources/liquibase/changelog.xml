@@ -9,6 +9,8 @@
     <!-- <includeAll path="src/main/resources/liquibase/changelogs"/> -->
     <include file="schema.sql" relativeToChangelogFile="true"/>
     <include file="testData.sql" relativeToChangelogFile="true"/>
+    <include file="table_log_schema.sql" relativeToChangelogFile="true"/>
+    <include file="triggers/klienci_triggers.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
 
 
