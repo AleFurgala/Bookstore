@@ -12,3 +12,14 @@ rodzaj_operacji VARCHAR(255),
 data VARCHAR(255),
 PRIMARY KEY (id)
 );
+
+CREATE TABLE ksiazki_log(
+id INT AUTO_INCREMENT,
+tytul VARCHAR(255),
+autor VARCHAR(255),
+id_ksiazki INT,
+id_admin INT,
+rodzaj_operacji VARCHAR(255),
+data VARCHAR(255),
+PRIMARY KEY (id)
+);

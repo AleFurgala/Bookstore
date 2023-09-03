@@ -100,7 +100,7 @@ public class Book {
 
         try {
             Statement stmt = connection.createStatement();
-            String query = "INSERT INTO ksiazki(tytul, autor, cena,ilosc) VALUES('" + title + "' , '" + author + "' , " + price + " , " + amount + ")";
+            String query = "INSERT INTO ksiazki(tytul, autor, cena,ilosc, id_admin) VALUES('" + title + "' , '" + author + "' , " + price + " , " + amount + ",1)";
             stmt.executeUpdate(query);
         } catch (Exception e) {
             System.out.println(e);
