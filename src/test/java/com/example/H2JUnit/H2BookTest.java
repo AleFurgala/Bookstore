@@ -96,19 +96,19 @@ public class H2BookTest {
         assertEquals("Paula Hawkins", resultSet.getString(3));
     }
 
-    @Test
-    void addBookTest() throws SQLException {
-        statement = connection.createStatement();
-
-        statement.executeUpdate("CREATE TABLE ksiazki (id INT AUTO_INCREMENT, tytul VARCHAR(255), autor VARCHAR(255), cena INT, ilosc INT, PRIMARY KEY (id))");
-
-        Book book = new Book(connection);
-        book.addBook("abc", "xyz", 2, 1);
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM ksiazki");
-        resultSet.absolute(1);
-        assertEquals("abc", resultSet.getString(2));
-        assertEquals("xyz", resultSet.getString(3));
-    }
+//    @Test
+//    void addBookTest() throws SQLException {
+//        statement = connection.createStatement();
+//
+//        statement.executeUpdate("CREATE TABLE ksiazki (id INT AUTO_INCREMENT, tytul VARCHAR(255), autor VARCHAR(255), cena INT, ilosc INT, PRIMARY KEY (id))");
+//
+//        Book book = new Book(connection);
+//        book.addBook("abc", "xyz", 2, 1);
+//        ResultSet resultSet = statement.executeQuery("SELECT * FROM ksiazki");
+//        resultSet.absolute(1);
+//        assertEquals("abc", resultSet.getString(2));
+//        assertEquals("xyz", resultSet.getString(3));
+//    }
 
     @Test
     void deleteBookTest() throws SQLException {

@@ -30,7 +30,7 @@ public class Book {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println("id  | Autor książki       | Tytuł książki      | cena  | ilość");
+            System.out.println("id  | Tytuł książki       | Autor książki      | cena  | ilość");
             System.out.println("---------------------------------------------------------------");
             System.out.println();
             while (rs.next()) {
@@ -55,7 +55,7 @@ public class Book {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println("id  | Autor książki       | Tytuł książki      | cena  | ilość");
+            System.out.println("id  | Tytuł książki       | Autor książki      | cena  | ilość");
             System.out.println("---------------------------------------------------------------");
             System.out.println();
             while (rs.next()) {
@@ -78,7 +78,7 @@ public class Book {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println("id  | Autor książki       | Tytuł książki      | cena  | ilość");
+            System.out.println("id  | Tytuł książki       | Autor książki      | cena  | ilość");
             System.out.println("---------------------------------------------------------------");
             System.out.println();
             while (rs.next()) {
@@ -96,11 +96,11 @@ public class Book {
         }
     }
 
-    public void addBook(String title, String author, int price, int amount) throws SQLException {
+    public void addBook(String title, String author, int price, int amount, Long idAdmin) throws SQLException {
 
         try {
             Statement stmt = connection.createStatement();
-            String query = "INSERT INTO ksiazki(tytul, autor, cena,ilosc, id_admin) VALUES('" + title + "' , '" + author + "' , " + price + " , " + amount + ",1)";
+            String query = "INSERT INTO ksiazki(tytul, autor, cena,ilosc, id_admin) VALUES('" + title + "' , '" + author + "' , " + price + " , " + amount + ", " + idAdmin + ")";
             stmt.executeUpdate(query);
         } catch (Exception e) {
             System.out.println(e);

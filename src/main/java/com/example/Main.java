@@ -76,7 +76,9 @@ public class Main {
                                 int price = Integer.parseInt(readValue(scanner, "Wprowadź cenę: "));
                                 int amount = Integer.parseInt(readValue(scanner, "Wprowadź ilosc: "));
 
-                                book.addBook(title, author, price, amount);
+                                Long idAdmin= adminAccounts.getIdBasedLogin(adminLogin);
+
+                                book.addBook(title, author, price, amount, idAdmin);
                                 break;
                             case 5:
                                 book.showAllBooks();
@@ -125,8 +127,8 @@ public class Main {
                                 String name = readValue(scanner, "Wprowadź imie: ");
                                 String surname = readValue(scanner, "Wprowadź nazwisko: ");
                                 String address = readValue(scanner, "Wprowadź adres: ");
-
-                                client.addClient(name, surname, address);
+                                Long idAdmin= adminAccounts.getIdBasedLogin(adminLogin);
+                                client.addClient(name, surname, address, idAdmin);
                                 break;
                             case 4:
                                 client.showAllClients();
