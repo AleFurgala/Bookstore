@@ -14,8 +14,8 @@ public class Main {
     static String adminLogin;
     public static void main(String[] args) throws Exception {
 
-        JdbConnection jdbConnection = new JdbConnection();
-        Connection connection = jdbConnection.getConnection();
+        DbConnection dbConnection = new DbConnection();
+        Connection connection = dbConnection.getConnection();
         Book book = new Book(connection);
         Client client = new Client(connection);
         Order order = new Order(connection);
@@ -233,7 +233,7 @@ public class Main {
                                 break;
                             case 0:
                                 System.out.println("Dziękuję za odwiedziny");
-                                jdbConnection.closeConnection();
+                                dbConnection.closeConnection();
                                 break;
                             default:
                                 System.out.println("Wprowadziłeś blędny numer");

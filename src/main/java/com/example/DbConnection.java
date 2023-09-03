@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class JdbConnection {
+public class DbConnection {
 
     private static final String url = "jdbc:mysql://localhost:3306/ksiegarnia";
     private static final String user = "root";
@@ -15,7 +15,7 @@ public class JdbConnection {
         return connection;
     }
 
-    public JdbConnection() throws ClassNotFoundException, SQLException {
+    public DbConnection() throws ClassNotFoundException, SQLException {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

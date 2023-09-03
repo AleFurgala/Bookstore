@@ -5,8 +5,8 @@ import liquibase.exception.LiquibaseException;
 import java.sql.Connection;
 
 public class Liquibase {
-    private static JdbConnection jdbConnection;
-    static Connection connection = jdbConnection.getConnection();
+    private static DbConnection dbConnection;
+    static Connection connection = dbConnection.getConnection();
     public static void createDb() throws LiquibaseException {
 
 
