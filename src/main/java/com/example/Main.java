@@ -172,8 +172,8 @@ public class Main {
                                 book.showAvailableBooks();
 
                                 Long idBooks = Long.valueOf((readValue(scanner, "Wprowadź id książki: ")));
-
-                                order.addOrder(idClients, idBooks);
+                                Long idAdmin = adminAccounts.getIdBasedLogin(adminLogin);
+                                order.addOrder(idClients, idBooks, idAdmin);
                                 book.deleteAmount(idBooks);
                                 break;
                             case 4:

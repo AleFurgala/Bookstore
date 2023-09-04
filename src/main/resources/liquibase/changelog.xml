@@ -12,6 +12,7 @@
     <include file="table_log_schema.sql" relativeToChangelogFile="true"/>
     <include file="triggers/klienci_triggers.sql" relativeToChangelogFile="true"/>
     <include file="triggers/ksiazki_triggers.sql" relativeToChangelogFile="true"/>
+    <include file="triggers/zamowienia_triggers.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
 
 

@@ -107,11 +107,11 @@ public class Order {
     }
 
 
-    public void addOrder(Long idClients, Long idBooks) {
+    public void addOrder(Long idClients, Long idBooks, Long idAdmin) {
         try {
             Statement stmt = connection.createStatement();
 
-            String query = "INSERT INTO zamowienia(id_klienci, id_ksiazki, data) VALUES(" + idClients + " , " + idBooks + " , " + getDate() + ")";
+            String query = "INSERT INTO zamowienia(id_klienci, id_ksiazki, data, id_admin) VALUES(" + idClients + " , " + idBooks + " , " + getDate() + ", " + idAdmin + ")";
 
             stmt.executeUpdate(query);
 

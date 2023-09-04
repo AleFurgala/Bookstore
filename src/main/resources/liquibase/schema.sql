@@ -44,3 +44,8 @@ ALTER TABLE `klienci` ADD FOREIGN KEY (`id_admin`) REFERENCES `konta_administrat
 
 ALTER TABLE ksiazki ADD id_admin INT;
 ALTER TABLE `ksiazki` ADD FOREIGN KEY (`id_admin`) REFERENCES `konta_administratorow`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE zamowienia ADD id_admin INT;
+ALTER TABLE `zamowienia` ADD FOREIGN KEY (`id_admin`) REFERENCES `konta_administratorow`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+

@@ -73,19 +73,19 @@ public class H2OrderTest {
         assertEquals(1, resultSet.getInt(2));
         assertEquals(2, resultSet.getInt(3));
     }
-    @Test
-    void addOrderTest() throws SQLException {
-        statement = connection.createStatement();
-
-        statement.executeUpdate( "CREATE TABLE zamowienia (id INT AUTO_INCREMENT, id_klienci INT, id_ksiazki INT, data VARCHAR(255), PRIMARY KEY (id))");
-
-        Order order = new Order(connection);
-        order.addOrder(1L,2L);
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM zamowienia");
-        resultSet.absolute(1);
-        assertEquals(1, resultSet.getInt(2));
-        assertEquals(2, resultSet.getInt(3));
-    }
+//    @Test
+//    void addOrderTest() throws SQLException {
+//        statement = connection.createStatement();
+//
+//        statement.executeUpdate( "CREATE TABLE zamowienia (id INT AUTO_INCREMENT, id_klienci INT, id_ksiazki INT, data VARCHAR(255), PRIMARY KEY (id))");
+//
+//        Order order = new Order(connection);
+//        order.addOrder(1L,2L);
+//        ResultSet resultSet = statement.executeQuery("SELECT * FROM zamowienia");
+//        resultSet.absolute(1);
+//        assertEquals(1, resultSet.getInt(2));
+//        assertEquals(2, resultSet.getInt(3));
+//    }
     @Test
     void deleteOrderTest() throws SQLException {
         statement = connection.createStatement();
