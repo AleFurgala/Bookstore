@@ -68,6 +68,21 @@ public class H2AdminAccountsTest {
     }
 
     @Test
+    void getIdBasedLoginTest() throws SQLException {
+        statement = connection.createStatement();
+
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
+
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin','ddd','Jurek', 'user')");
+
+        AdminAccounts adminAccounts = new AdminAccounts(connection);
+        adminAccounts.getNameBasedLogin("admin");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM konta_administratorow WHERE login = 'admin'");
+        resultSet.absolute(1);
+        assertEquals(1, resultSet.getInt(1));
+    }
+
+    @Test
     void addAdminAccountTest() throws SQLException {
         statement = connection.createStatement();
 
