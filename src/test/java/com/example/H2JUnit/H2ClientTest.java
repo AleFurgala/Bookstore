@@ -74,19 +74,19 @@ public class H2ClientTest {
         assertEquals("Jan", resultSet.getString(2));
         assertEquals("Nowak", resultSet.getString(3));
     }
-//    @Test
-//    void addClientTest() throws SQLException {
-//        statement = connection.createStatement();
-//
-//        statement.executeUpdate("CREATE TABLE klienci (id INT AUTO_INCREMENT, imie VARCHAR(255), nazwisko VARCHAR(255), adres VARCHAR(255), PRIMARY KEY (id))");
-//
-//        Client client = new Client(connection);
-//        client.addClient("Jan", "Nowak", "Rzeszów");
-//        ResultSet resultSet = statement.executeQuery("SELECT * FROM klienci");
-//        resultSet.absolute(1);
-//        assertEquals("Jan", resultSet.getString(2));
-//        assertEquals("Nowak", resultSet.getString(3));
-//    }
+    @Test
+    void addClientTest() throws SQLException {
+        statement = connection.createStatement();
+
+        statement.executeUpdate("CREATE TABLE klienci (id INT AUTO_INCREMENT, imie VARCHAR(255), nazwisko VARCHAR(255), adres VARCHAR(255), id_admin LONG, PRIMARY KEY (id))");
+
+        Client client = new Client(connection);
+        client.addClient("Jan", "Nowak", "Rzeszów", 1L);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM klienci");
+        resultSet.absolute(1);
+        assertEquals("Jan", resultSet.getString(2));
+        assertEquals("Nowak", resultSet.getString(3));
+    }
     @Test
     void deleteClientTest() throws SQLException {
         statement = connection.createStatement();
