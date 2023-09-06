@@ -14,6 +14,7 @@ id INT AUTO_INCREMENT,
 login VARCHAR(255),
 haslo VARCHAR(255),
 nazwa_uzytkownika VARCHAR(255),
+email VARCHAR(255),
 rodzaj_konta VARCHAR(255),
 PRIMARY KEY (id)
 );
