@@ -86,10 +86,10 @@ public class H2AdminAccountsTest {
     void addAdminAccountTest() throws SQLException {
         statement = connection.createStatement();
 
-        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), email VARCHAR(255), rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
 
         AdminAccounts adminAccounts = new AdminAccounts(connection);
-        adminAccounts.addAdminAccount("admin", "ddd", "Jurek", "user");
+        adminAccounts.addAdminAccount("admin", "ddd", "Jurek","test@test.com","user");
         ResultSet resultSet = statement.executeQuery("SELECT * FROM konta_administratorow ");
         resultSet.absolute(1);
         assertEquals("lDHFY6qkS4Oi1WNNmw002A==", resultSet.getString(3));
@@ -149,10 +149,10 @@ public class H2AdminAccountsTest {
     void showAllAccountsTest() throws SQLException {
         statement = connection.createStatement();
 
-        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255), rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
+        statement.executeUpdate("CREATE TABLE konta_administratorow (id INT AUTO_INCREMENT, login VARCHAR(255), haslo VARCHAR(255), nazwa_uzytkownika VARCHAR(255),email VARCHAR(255) ,rodzaj_konta VARCHAR(255), PRIMARY KEY (id))");
 
-        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin1','ddd','Jurek', 'admin')");
-        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('admin2','ddd','Dona', 'user')");
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, email, rodzaj_konta) VALUES('admin1','ddd','Jurek','jurek@test.com', 'admin')");
+        statement.executeUpdate("INSERT INTO konta_administratorow (login, haslo, nazwa_uzytkownika, email, rodzaj_konta) VALUES('admin2','ddd','Dona', 'dona@test.com','user')");
 
         AdminAccounts adminAccounts = new AdminAccounts(connection);
         adminAccounts.showAllAccounts();

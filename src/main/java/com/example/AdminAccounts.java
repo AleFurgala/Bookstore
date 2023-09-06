@@ -75,12 +75,12 @@ public class AdminAccounts {
         return 0L;
     }
 
-    public void addAdminAccount(String login, String password, String userName, String accountType) throws SQLException {
+    public void addAdminAccount(String login, String password, String userName, String email,  String accountType) throws SQLException {
 
         try {
             Statement stmt = connection.createStatement();
 
-            String query = "INSERT INTO konta_administratorow(login, haslo, nazwa_uzytkownika, rodzaj_konta) VALUES('" + login + "' , '" + dataEncryption(password) + "' , '" + userName + "' , '" + accountType + "')";
+            String query = "INSERT INTO konta_administratorow(login, haslo, nazwa_uzytkownika, email, rodzaj_konta) VALUES('" + login + "' , '" + dataEncryption(password) + "' , '" + userName + "' ,'" + email + "', '" + accountType + "')";
             stmt.executeUpdate(query);
 
         } catch (Exception e) {
@@ -125,8 +125,8 @@ public class AdminAccounts {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
-            System.out.println("id  | Login     |           Hasło              | Nazwa użytkownia   | Rodzaj Konta  ");
-            System.out.println("-------------------------------------------------------------------------------------------------");
+            System.out.println("id  | Login     |           Hasło              | Nazwa użytkownia   | Email              |Rodzaj Konta  ");
+            System.out.println("------------------------------------------------------------------------------------------------------------------");
             System.out.println();
             while (rs.next()) {
                 Long column1 = rs.getLong(1);
@@ -134,10 +134,11 @@ public class AdminAccounts {
                 String column3 = rs.getString(3);
                 String column4 = rs.getString(4);
                 String column5 = rs.getString(5);
+                String column6 = rs.getString(6);
 
-                System.out.printf("%-5d %-10s %-35s %-20s %-20s%n", column1, column2, column3, column4, column5);
+                System.out.printf("%-5d %-10s %-35s %-20s %-20s %-20s%n", column1, column2, column3, column4, column5, column6);
             }
-            System.out.println("-------------------------------------------------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------------------------");
 
 
         } catch (Exception e) {

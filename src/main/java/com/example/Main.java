@@ -211,9 +211,10 @@ public class Main {
                                 String login = readValue(scanner, "Wprowadź login: ");
                                 String password = readValue(scanner, "Wprowadź haslo: ");
                                 String userName = readValue(scanner, "Wprowadź nazwę użytkownika: ");
+                                String email = readValue(scanner, "Wprowadź email: ");
                                 String accountType = readValue(scanner, "Wprowadź rodzaj konta: ");
 
-                                adminAccounts.addAdminAccount(login, password, userName, accountType);
+                                adminAccounts.addAdminAccount(login, password, userName,email, accountType);
                                 break;
                             case 2:
                                 Long id = Long.valueOf((readValue(scanner, "Wprowadź numer id Administratora którego chcesz usunąć: ")));
