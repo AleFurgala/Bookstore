@@ -136,7 +136,7 @@ public class AdminAccounts {
                 String column5 = rs.getString(5);
                 String column6 = rs.getString(6);
 
-                System.out.printf("%-5d %-10s %-35s %-20s %-20s %-20s%n", column1, column2, column3, column4, column5, column6);
+                System.out.printf("%-5d %-10s %-30s %-20s %-20s %-20s%n", column1, column2, column3, column4, column5, column6);
             }
             System.out.println("------------------------------------------------------------------------------------------------------------------");
 
