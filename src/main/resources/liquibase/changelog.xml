@@ -13,6 +13,7 @@
     <include file="triggers/klienci_triggers.sql" relativeToChangelogFile="true"/>
     <include file="triggers/ksiazki_triggers.sql" relativeToChangelogFile="true"/>
     <include file="triggers/zamowienia_triggers.sql" relativeToChangelogFile="true"/>
+    <include file="test_data_for_statistic.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
 
 
