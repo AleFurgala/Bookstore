@@ -16,6 +16,7 @@ public class Main {
         Client client = new Client(connection);
         Order order = new Order(connection);
         AdminAccounts adminAccounts = new AdminAccounts(connection);
+        Statistics statistics = new Statistics(connection);
         LiquibaseConfiguration liquibaseConfiguration = new LiquibaseConfiguration(connection);
 
         liquibaseConfiguration.addLiquibase();
@@ -39,6 +40,7 @@ public class Main {
                         "2.Klienci \n" +
                         "3.Zamówienia \n" +
                         "4.Panel administratora \n" +
+                        "5.Statystyki\n" +
                         "0.Zamknij program ");
                 menu = Integer.parseInt(readValue(scanner, ""));
                 switch (menu) {
@@ -214,7 +216,7 @@ public class Main {
                                 String email = readValue(scanner, "Wprowadź email: ");
                                 String accountType = readValue(scanner, "Wprowadź rodzaj konta: ");
 
-                                adminAccounts.addAdminAccount(login, password, userName,email, accountType);
+                                adminAccounts.addAdminAccount(login, password, userName, email, accountType);
                                 break;
                             case 2:
                                 Long id = Long.valueOf((readValue(scanner, "Wprowadź numer id Administratora którego chcesz usunąć: ")));
@@ -225,7 +227,28 @@ public class Main {
                                 break;
                             case 3:
                                 adminAccounts.showAllAccounts();
+                                break;
                             case 4:
+                                System.out.println("Powrót do menu glównego");
+                                break;
+                            case 0:
+                                System.out.println("Dziękuję za odwiedziny");
+                                dbConnection.closeConnection();
+                                break;
+                            default:
+                                System.out.println("Wprowadziłeś blędny numer");
+                        }
+
+                    case 5:
+                        System.out.println("1.Ilość kupionych książek \n" +
+                                "2.Powrót do glównego menu \n" +
+                                "********************************************************");
+                        int menu6 = Integer.parseInt(readValue(scanner, " "));
+                        switch (menu6) {
+                            case 1:
+                                statistics.showOrderStatistic();
+                                break;
+                            case 2:
                                 System.out.println("Powrót do menu glównego");
                                 break;
                             case 0:
