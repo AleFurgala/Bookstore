@@ -10,7 +10,7 @@ public class Statistics {
 
 
     public void showOrderStatistic() throws SQLException {
-        String query = "SELECT id_ksiazki, COUNT(*) AS liczba_zamowionych_ksiazek FROM zamowienia GROUP BY id_ksiazki";
+        String query = "SELECT id_ksiazki, COUNT(*) AS liczba_zamowionych_ksiazek FROM zamowienia GROUP BY id_ksiazki ORDER BY liczba_zamowionych_ksiazek DESC";
 
         try {
             Statement stmt = connection.createStatement();
