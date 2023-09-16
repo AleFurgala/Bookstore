@@ -1,11 +1,15 @@
 package com.example;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Statistics {
-    public Statistics(Connection connection) {this.connection = connection;}
+    public Statistics(Connection connection) {
+        this.connection = connection;
+    }
+
     private Connection connection;
 
 
@@ -23,7 +27,7 @@ public class Statistics {
                 String column2 = rs.getString(2);
                 Long column3 = rs.getLong(3);
 
-                System.out.printf("%-20d %-20s  %-20s%n", column1,column2, column3);
+                System.out.printf("%-20d %-20s  %-20s%n", column1, column2, column3);
             }
             System.out.println("--------------------------------------------------------------------------------------------");
         } catch (Exception e) {
@@ -32,6 +36,26 @@ public class Statistics {
 
     }
 
+    public void showClientStatistic() throws SQLException {
+        String query = "SELECT id_klienci, COUNT(*) AS najbardziej_aktywny_klient  FROM zamowienia GROUP BY id_klienci ORDER BY najbardziej_aktywny_klient DESC";
 
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            System.out.println(" id klienta       | Najbardziej aktywny klient ");
+            System.out.println("---------------------------------------------------");
+            System.out.println();
+            while (rs.next()) {
+                Long column1 = rs.getLong(1);
+                Long column2 = rs.getLong(2);
+
+                System.out.printf("%-20d %-20d%n", column1,column2);
+            }
+            System.out.println("----------------------------------------------------------");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
 
 }
