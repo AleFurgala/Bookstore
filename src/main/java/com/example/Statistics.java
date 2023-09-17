@@ -27,7 +27,7 @@ public class Statistics {
                 String column2 = rs.getString(2);
                 Long column3 = rs.getLong(3);
 
-                System.out.printf("%-20d %-20s  %-20s%n", column1, column2, column3);
+                System.out.printf("%-20d %-35s %-20d%n", column1, column2, column3);
             }
             System.out.println("--------------------------------------------------------------------------------------------");
         } catch (Exception e) {
@@ -37,21 +37,23 @@ public class Statistics {
     }
 
     public void showClientStatistic() throws SQLException {
-        String query = "SELECT id_klienci, COUNT(*) AS najbardziej_aktywny_klient  FROM zamowienia GROUP BY id_klienci ORDER BY najbardziej_aktywny_klient DESC";
+        String query = "SELECT id_klienci, klienci.imie, klienci.nazwisko, COUNT(*) AS najbardziej_aktywny_klient  FROM zamowienia INNER JOIN klienci ON klienci.id = zamowienia.id_klienci GROUP BY id_klienci ORDER BY najbardziej_aktywny_klient DESC";
 
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println(" id klienta       | Najbardziej aktywny klient ");
-            System.out.println("---------------------------------------------------");
+            System.out.println(" id klienta       | Imie                 | Nazwisko               | Najbardziej aktywny klient ");
+            System.out.println("------------------------------------------------------------------------------------------------------");
             System.out.println();
             while (rs.next()) {
                 Long column1 = rs.getLong(1);
-                Long column2 = rs.getLong(2);
+                String column2 = rs.getString(2);
+                String column3 = rs.getString(3);
+                Long column4 = rs.getLong(4);
 
-                System.out.printf("%-20d %-20d%n", column1,column2);
+                System.out.printf("%-20d %-20s %-20s %-20d%n", column1,column2, column3, column4);
             }
-            System.out.println("----------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------------");
         } catch (Exception e) {
             System.out.println(e);
         }
