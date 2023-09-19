@@ -33,7 +33,7 @@ public class H2StatisticTest {
 
     @AfterEach
     public void after() throws SQLException {
-        statement.executeUpdate("DROP table ksiazki");
+        statement.executeUpdate("DROP table zamowienia");
         statement.close();
         connection.close();
     }
@@ -61,6 +61,32 @@ public class H2StatisticTest {
         assertEquals(2, resultSet.getInt(1));
         assertEquals("Harry Poter", resultSet.getString(2));
         assertEquals(2, resultSet.getInt(3));
+
+    }
+
+    @Test
+    void showClientStatistic() throws SQLException {
+        statement = connection.createStatement();
+
+        statement.executeUpdate("CREATE TABLE klienci (id INT AUTO_INCREMENT, imie VARCHAR(255), nazwisko VARCHAR(255), adres VARCHAR(255), PRIMARY KEY (id))");
+        statement.executeUpdate("INSERT INTO klienci (imie, nazwisko, adres) VALUES('Teofil' ,'Wilczyński', 'Rzeszow')");
+        statement.executeUpdate("INSERT INTO klienci (imie, nazwisko, adres) VALUES('Wanda' , 'Wyszyńska' , 'Warszawa')");
+        statement.executeUpdate("INSERT INTO klienci (imie, nazwisko, adres) VALUES('Izabla' , 'Siarzewska' , 'Łódź')");
+
+        statement.executeUpdate( "CREATE TABLE zamowienia (id INT AUTO_INCREMENT, id_klienci INT, id_ksiazki INT, data VARCHAR(255), PRIMARY KEY (id))");
+        statement.executeUpdate("INSERT INTO zamowienia (id_klienci, id_ksiazki, data) VALUES(1 , 2 , '24072023')");
+        statement.executeUpdate("INSERT INTO zamowienia (id_klienci, id_ksiazki, data) VALUES(2 , 2 , '25072023')");
+        statement.executeUpdate("INSERT INTO zamowienia (id_klienci, id_ksiazki, data) VALUES(2 , 1 , '25072023')");
+
+        Statistics statistics = new Statistics(connection);
+        statistics.showClientStatistic();
+
+        ResultSet resultSet = statement.executeQuery("SELECT id_klienci, klienci.imie, klienci.nazwisko, COUNT(*) AS najbardziej_aktywny_klient  FROM zamowienia INNER JOIN klienci ON klienci.id = zamowienia.id_klienci GROUP BY id_klienci ORDER BY najbardziej_aktywny_klient DESC");
+        resultSet.absolute(1);
+        assertEquals(2, resultSet.getInt(1));
+        assertEquals("Wanda", resultSet.getString(2));
+        assertEquals("Wyszyńska", resultSet.getString(3));
+        assertEquals(2, resultSet.getInt(4));
 
     }
 
