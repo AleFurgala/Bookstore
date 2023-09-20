@@ -258,6 +258,7 @@ public class Main {
                             case 0:
                                 System.out.println("Dziękuję za odwiedziny");
                                 dbConnection.closeConnection();
+                                liquibaseConfiguration.updateLiquibase();
                                 break;
                             default:
                                 System.out.println("Wprowadziłeś blędny numer");
@@ -268,7 +269,7 @@ public class Main {
         } else {
             System.out.println("Błędny login lub hasło");
         }
-        liquibaseConfiguration.updateLiquibase();
+       // liquibaseConfiguration.updateLiquibase();
     }
 
     public static String readValue(Scanner scanner, String message) {

@@ -49,7 +49,7 @@ public class Order {
 
 
     public void showAllOrder() throws SQLException {
-        String query = "SELECT zamowienia.id,zamowienia.data, klienci.imie, klienci.nazwisko, ksiazki.tytul FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki INNER JOIN klienci ON klienci.id = zamowienia.id_klienci";
+        String query = "SELECT zamowienia.id,zamowienia.data, klienci.imie, klienci.nazwisko, ksiazki.tytul FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki INNER JOIN klienci ON klienci.id = zamowienia.id_klienci ORDER BY id";
         try {
 
             Statement stmt = connection.createStatement();
@@ -111,7 +111,7 @@ public class Order {
         try {
             Statement stmt = connection.createStatement();
 
-            String query = "INSERT INTO zamowienia(id_klienci, id_ksiazki, data, id_admin) VALUES(" + idClients + " , " + idBooks + " , " + getDate() + ", " + idAdmin + ")";
+            String query = "INSERT INTO zamowienia(id_klienci, id_ksiazki, data, id_admin) VALUES(" + idClients + " , " + idBooks + " , NOW() , " + idAdmin + ")";
 
             stmt.executeUpdate(query);
 
