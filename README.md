@@ -62,6 +62,13 @@ This software helps Books Store how to manage with orders.
   * delete account
   * option 
   * back to main menu 
+
+  
+- Statistic
+  * the number of books that were bought
+  * clients statistics
+
+
 - Close the program 
 
 ### Files in main.Book.java 
