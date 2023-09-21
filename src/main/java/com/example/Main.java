@@ -242,7 +242,8 @@ public class Main {
                     case 5:
                         System.out.println("1.Ilość kupionych książek \n" +
                                 "2.Statystyka klientów \n" +
-                                "3.Powrót do glównego menu \n" +
+                                "3.Podsumowanie \n" +
+                                "4.Powrót do glównego menu \n" +
                                 "********************************************************");
                         int menu6 = Integer.parseInt(readValue(scanner, " "));
                         switch (menu6) {
@@ -253,6 +254,9 @@ public class Main {
                                 statistics.showClientStatistic();
                                 break;
                             case 3:
+                                statistics.showSummary("Najcześciej kupowana książka: ", "SELECT  ksiazki.tytul, id_ksiazki, COUNT(*) AS liczba_zamowionych_ksiazek FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki GROUP BY id_ksiazki ORDER BY liczba_zamowionych_ksiazek DESC LIMIT 1");
+                                break;
+                            case 4:
                                 System.out.println("Powrót do menu glównego");
                                 break;
                             case 0:

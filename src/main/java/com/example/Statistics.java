@@ -60,4 +60,23 @@ public class Statistics {
 
     }
 
+    public void showSummary(String xyz, String query) throws SQLException {
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            System.out.print(xyz);
+
+            while (rs.next()) {
+                String column1 = rs.getString(1);
+                System.out.println(column1);
+            }
+
+            System.out.println();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
 }
