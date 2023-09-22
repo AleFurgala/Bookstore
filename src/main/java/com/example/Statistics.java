@@ -12,24 +12,20 @@ public class Statistics {
 
     private Connection connection;
 
-
-    public void showOrderStatistic() throws SQLException {
-        String query = "SELECT id_ksiazki, ksiazki.tytul, COUNT(*) AS liczba_zamowionych_ksiazek FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki GROUP BY id_ksiazki ORDER BY liczba_zamowionych_ksiazek DESC";
+    public void showSummary(String xyz, String query) throws SQLException {
 
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.println(" id książki       |Tytuł                            | liczba zamówionych książek ");
-            System.out.println("--------------------------------------------------------------------------------------------");
-            System.out.println();
-            while (rs.next()) {
-                Long column1 = rs.getLong(1);
-                String column2 = rs.getString(2);
-                Long column3 = rs.getLong(3);
+            System.out.print(xyz);
 
-                System.out.printf("%-20d %-35s %-20d%n", column1, column2, column3);
+            while (rs.next()) {
+                String column1 = rs.getString(1);
+                System.out.println(column1);
             }
-            System.out.println("--------------------------------------------------------------------------------------------");
+
+            System.out.println();
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -60,23 +56,25 @@ public class Statistics {
 
     }
 
-    public void showSummary(String xyz, String query) throws SQLException {
+    public void showOrderStatistic() throws SQLException {
+        String query = "SELECT id_ksiazki, ksiazki.tytul, COUNT(*) AS liczba_zamowionych_ksiazek FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki GROUP BY id_ksiazki ORDER BY liczba_zamowionych_ksiazek DESC";
 
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.print(xyz);
-
-            while (rs.next()) {
-                String column1 = rs.getString(1);
-                System.out.println(column1);
-            }
-
+            System.out.println(" id książki       |Tytuł                            | liczba zamówionych książek ");
+            System.out.println("--------------------------------------------------------------------------------------------");
             System.out.println();
+            while (rs.next()) {
+                Long column1 = rs.getLong(1);
+                String column2 = rs.getString(2);
+                Long column3 = rs.getLong(3);
 
+                System.out.printf("%-20d %-35s %-20d%n", column1, column2, column3);
+            }
+            System.out.println("--------------------------------------------------------------------------------------------");
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
 }

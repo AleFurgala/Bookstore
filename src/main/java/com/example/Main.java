@@ -240,21 +240,24 @@ public class Main {
                         }
 
                     case 5:
-                        System.out.println("1.Ilość kupionych książek \n" +
+                        System.out.println("1.Podsumowanie\n" +
                                 "2.Statystyka klientów \n" +
-                                "3.Podsumowanie \n" +
+                                "3.Ilość kupionych książek  \n" +
                                 "4.Powrót do glównego menu \n" +
                                 "********************************************************");
                         int menu6 = Integer.parseInt(readValue(scanner, " "));
                         switch (menu6) {
                             case 1:
-                                statistics.showOrderStatistic();
+                                statistics.showSummary("Najcześciej kupowana książka: ", "SELECT  ksiazki.tytul, id_ksiazki, COUNT(*) AS liczba_zamowionych_ksiazek FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki GROUP BY id_ksiazki ORDER BY liczba_zamowionych_ksiazek DESC LIMIT 1");
+                                statistics.showSummary("Liczba wszystkich sprzedanych książek: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia");
+                                statistics.showSummary("Liczba sprzedanych książek w bieżącym roku: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE)");
+                                statistics.showSummary("Liczba sprzedanych książek w bieżącym miesiącu: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE) AND MONTH(data) = MONTH(CURRENT_DATE)");
                                 break;
                             case 2:
                                 statistics.showClientStatistic();
                                 break;
                             case 3:
-                                statistics.showSummary("Najcześciej kupowana książka: ", "SELECT  ksiazki.tytul, id_ksiazki, COUNT(*) AS liczba_zamowionych_ksiazek FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki GROUP BY id_ksiazki ORDER BY liczba_zamowionych_ksiazek DESC LIMIT 1");
+                                statistics.showOrderStatistic();
                                 break;
                             case 4:
                                 System.out.println("Powrót do menu glównego");
