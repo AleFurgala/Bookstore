@@ -252,6 +252,9 @@ public class Main {
                                 statistics.showSummary("Liczba wszystkich sprzedanych książek: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia");
                                 statistics.showSummary("Liczba sprzedanych książek w bieżącym roku: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE)");
                                 statistics.showSummary("Liczba sprzedanych książek w bieżącym miesiącu: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE) AND MONTH(data) = MONTH(CURRENT_DATE)");
+                                statistics.showSummary("Liczba klientów: ", "SELECT COUNT(*) AS liczba_klientów FROM klienci");
+                                statistics.showSummary2("Najbardziej aktywny klient: ", "SELECT klienci.imie, klienci.nazwisko,id_klienci, COUNT(*) AS najbardziej_aktywny_klient  FROM zamowienia INNER JOIN klienci ON klienci.id = zamowienia.id_klienci GROUP BY id_klienci ORDER BY najbardziej_aktywny_klient DESC LIMIT 1");
+
                                 break;
                             case 2:
                                 statistics.showClientStatistic();

@@ -22,6 +22,30 @@ public class Statistics {
             while (rs.next()) {
                 String column1 = rs.getString(1);
                 System.out.println(column1);
+
+            }
+
+            System.out.println();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public void showSummary2(String xyz, String query) throws SQLException {
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            System.out.print(xyz);
+
+            while (rs.next()) {
+                String column1 = rs.getString(1);
+                String column2 = rs.getString(2);
+                System.out.print( column1);
+                System.out.println( column2);
+
             }
 
             System.out.println();
