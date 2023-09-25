@@ -22,7 +22,6 @@ public class Statistics {
             while (rs.next()) {
                 String column1 = rs.getString(1);
                 System.out.println(column1);
-
             }
 
             System.out.println();
