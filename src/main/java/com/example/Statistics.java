@@ -1,5 +1,8 @@
 package com.example;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,30 +32,14 @@ public class Statistics {
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
 
-    public void showSummary2(String xyz, String query) throws SQLException {
-
-        try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            System.out.print(xyz);
-
-            while (rs.next()) {
-                String column1 = rs.getString(1);
-                String column2 = rs.getString(2);
-                System.out.print( column1);
-                System.out.println( column2);
-
-            }
-
-            System.out.println();
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
+    public void showSummaryCommands() throws SQLException {
+        showSummary("Najcześciej kupowana książka: ", "SELECT  ksiazki.tytul, id_ksiazki, COUNT(*) AS liczba_zamowionych_ksiazek FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki GROUP BY id_ksiazki ORDER BY liczba_zamowionych_ksiazek DESC LIMIT 1");
+        showSummary("Liczba wszystkich sprzedanych książek: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia");
+        showSummary("Liczba sprzedanych książek w bieżącym roku: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE)");
+        showSummary("Liczba sprzedanych książek w bieżącym miesiącu: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE) AND MONTH(data) = MONTH(CURRENT_DATE)");
+        showSummary("Liczba klientów: ", "SELECT COUNT(*) AS liczba_klientów FROM klienci");
     }
 
     public void showClientStatistic() throws SQLException {
@@ -70,7 +57,7 @@ public class Statistics {
                 String column3 = rs.getString(3);
                 Long column4 = rs.getLong(4);
 
-                System.out.printf("%-20d %-20s %-20s %-20d%n", column1,column2, column3, column4);
+                System.out.printf("%-20d %-20s %-20s %-20d%n", column1, column2, column3, column4);
             }
             System.out.println("------------------------------------------------------------------------------------------------------");
         } catch (Exception e) {
@@ -100,4 +87,21 @@ public class Statistics {
             System.out.println(e);
         }
     }
+
+    public void generateReport() {
+        String sciezkaDoPliku = "bookstore.txt";
+
+        try {
+            FileWriter fileWriter = new FileWriter(sciezkaDoPliku);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            String tekst = "To jest przykładowy tekst do zapisania w pliku.";
+            bufferedWriter.write(tekst);
+            bufferedWriter.close();
+
+            System.out.println("Plik został pomyślnie utworzony i zapisany.");
+        } catch (IOException e) {
+            System.err.println("Wystąpił błąd podczas tworzenia pliku: " + e.getMessage());
+        }
+    }
 }
+

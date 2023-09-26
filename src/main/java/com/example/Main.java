@@ -241,20 +241,15 @@ public class Main {
 
                     case 5:
                         System.out.println("1.Podsumowanie\n" +
-                                "2.Statystyka klientów \n" +
-                                "3.Ilość kupionych książek  \n" +
-                                "4.Powrót do glównego menu \n" +
+                                "2.Lista klientów \n" +
+                                "3.Lista książek  \n" +
+                                "4.Generuj raport z ostatniego miesiąca (plik txt) \n" +
+                                "5.Powrót do glównego menu \n" +
                                 "********************************************************");
                         int menu6 = Integer.parseInt(readValue(scanner, " "));
                         switch (menu6) {
                             case 1:
-                                statistics.showSummary("Najcześciej kupowana książka: ", "SELECT  ksiazki.tytul, id_ksiazki, COUNT(*) AS liczba_zamowionych_ksiazek FROM zamowienia INNER JOIN ksiazki ON ksiazki.id = zamowienia.id_ksiazki GROUP BY id_ksiazki ORDER BY liczba_zamowionych_ksiazek DESC LIMIT 1");
-                                statistics.showSummary("Liczba wszystkich sprzedanych książek: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia");
-                                statistics.showSummary("Liczba sprzedanych książek w bieżącym roku: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE)");
-                                statistics.showSummary("Liczba sprzedanych książek w bieżącym miesiącu: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE) AND MONTH(data) = MONTH(CURRENT_DATE)");
-                                statistics.showSummary("Liczba klientów: ", "SELECT COUNT(*) AS liczba_klientów FROM klienci");
-                                statistics.showSummary2("Najbardziej aktywny klient: ", "SELECT klienci.imie, klienci.nazwisko,id_klienci, COUNT(*) AS najbardziej_aktywny_klient  FROM zamowienia INNER JOIN klienci ON klienci.id = zamowienia.id_klienci GROUP BY id_klienci ORDER BY najbardziej_aktywny_klient DESC LIMIT 1");
-
+                                statistics.showSummaryCommands();
                                 break;
                             case 2:
                                 statistics.showClientStatistic();
@@ -263,6 +258,9 @@ public class Main {
                                 statistics.showOrderStatistic();
                                 break;
                             case 4:
+                                statistics.generateReport();
+                                break;
+                            case 5:
                                 System.out.println("Powrót do menu glównego");
                                 break;
                             case 0:
@@ -279,7 +277,7 @@ public class Main {
         } else {
             System.out.println("Błędny login lub hasło");
         }
-       // liquibaseConfiguration.updateLiquibase();
+        // liquibaseConfiguration.updateLiquibase();
     }
 
     public static String readValue(Scanner scanner, String message) {
