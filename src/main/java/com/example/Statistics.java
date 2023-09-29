@@ -15,6 +15,8 @@ public class Statistics {
 
     private Connection connection;
 
+    String[] summary = new String[2];
+
     public void showSummary(String xyz, String query) throws SQLException {
 
         try {
@@ -40,6 +42,19 @@ public class Statistics {
         showSummary("Liczba sprzedanych książek w bieżącym roku: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE)");
         showSummary("Liczba sprzedanych książek w bieżącym miesiącu: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE) AND MONTH(data) = MONTH(CURRENT_DATE)");
         showSummary("Liczba klientów: ", "SELECT COUNT(*) AS liczba_klientów FROM klienci");
+
+        Statement stmt = connection.createStatement();
+        ResultSet resultSet1 = stmt.executeQuery("SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE) AND MONTH(data) = MONTH(CURRENT_DATE)");
+        if (resultSet1.next()) {
+            int liczbaKsiazek = resultSet1.getInt("liczba_sprzedanych_ksiazek");
+            summary[0] = "Liczba sprzedanych książek w bieżącym miesiącu: " + liczbaKsiazek;
+        }
+
+        ResultSet resultSet2 = stmt.executeQuery("SELECT COUNT(*) AS liczba_klientów FROM klienci");
+        if (resultSet2.next()) {
+            int liczbaKlientow = resultSet2.getInt("liczba_klientów");
+            summary[1] = "Liczba klientów: " + liczbaKlientow;
+        }
     }
 
     public void showClientStatistic() throws SQLException {
@@ -94,14 +109,21 @@ public class Statistics {
         try {
             FileWriter fileWriter = new FileWriter(sciezkaDoPliku);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            String tekst = "To jest przykładowy tekst do zapisania w pliku.";
-            bufferedWriter.write(tekst);
+
+            for (String summary : summary) {
+                bufferedWriter.write(summary + "\n");
+            }
+
             bufferedWriter.close();
+            System.out.println("Dane zostały zapisane do pliku " + sciezkaDoPliku);
+
 
             System.out.println("Plik został pomyślnie utworzony i zapisany.");
         } catch (IOException e) {
             System.err.println("Wystąpił błąd podczas tworzenia pliku: " + e.getMessage());
         }
     }
+
 }
+
 
