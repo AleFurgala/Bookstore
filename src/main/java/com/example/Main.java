@@ -258,6 +258,7 @@ public class Main {
                                 statistics.showOrderStatistic();
                                 break;
                             case 4:
+                                statistics.showSummaryCommands();
                                 statistics.generateReport();
                                 break;
                             case 5:

@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Statistics {
     public Statistics(Connection connection) {
@@ -14,8 +16,7 @@ public class Statistics {
     }
 
     private Connection connection;
-
-    String[] summary = new String[2];
+    List<String> summary = new ArrayList<>();
 
     public void showSummary(String xyz, String query) throws SQLException {
 
@@ -26,7 +27,9 @@ public class Statistics {
 
             while (rs.next()) {
                 String column1 = rs.getString(1);
+
                 System.out.println(column1);
+                summary.add(column1);
             }
 
             System.out.println();
@@ -43,18 +46,6 @@ public class Statistics {
         showSummary("Liczba sprzedanych książek w bieżącym miesiącu: ", "SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE) AND MONTH(data) = MONTH(CURRENT_DATE)");
         showSummary("Liczba klientów: ", "SELECT COUNT(*) AS liczba_klientów FROM klienci");
 
-        Statement stmt = connection.createStatement();
-        ResultSet resultSet1 = stmt.executeQuery("SELECT COUNT(*) AS liczba_sprzedanych_ksiazek FROM zamowienia WHERE YEAR(data) = YEAR(CURRENT_DATE) AND MONTH(data) = MONTH(CURRENT_DATE)");
-        if (resultSet1.next()) {
-            int liczbaKsiazek = resultSet1.getInt("liczba_sprzedanych_ksiazek");
-            summary[0] = "Liczba sprzedanych książek w bieżącym miesiącu: " + liczbaKsiazek;
-        }
-
-        ResultSet resultSet2 = stmt.executeQuery("SELECT COUNT(*) AS liczba_klientów FROM klienci");
-        if (resultSet2.next()) {
-            int liczbaKlientow = resultSet2.getInt("liczba_klientów");
-            summary[1] = "Liczba klientów: " + liczbaKlientow;
-        }
     }
 
     public void showClientStatistic() throws SQLException {
@@ -110,8 +101,8 @@ public class Statistics {
             FileWriter fileWriter = new FileWriter(sciezkaDoPliku);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            for (String summary : summary) {
-                bufferedWriter.write(summary + "\n");
+            for (int i =0; i<summary.size(); i++){
+                bufferedWriter.write(summary.get(i));
             }
 
             bufferedWriter.close();
