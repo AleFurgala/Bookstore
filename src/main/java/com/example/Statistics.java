@@ -23,10 +23,9 @@ public class Statistics {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            System.out.print(xyz);
 
             while (rs.next()) {
-                String column1 = rs.getString(1);
+                String column1 = xyz + rs.getString(1);
 
                 System.out.println(column1);
                 summary.add(column1);
@@ -102,7 +101,7 @@ public class Statistics {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
             for (int i =0; i<summary.size(); i++){
-                bufferedWriter.write(summary.get(i));
+                bufferedWriter.write(summary.get(i) + "\n");
             }
 
             bufferedWriter.close();
